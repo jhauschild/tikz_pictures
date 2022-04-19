@@ -1,0 +1,17 @@
+STANDALONE_TEX=$(filter-out tikzlibrarytensornetwork.code.tex, $(wildcard *.tex))
+STANDALONE_PDF=$(STANDALONE_TEX:.tex=.pdf)
+
+.PHONY: all clean distclean
+
+all: $(STANDALONE_PDF)
+
+%.pdf: %.tex
+	@echo "==========================================="
+	pdflatex -shell-escape $<
+	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta
+
+clean:
+	-rm -f *.log *.aux *.auxlock *.out *.sta
+
+distclean: clean
+	-rm -f *.pdf

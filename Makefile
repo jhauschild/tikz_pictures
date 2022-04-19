@@ -1,18 +1,26 @@
 
+SUBDIRS=$(sort $(dir $(wildcard ./*/Makefile)))
 
-STANDALONE_TEX=$(wildcard */*.tex)
-STANDALONE_PDF=$(STANDALONE_TEX:.tex=.pdf)
+.PHONY: all main clean distclean
 
-.PHONY: all clean main
 
-all: $(STANDALONE_PDF) main
+.PHONY: $(TOPTARGETS) $(SUBDIRS)
+
+
+all: main $(SUBDIRS)
 
 main: main_article.pdf
 
+$(SUBDIRS):
+	$(MAKE) -C $@ $(MAKECMDGOALS)
+
 %.pdf: %.tex
 	pdflatex -shell-escape $<
+	-rm -f %.log %.aux %.auxlock %.out %.sta
 
-clean:
-	rm -rf cache
-	rm -f *.log *.aux *.auxlock *.out *.sta
-	rm -f */*.log */*.aux */*.out */*.sta
+clean: $(SUBDIRS)
+	-rm -rf cache
+	-rm -f *.log *.aux *.auxlock *.out *.sta
+
+distclean: clean $(SUBDIRS)
+	-rm -f *.pdf
