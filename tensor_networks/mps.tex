@@ -1,3 +1,9 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}
 \matrix[tmatrix]{
 	\node (A1)  [tensor] {}; \& \node (A2)  [tensor] {}; \& \node (A3)  [tensor] {}; \&
 	\node (A4)  [tensor] {}; \& \node (A5)  [tensor] {}; \& \node (A6)  [tensor] {}; \&
@@ -9,3 +15,5 @@
 	\draw[tedge] (\T.south) -- +(0.0,-0.3);
 % \node at ($ (A1.south) + (0.0,-0.3) $) [tindex,below] {$\sigma_1$};
 % \node at ($ (AN.south) + (0.0,-0.3) $) [tindex,below] {$\sigma_N$};
+\end{tikzpicture}
+\end{document}

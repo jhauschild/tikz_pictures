@@ -1,0 +1,54 @@
+main*.pdf
+*/*.pdf
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.auxlock
+*.acn
+*.lof
+*.log
+*.lot
+*.fls
+*.ilg
+*.out
+*.nlo
+*.nls
+*.toc
+*.lol
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.sta
+
+## Intermediate documents:
+*.dvi
+*.xdv
+*-converted-to.*
+# these rules might exclude image files for figures etc.
+# *.ps
+# *.eps
+# *.pdf
+
+## Generated if empty string is given at "Please type another file name for output:"
+.pdf
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+# *.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+*.nav
+*.snm
+*.vrb

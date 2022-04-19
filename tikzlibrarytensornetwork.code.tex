@@ -6,7 +6,7 @@
 % You can also put the whole network into equations and use \scalebox{0.7}{...} to scale it down.
 
 % %%% full example %%%
-% \begin{tensornetwork}[baseline=(AN.base)]
+% \begin{tikzpicture}[baseline=(AN.base)]
 %     \matrix[tmatrix]{
 %         \node (A1)  [tensor] {$A_1$}; \&
 %         \node (A2)  [tensor] {$A_2$}; \&
@@ -28,17 +28,9 @@
 %     \begin{scope}[on background layer]
 %         \node (th) [tensor,draw,fit=(An) (An1) (thl)];
 %     \end{scope}
-% \end{tensornetwork} 
+% \end{tikzpicture} 
 
 \usetikzlibrary{matrix,fit,backgrounds,calc,decorations.markings,arrows.meta,shapes.geometric}
-
-\newenvironment{tensornetwork}
-{
-\begin{tikzpicture}
-}
-{
-\end{tikzpicture}
-}
 
 \newcommand{\coordinates}{
 \draw[very thin, color=blue] (-2.5,-3.5) grid (5.5,3.5);

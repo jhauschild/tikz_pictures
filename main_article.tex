@@ -1,0 +1,11 @@
+\documentclass{article}
+\usepackage[subpreambles,sort]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=cache/]
+
+\begin{document}
+	\input{tensor_networks/mps.tex}
+	% \input{tensor_networks/mps.tex}
+\end{document}
