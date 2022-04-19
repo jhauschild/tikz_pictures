@@ -1,0 +1,88 @@
+\definecolor{colQ1}{rgb}{0.3,0.5,0.0}
+\definecolor{colQ2}{rgb}{0.5,0.3,1.0}
+\definecolor{colQ3}{rgb}{0.8,0.1,0.3}
+\definecolor{colQ4}{rgb}{1.,0.5,0.5}
+\definecolor{colQ5}{rgb}{0.3,0.1,0.1}
+\begin{scope}[
+		U/.style={tensor=blue!60,rotate=30,scale=0.7},
+		V/.style={tensor=red!60,rotate=30,scale=0.7,trapezium,trapezium left angle=75,trapezium right angle=75},
+		M/.style={draw,fill=black},
+		connect/.style={tedge,postaction={decorate}},
+		decoration={markings,mark=at position 0.5 with {\arrow{<}}},
+		% measure/.pic={
+		%     % \draw (-3mm,0) to [bend left] (0,0) to [bend left] (3mm,0);
+		%     \draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+		%     \draw[color=white,thick] (0,-1mm) -- ([yshift=-1mm] 60:3mm)
+		%      (2mm,-1mm) arc [start angle=0, end angle=180, radius=2mm];
+		% },
+		]
+% \draw[very thin, color=blue] (0,-1) grid (11,4);
+\node(V11) [V] at (1,0.5){};
+\node(V12) [V] at (2,1)  {};
+\node(V13) [V] at (4,1)  {};
+\node(V14) [V] at (6,1)  {};
+\node(V15) [V] at (8,1)  {};
+\node(V16) [V] at (10,1) {};
+\node(V21) [V] at (1,2.5){};
+\node(V22) [V] at (2,3)  {};
+\node(V23) [V] at (6,3)  {};
+\node(U11) [U] at (2,0)  {};
+\node(U12) [U] at (4,0)  {};
+\node(U13) [U] at (6,0)  {};
+\node(U14) [U] at (8,0)  {};
+\node(U15) [U] at (10,0) {};
+\node(U21) [U] at (2,2)  {};
+\node(U22) [U] at (6,2)  {};
+\foreach \M/\i in {M1/1,M2/2,M3/3,M4/4,M5/5,
+	M6/6,M7/7,M8/8,M9/9,M10/10,M11/11,M12/12}
+	\coordinate (\M) at (\i,-1);
+%
+\node(T1) [color=colQ1]  at (1,4) {$\ket{0}_1$};
+\node(T2) [color=colQ1]  at (2,4) {$\ket{0}_1$};
+\node(T3) [color=colQ1]  at (6,4) {$\ket{0}_1$};
+\foreach \S/\T in {M1/V11,V11/V21,V21/T1,%
+	M2/U11,U11/V12,V12/U21,U21/V22,V22/T2,%
+	M6/U13,U13/V14,V14/U22,U22/V23,V23/T3}
+	\draw [connect,color=colQ1] (\S) to (\T) ;
+	% \draw [connect,color=colQ1] (M1) to (V11) ;
+%
+\node(iV21)[colQ2] at ($ (V21) + (135:0.6) $)  {$\ket{0}_2$};
+\node(iV23)[colQ2] at ($ (V23) + (135:0.6) $)  {$\ket{0}_2$};
+\draw [connect,colQ2] (M4) to (U12) ;
+\draw [connect,colQ2] (U12) to (V13) ;
+\draw [connect,colQ2] (M10) to (U15) ;
+\draw [connect,colQ2] (U15) to (V16) ;
+\draw [connect,colQ2] (V13) .. controls (4,2) and (3,2) .. (U21) ;
+\draw [connect,colQ2] (V16) .. controls (10,3) and (7,3) .. (V23) ;
+\draw [connect,colQ2] (U21) .. controls (1.5,2) .. (V21) ;
+%
+\node(iV21)[colQ3] at ($ (V22) + (135:0.6) $)  {$\ket{0}_3$};
+\draw [connect,colQ3] (M8) to (U14) ;
+\draw [connect,colQ3] (U14) to (V15) ;
+\draw [connect,colQ3] (V15) .. controls (8,2) and (7,2) .. (U22) ;
+\draw [connect,colQ3] (U22) .. controls (4,2) and (4,3) .. (V22) ;
+%
+\node(iV11)[colQ4] at ($ (V11) + (135:0.6) $)  {$\ket{0}_4$};
+\node(iV13)[colQ4] at ($ (V13) + (135:0.6) $)  {$\ket{0}_4$};
+\node(iV15)[colQ4] at ($ (V15) + (135:0.6) $)  {$\ket{0}_4$};
+\draw [connect,colQ4] (M3) .. controls (3,0) .. (U11) ;
+\draw [connect,colQ4] (M7) .. controls (7,0) .. (U13) ;
+\draw [connect,colQ4] (M11) .. controls (11,0) .. (U15) ;
+\draw [connect,colQ4] (U13) .. controls (5,0) and (5, 1) .. (V13);
+\draw [connect,colQ4] (U15) .. controls (9,0) and (9, 1) .. (V15);
+\draw [connect,colQ4] (U11) .. controls (1.5,0) .. (V11) ;
+%
+\node(iV12)[colQ5] at ($ (V12) + (135:0.6) $)  {$\ket{0}_5$};
+\node(iV14)[colQ5] at ($ (V14) + (135:0.6) $)  {$\ket{0}_5$};
+\node(iV16)[colQ5] at ($ (V16) + (135:0.6) $)  {$\ket{0}_5$};
+\draw [connect,colQ5] (M5) .. controls (5,0) .. (U12) ;
+\draw [connect,colQ5] (M9) .. controls (9,0) .. (U14) ;
+\draw [connect,colQ5] (M12) .. controls (12,0)  and (11, 1).. (V16) ;
+\draw [connect,colQ5] (U12) .. controls (3,0) and (3, 1) .. (V12);
+\draw [connect,colQ5] (U14) .. controls (7,0) and (7, 1) .. (V14);
+%
+% add measure pics
+\foreach \M in {M1,M2,M3,M4,M5,%
+	M6,M7,M8,M9,M10,M11,M12}
+	\draw ($ (\M) + (0,-0.2) $) pic {measure};
+\end{scope}

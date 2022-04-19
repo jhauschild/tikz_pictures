@@ -1,0 +1,97 @@
+\begin{scope}[
+		Ubig/.style={tensor=blue!40,scale=1.2},
+		Vbig/.style={tensor=red!40,scale=1.2,trapezium,trapezium left angle=75,trapezium right angle=75},
+		U/.style={tensor=blue!60},
+		V/.style={tensor=red!60,trapezium,trapezium left angle=75,trapezium right angle=75},
+		connect/.style={tedge,postaction={decorate}},
+		decoration={markings,mark=at position 0.5 with {\arrow{<}}},
+		]
+% \draw[very thin, color=blue] (0,0) grid (8,4);
+% tensors in matrix grid; one column per tensor alignment
+% I should have done this with coordinates directly instead of building a grid...
+\matrix[column sep={0.8cm,between origins},row sep={1.8cm,between origins},ampersand replacement=\&]{
+	\& \node (V21) [Vbig] {}; \& \& \& \node (V22) [Vbig] {}; \& \& \& 
+	\& \node (V23) [Ubig] {}; \& \& \& \& \\
+	% \& \& \& \& \node (U21) [Ubig] {}; \& \& \&
+	%     \& \node (U22) [Ubig] {}; \& \& \& \&  \&\\
+	\& \node (V11) [Vbig] {}; \& \& \node (V12) [Vbig] {}; \& \& \node (V13) [Vbig] {}; \& \& 
+		\node (V14) [Vbig] {}; \& \& \node (V15) [Vbig] {}; \& \& \node (V16) [Ubig] {}; \&  \& \\
+	% \& \& \node (U11) [Ubig] {}; \& \& \node (U12) [Ubig] {}; \& \& \node (U13) [Ubig] {}; \& 
+	%     \& \node (U14) [Ubig] {}; \& \& \node (U15) [Ubig] {}; \& \&  \& \\[-2ex]
+	\coordinate (p005) ; \& \coordinate (p015) ; \& \coordinate (p025) ; \& \coordinate (p035) ; \& \coordinate (p045) ; \& \coordinate (p055) ; \& \coordinate (p065) ; \& 
+		\coordinate (p075) ; \& \coordinate (p085) ; \& \coordinate (p095) ; \& \coordinate (p105) ; \& \coordinate (p115) ; \& \coordinate (p125) ; \& \coordinate (p135) ; \\
+};
+% inside of the big tensors
+\foreach \T in {V11,V21}
+{
+		\node (I1) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,+0.2) $) {};
+		\node (I2) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.2) $) {};
+		\draw [thin] (\T.90) [out=270,in=105] to (I1.60) ;
+		\draw [thin] (I1.300) [out=345,in=180] to (\T.0) ;
+		\draw [thin] (I1.240) [out=285,in=105] to (I2.60) ;
+		\draw [thin] (I2.300) [out=345,in=180] to (\T.0) ;
+		\draw [thin] (I2.240) [out=345,in=90] to (\T.270) ;
+}
+\foreach \T in {V22,V12,V13,V14,V15}
+{
+		\node (I1) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (-0.2,+0.2) $) {};
+		\node (I2) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (+0.2,+0.2) $) {};
+		\node (I3) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (-0.2,-0.2) $) {};
+		\node (I4) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (+0.2,-0.2) $) {};
+		\draw [thin] (\T.90) [out=270,in=105] to (I1.60) ;
+		\draw [thin] (\T.180) [out=0,in=165] to (I1.120) ;
+		\draw [thin] (I1.300) [out=345,in=165] to (I2.120) ;
+		\draw [thin] (I1.240) [out=285,in=105] to (I3.60) ;
+		\draw [thin] (I2.300) [out=345,in=180] to (\T.0) ;
+		\draw [thin] (I2.240) [out=285,in=105] to (I4.60) ;
+		\draw [thin] (\T.180) [out=0,in=165] to (I3.120) ;
+		\draw [thin] (I3.300) [out=345,in=165] to (I4.120) ;
+		\draw [thin] (I3.240) [out=285,in=60] to (\T.240) ;
+		\draw [thin] (I4.300) [out=345,in=180] to (\T.0) ;
+		\draw [thin] (I4.240) [out=285,in=120] to (\T.300) ;
+}
+\foreach \T in {V23,V16}
+{
+		\node (I1) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (-0.2,+0.2) $) {};
+		\coordinate (I2)                                       at ($ (\T) + (+0.2,+0.2) $) {};
+		\node (I3) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (-0.2,-0.2) $) {};
+		\node (I4) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (+0.2,-0.2) $) {};
+		\draw [thin] (\T.90) [out=270,in=105] to (I1.60) ;
+		\draw [thin] (\T.180) [out=0,in=165] to (I1.120) ;
+		\draw [thin] (I1.300) [out=345,in=105] .. controls (I2) .. (I4.105) ;
+		\draw [thin] (I1.240) [out=285,in=105] to (I3.60) ;
+		\draw [thin] (\T.180) [out=0,in=165] to (I3.120) ;
+		\draw [thin] (I3.300) [out=345,in=165] to (I4.120) ;
+		\draw [thin] (I3.240) [out=285,in=60] to (\T.240) ;
+		\draw [thin] (I4.300) [out=345,in=180] to (\T.0) ;
+		\draw [thin] (I4.240) [out=285,in=120] to (\T.300) ;
+}
+%
+% define coordinates for physical indices halfway between tensors
+\foreach \LP/\RP/\CP in {p005/p015/p01,p015/p025/p02,p025/p035/p03,p035/p045/p04,p045/p055/p05,p055/p065/p06,
+						 p065/p075/p07,p075/p085/p08,p085/p095/p09,p095/p105/p10,p105/p115/p11,p115/p125/p12,p125/p135/p13}
+	\coordinate (\CP) at ($ (\LP)!0.5!(\RP) $);
+% connect tensors
+\foreach \S/\T in {V12/V22,V14/V23}
+	\draw[connect] (\S.90) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {V13/V22,V15/V23}
+	\draw[connect] (\S.90) to [out=90,in=300] (\T.300);
+\foreach \S/\T in {V16/V15,V15/V14,V14/V13,V13/V12,V12/V11,
+		V23/V22,V22/V21}
+	\draw[connect] (\S) to (\T);
+\draw[connect] (V11) to (V21);
+\draw[connect] (V16.90) to [out=90,in=0] (V23.0);
+% % physical
+\foreach \S/\T in {p03/V12,p05/V13,p07/V14,p09/V15,p11/V16}
+	\draw[connect] (\S) to [out=90,in=240] (\T.240);
+\draw[connect] (p02) to [out=90,in=270] (V11.270);
+\foreach \S/\T in {p04/V12,p06/V13,p08/V14,p10/V15,p12/V16}
+	\draw[connect] (\S) to [out=90,in=300] (\T.300);
+\draw[connect] (p13) to [out=90,in=0] (V16.0);
+% % top
+\foreach \T in {V21,V22,V23}
+	\draw[connect] (\T.north) -- +(0.0,0.8);
+% \foreach \T in {V21,V22,V23}
+%     \node at ($ (\T.north) + (0.0,0.5) $) [above] {$\ket{0}$};
+\end{scope}
+

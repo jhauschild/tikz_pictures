@@ -1,0 +1,110 @@
+\begin{scope}[connect/.style={tedge,postaction={decorate}},
+		decoration={markings,mark=at position 0.7 with {\arrow{<}}},
+		hightensor/.style={tensor=orange!75,minimum height=3cm},
+		measure/.pic={
+			% \draw (-3mm,0) to [bend left] (0,0) to [bend left] (3mm,0);
+			\draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+			\draw[color=white,thick] (0,-1mm) -- ([yshift=-1mm] 60:3mm)
+			 (2mm,-1mm) arc [start angle=0, end angle=180, radius=2mm];
+		},
+		U/.style={tensor=blue!60},
+		V/.style={tensor=red!60,trapezium,trapezium left angle=75,trapezium right angle=75},
+	]
+\matrix[tmatrix,matrix anchor=west]{
+	\node (B01)  [hightensor] {}; \& \node (B02)  [hightensor] {}; \& \node (B03)  [hightensor] {}; \&
+	\node (B04)  [hightensor] {}; \& \node (B05)  [hightensor] {}; \& \node (B06)  [hightensor] {}; \&
+	\node (B07)  [hightensor] {}; \& \node (B08)  [hightensor] {}; \& \node (B09)  [hightensor] {}; \&
+	\node (B10)  [hightensor] {}; \& \node (B11)  [hightensor] {}; \& \node (B12)  [hightensor] {};\\
+};
+\foreach \S/\T in {B12/B11,B11/B10,B10/B09,B09/B08,B08/B07,B07/B06,B06/B05,B05/B04,B04/B03,B03/B02,B02/B01}
+	\draw[connect] ($ (\S.west) + (0.,-0.9) $) -- ($ (\T.east) + (0.,-0.9) $);
+\foreach \S/\T in {B11/B10,B10/B09,B09/B08,B08/B07,B07/B06,B06/B05,B05/B04,B04/B03,B03/B02,B02/B01}
+	\draw[connect] ($ (\S.west) + (0.,-0.3) $) -- ($ (\T.east) + (0.,-0.3) $);
+\foreach \S/\T in {B10/B09,B09/B08,B08/B07,B07/B06,B06/B05,B05/B04,B04/B03,B03/B02,B02/B01}
+	\draw[connect] ($ (\S.west) + (0.,+0.3) $) -- ($ (\T.east) + (0.,+0.3) $);
+\foreach \S/\T in {B09/B08,B08/B07,B07/B06,B06/B05,B05/B04,B04/B03,B03/B02,B02/B01}
+	\draw[connect] ($ (\S.west) + (0.,+0.9) $) -- ($ (\T.east) + (0.,+0.9) $);
+\foreach \T in {B01,B02,B03,B04,B05,B06,B07,B08} 
+{
+	\draw[connect] (\T.north) -- +(0.0,0.8);
+	\node at (\T.north) [above,yshift=7mm] {$ \ket{0} $};
+}
+\foreach \T in {B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12} 
+	\draw[connect] ($ (\T.south) + (0.0,-0.8) $) -- (\T.south);
+% inner parts
+\foreach \T in {B01}
+{
+	\node (I1) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,+0.9) $) {};
+	\node (I2) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,+0.3) $) {};
+	\node (I3) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.3) $) {};
+	\node (I4) [V,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.9) $) {};
+	\draw [thin] (\T.90) [out=270,in=105] to (I1.60) ;
+	\foreach \R/\S in {I1/I2,I2/I3,I3/I4}
+		\draw [thin] (\R.240) [out=285,in=105] to (\S.60) ;
+	\draw [thin] (I4.240) [out=285,in=90] to (\T.270) ;
+	\foreach \R/\y in {I1/0.9,I2/0.3,I3/-0.3,I4/-0.9}
+	{
+		\draw [thin] (\R.300) [out=345,in=180] to ($ (\T.0) + (0,\y) $) ;
+	}
+}
+\foreach \T in {B02,B03,B04,B05,B06,B07,B08}
+{
+	\node (I1) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,+0.9) $) {};
+	\node (I2) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,+0.3) $) {};
+	\node (I3) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.3) $) {};
+	\node (I4) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.9) $) {};
+	\draw [thin] (\T.90) [out=270,in=105] to (I1.60) ;
+	\foreach \R/\S in {I1/I2,I2/I3,I3/I4}
+		\draw [thin] (\R.240) [out=285,in=105] to (\S.60) ;
+	\draw [thin] (I4.240) [out=285,in=90] to (\T.270) ;
+	\foreach \R/\y in {I1/0.9,I2/0.3,I3/-0.3,I4/-0.9}
+	{
+		\draw [thin] ($ (\T.180) + (0,\y) $) [out=0,in=165] to (\R.120);
+		\draw [thin] (\R.300) [out=345,in=180] to ($ (\T.0) + (0,\y) $) ;
+	}
+}
+\foreach \T in {B09}
+{
+	\node (I2) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,+0.3) $) {};
+	\node (I3) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.3) $) {};
+	\node (I4) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.9) $) {};
+	\draw [thin] ($ (\T.180) + (0,0.9) $) [out=0,in=105] to (I2.60) ;
+	\foreach \R/\S in {I2/I3,I3/I4}
+		\draw [thin] (\R.240) [out=285,in=105] to (\S.60) ;
+	\draw [thin] (I4.240) [out=285,in=90] to (\T.270) ;
+	\foreach \R/\y in {I2/0.3,I3/-0.3,I4/-0.9}
+	{
+		\draw [thin] ($ (\T.180) + (0,\y) $) [out=0,in=165] to (\R.120);
+		\draw [thin] (\R.300) [out=345,in=180] to ($ (\T.0) + (0,\y) $) ;
+	}
+}
+\foreach \T in {B10}
+{
+	\node (I3) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.3) $) {};
+	\node (I4) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.9) $) {};
+	\draw [thin] ($ (\T.180) + (0,0.3) $) [out=0,in=105] to (I3.60) ;
+	\foreach \R/\S in {I3/I4}
+		\draw [thin] (\R.240) [out=285,in=105] to (\S.60) ;
+	\draw [thin] (I4.240) [out=285,in=90] to (\T.270) ;
+	\foreach \R/\y in {I3/-0.3,I4/-0.9}
+	{
+		\draw [thin] ($ (\T.180) + (0,\y) $) [out=0,in=165] to (\R.120);
+		\draw [thin] (\R.300) [out=345,in=180] to ($ (\T.0) + (0,\y) $) ;
+	}
+}
+\foreach \T in {B11}
+{
+	\node (I4) [U,rotate=45,scale=0.2,rounded corners=1pt] at ($ (\T) + (0,-0.9) $) {};
+	\draw [thin] ($ (\T.180) + (0,-0.3) $) [out=0,in=105] to (I4.60) ;
+	\draw [thin] (I4.240) [out=285,in=90] to (\T.270) ;
+	\foreach \R/\y in {I4/-0.9}
+	{
+		\draw [thin] ($ (\T.180) + (0,\y) $) [out=0,in=165] to (\R.120);
+		\draw [thin] (\R.300) [out=345,in=180] to ($ (\T.0) + (0,\y) $) ;
+	}
+}
+\foreach \T in {B12}
+{
+	\draw [thin] ($ (\T.180) + (0,-0.9) $) [out=0,in=90] to (\T.270) ;
+}
+\end{scope}

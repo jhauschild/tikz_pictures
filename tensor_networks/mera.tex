@@ -1,0 +1,45 @@
+\begin{scope}[
+		U/.style={tensor=blue!60},
+		V/.style={tensor=red!60,trapezium,trapezium left angle=75,trapezium right angle=75},
+		connect/.style={tedge,postaction={decorate}},
+		decoration={markings,mark=at position 0.5 with {\arrow{<}}}]
+% tensors in matrix grid; one column per tensor alignment
+% I should have done this with coordinates directly instead of building a grid...
+\matrix[column sep={0.7cm,between origins},row sep={1.3cm,between origins},ampersand replacement=\&]{
+	\& \& \node (V21) [V] {}; \& \& \& \& \node (V22) [V] {}; \&
+		\& \& \& \node (V23) [V] {}; \& \\
+	\& \& \& \& \node (U21) [U] {}; \& \& \&
+		\& \node (U22) [U] {}; \& \& \& \&  \\
+	\& \node (V11) [V] {}; \& \& \node (V12) [V] {}; \& \& \node (V13) [V] {}; \& \& 
+		\node (V14) [V] {}; \& \& \node (V15) [V] {}; \& \& \node (V16) [V] {}; \& \\
+	\& \& \node (U11) [U] {}; \& \& \node (U12) [U] {}; \& \& \node (U13) [U] {}; \& 
+		\& \node (U14) [U] {}; \& \& \node (U15) [U] {}; \& \& \\[-2ex]
+	\coordinate (p005) ; \& \coordinate (p015) ; \& \coordinate (p025) ; \& \coordinate (p035) ; \& \coordinate (p045) ; \& \coordinate (p055) ; \& \coordinate (p065) ; \& 
+		\coordinate (p075) ; \& \coordinate (p085) ; \& \coordinate (p095) ; \& \coordinate (p105) ; \& \coordinate (p115) ; \& \coordinate (p125) ; \\
+};
+% define coordinates for physical indices halfway between tensors
+\foreach \LP/\RP/\CP in {p005/p015/p01,p015/p025/p02,p025/p035/p03,p035/p045/p04,p045/p055/p05,p055/p065/p06,
+						 p065/p075/p07,p075/p085/p08,p085/p095/p09,p095/p105/p10,p105/p115/p11,p115/p125/p12}
+	\coordinate (\CP) at ($ (\LP)!0.5!(\RP) $);
+% connect tensors
+\foreach \S/\T in {U11/V11,U12/V12,U13/V13,U14/V14,U15/V15, U21/V21,U22/V22}
+	\draw[connect] (\S.120) to [out=120,in=300] (\T.300);
+\foreach \S/\T in {U11/V12,U12/V13,U13/V14,U14/V15,U15/V16, U21/V22,U22/V23}
+	\draw[connect] (\S.60) to [out=60,in=240] (\T.240);
+\foreach \S/\T in {U11/V12,U12/V13,U13/V14,U14/V15,U15/V16, U21/V22,U22/V23}
+	\draw[connect] (\S.60) to [out=60,in=240] (\T.240);
+\foreach \S/\T in {V12/U21,V14/U22, V11/V21}
+	\draw[connect] (\S.north) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {V13/U21,V15/U22, V16/V23}
+	\draw[connect] (\S.north) to [out=90,in=300] (\T.300);
+% physical
+\foreach \S/\T in {p02/U11,p04/U12,p06/U13,p08/U14,p10/U15, p01/V11}
+	\draw[connect] (\S) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {p03/U11,p05/U12,p07/U13,p09/U14,p11/U15, p12/V16}
+	\draw[connect] (\S) to [out=90,in=300] (\T.300);
+% top
+\foreach \T in {V21,V22,V23}
+	\draw[connect] (\T.north) -- +(0.0,0.5);
+% \foreach \T in {V21,V22,V23}
+%     \node at ($ (\T.north) + (0.0,0.5) $) [above] {$\ket{0}$};
+\end{scope}

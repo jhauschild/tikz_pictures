@@ -1,0 +1,13 @@
+\begin{scope}[connect/.style={tedge,postaction={decorate}},decoration={markings,mark=at position 0.6 with {\arrow{<}}}]
+\matrix[tmatrix]{
+	\node (B1)  [tensor] {}; \& \node (B2)  [tensor] {}; \& \node (B3)  [tensor] {}; \&
+	\node (B4)  [tensor] {}; \& \node (B5)  [tensor] {}; \& \node (B6)  [tensor] {}; \&
+	\node (B7)  [tensor] {}; \& \node (B8)  [tensor] {}; \& \node (BN)  [tensor] {}; \\
+};
+\foreach \S/\T in {BN/B8,B8/B7,B7/B6,B6/B5,B5/B4,B4/B3,B3/B2,B2/B1}
+	\draw[connect] (\S) -- (\T);
+\foreach \T in {B1,B2,B3,B4,B5,B6,B7,B8,BN} 
+	\draw[connect] ($ (\T.south) + (0.0,-0.3) $) -- (\T.south);
+% \node at ($ (B1.south) + (0.0,-0.3) $) [tindex,below] {$\sigma_1$};
+% \node at ($ (BN.south) + (0.0,-0.3) $) [tindex,below] {$\sigma_N$};
+\end{scope}
