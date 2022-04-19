@@ -1,5 +1,7 @@
 
 SUBDIRS=$(sort $(dir $(wildcard ./*/Makefile)))
+SUBDIRTEXS=$(filter-out $(wildcard ./*/tikzlibrarytensornetwork.code.tex), $(wildcard ./*/*.tex))
+SUBDIRPDFS=$(SUBDIRTEXS:.tex=.pdf)
 
 .PHONY: all main clean distclean $(SUBDIRS)
 
@@ -10,7 +12,10 @@ main: main_article.pdf
 $(SUBDIRS):
 	$(MAKE) -C $@ $(MAKECMDGOALS)
 
-%.pdf: %.tex $(wildcard ./*/*.pdf)
+$(SUBDIRPDFS):
+	$(MAKE) -C $(dir $@) $(notdir $@)
+
+%.pdf: %.tex $(SUBDIRPDFS)
 	pdflatex -shell-escape $<
 	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta
 

@@ -19,10 +19,10 @@ SUBDIRS=$(find * -type d)  # exclude .git !
 		echo "	\\section{$DIR}" | sed -r 's/_/\\_/g'
 		for F in $FILES
 		do
-			echo "		\\begin{figure}"
-			echo "		\\includegraphics[width=\\textwidth]{${F%.tex}.pdf}"
-			echo "		\\caption{$F}" | sed -r 's/_/\\_/g'
-			echo "		\\end{figure}"
+			# echo "		\\begin{figure}"
+			echo "		\\subsection{$F}" | sed -r 's/_/\\_/g'
+			echo "		\\includegraphics{${F%.tex}.pdf}"
+			# echo "		\\end{figure}"
 		done
 	done
 	echo '
