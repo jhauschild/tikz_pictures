@@ -1,0 +1,54 @@
+\definecolor{colQ1}{rgb}{0.3,0.5,0.0}
+\definecolor{colQ2}{rgb}{0.5,0.3,1.0}
+\definecolor{colQ3}{rgb}{0.8,0.1,0.3}
+\definecolor{colQ4}{rgb}{1.,0.5,0.5}
+\definecolor{colQ5}{rgb}{0.3,0.1,0.1}
+\begin{tikzpicture}[%
+		measure/.pic={
+			% \draw (-3mm,0) to [bend left] (0,0) to [bend left] (3mm,0);
+			\draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+			\draw[color=white,thick] (0,-1mm) -- ([yshift=-1mm] 60:3mm)
+			 (2mm,-1mm) arc [start angle=0, end angle=180, radius=2mm];
+		},
+		qubitreset/.pic={
+			\draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+			\node[color=white] at (0,0) {$\mathbf{\ket{0}}$} ;
+		}
+		]
+	\foreach \q/\i in {q1/1,q2/2,q3/3,q4/4,q5/5}
+	{
+		\node[minimum size=6mm,color=colQ\i] (\q) at (0,\i) {$\ket{0}_\i$};
+		\draw[thick,color=colQ\i] (\q) -- (18,\i) ;
+		\node at (18.5,\i) {$\cdots$};
+	}
+	\node[minimum size=6mm] (m) at (0,0) {m};
+	\draw[thick] ($ (m.east) + (0,1pt)$) -- (18,1pt) ;
+	\draw[thick] ($ (m.east) + (0,-1pt)$) -- (18,-1pt) ;
+	\node at (18.5,0) {$\cdots$};
+
+	\foreach \x/\y/\i in {3/1/1,9/1/2,11/4/3,15/2/4,17/5/5}
+	{
+		\draw[thick,double,->]         (\x,\y) -- (\x,1pt) ;
+		\node[node font=scriptsize] at (\x.3,.3) {\i};
+		\draw (\x,\y) pic {measure};
+		\ifnum\x<17
+			\draw (\x+1,\y) pic {qubitreset};
+		\fi
+	}
+	\foreach \col/\x/\q/\p in {%
+		red!60/1/1/2,
+		red!60/2/1/4,
+		red!60/5/1/3,
+		blue!60/6/1/2,
+		red!60/7/1/5,
+		blue!60/8/1/4,
+		red!60/13/2/4,
+		blue!60/14/2/5%
+		}
+	{
+		\ifnum\q<\numexpr\p-1
+			\path[fill=white] ($ (\x,\q+1) - (0.4,0.3) $) rectangle ($ (\x,\p-1) + (0.4,0.3) $);
+		\fi
+		\path[fill=\col] ($ (\x,\q) - (0.3,0.3) $) rectangle ($ (\x,\p) + (0.3,0.3) $);
+	}
+\end{tikzpicture}

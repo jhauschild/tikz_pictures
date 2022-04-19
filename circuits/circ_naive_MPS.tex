@@ -1,0 +1,25 @@
+\begin{tikzpicture}[
+		measure/.pic={
+			% \draw (-3mm,0) to [bend left] (0,0) to [bend left] (3mm,0);
+			\draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+			\draw[color=white,thick] (0,-1mm) -- ([yshift=-1mm] 60:3mm)
+			 (2mm,-1mm) arc [start angle=0, end angle=180, radius=2mm];
+		}
+		qubitreset/.pic={
+			\draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+			\node[color=white] at (0,0) {$\mathbf{\ket{0}}$};
+		}
+		]
+	\foreach \q/\i in {q1/1,q2/2,q3/3,q4/4,q5/5,q6/6,q7/7,q8/8,q9/9}
+	{
+		\node (\q) at (0,\i) {$\ket{0}$};
+		\draw[thick] (\q) -- (7,\i) ;
+	}
+	%
+	\foreach \i in {0,...,5}
+	{
+		\path[fill=orange]  ($ (1+\i,1+\i) - (0.3,0.3) $) rectangle ($ (1+\i,4+\i) + (0.3,0.3) $);
+		\draw (7,1+\i) pic {measure};
+	}
+	% \draw[fill=blue] (0.7,5.7) rectangle (1.3,9.3);
+\end{tikzpicture}
