@@ -17,14 +17,15 @@ $(SUBDIRPDFS):
 
 %.pdf: %.tex $(SUBDIRPDFS)
 	pdflatex -shell-escape $<
-	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta
+	pdflatex -shell-escape $<
+	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta $*.toc
 
 main_article.tex: generate_main.sh
 	bash generate_main.sh
 
 clean: $(SUBDIRS)
 	-rm -rf cache
-	-rm -f *.incl *.log *.aux *.auxlock *.out *.sta
+	-rm -f *.incl *.log *.aux *.auxlock *.out *.sta *.toc
 
 distclean: clean $(SUBDIRS)
-	-rm -f *.pdf $(SUBDIRINCL)
+	-rm -f *.pdf

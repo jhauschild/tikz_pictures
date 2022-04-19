@@ -2,33 +2,6 @@
 % \usepackage{tikz}
 % \usetikzlibrary{tensornetwork}
 
-% on beamer frames, use \begin{frame}[fragile]{Title}...\end{frame}
-% You can also put the whole network into equations and use \scalebox{0.7}{...} to scale it down.
-
-% %%% full example %%%
-% \begin{tikzpicture}[baseline=(AN.base)]
-%     \matrix[tmatrix]{
-%         \node (A1)  [tensor] {$A_1$}; \&
-%         \node (A2)  [tensor] {$A_2$}; \&
-%         \node (An)  [tensor] {$A_n$}; \&
-%         \node (An1) [tensor] {$A_{n+1}$}; \&
-%         \node (An2) [tensor] {$A_{n+2}$}; \&
-%         \node (AN)  [tensor] {$A_N$}; \\
-%     };
-%     \draw[tedge] 
-%         (A1) -- (A2) -- (An) -- (An1) -- (An2) -- (AN);
-%     \draw[tedge,dotted] 
-%         (A1.west) -- +(-0.3,0.0)
-%         (AN.east) -- +(+0.3,0.0);
-%     \foreach \T in {A1,A2,An,An1,An2,AN} 
-%         \draw[tedge] (\T.south) -- +(0.,-0.3);
-%     \node at ($ (A1.south) + (0.0,-0.3) $) [tindex,right] {$\sigma_1$};
-%     \node at ($ (AN.south) + (0.0,-0.3) $) [tindex,right] {$\sigma_N$};
-%     \node (thl) at (An1.north west) [above] {$\theta$};
-%     \begin{scope}[on background layer]
-%         \node (th) [tensor,draw,fit=(An) (An1) (thl)];
-%     \end{scope}
-% \end{tikzpicture} 
 
 \usetikzlibrary{matrix,fit,backgrounds,calc,decorations.markings,arrows.meta,shapes.geometric}
 
@@ -39,9 +12,10 @@
 }
 
 % minium size = 7mm - 0.5pt such that standard tensors with tmatrix repeat every 1cm
+% TODO: don't use fixed unit width, but allow to scale?
 \tikzset{tensor/.style={fill=#1,draw,rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt},
          tensor/.default={orange}}
- \tikzset{emptytensor/.style={rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt}}
+\tikzset{emptytensor/.style={rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt}}
 \tikzset{tedge/.style={thick}}
 \tikzset{tindex/.style={node font=\tiny}}
 \tikzset{tmatrix/.style={row sep=3mm,column sep=3mm,ampersand replacement=\&}}

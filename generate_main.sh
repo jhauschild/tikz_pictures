@@ -10,8 +10,14 @@ SUBDIRS=$(find * -type d)  # exclude .git !
 % \usetikzlibrary{external}
 % \tikzexternalize[prefix=cache/]
 \usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Collection of tikz figures}
 
 \begin{document}
+	\maketitle
+	\tableofcontents
+	\setlength{\fboxsep}{0pt}
 '
 	for DIR in $SUBDIRS
 	do
@@ -21,7 +27,7 @@ SUBDIRS=$(find * -type d)  # exclude .git !
 		do
 			# echo "		\\begin{figure}"
 			echo "		\\subsection{$F}" | sed -r 's/_/\\_/g'
-			echo "		\\includegraphics{${F%.tex}.pdf}"
+			echo "		\\fbox{\\includegraphics{${F%.tex}.pdf}}"
 			# echo "		\\end{figure}"
 		done
 	done
