@@ -1,11 +1,67 @@
-\documentclass{article}
-\usepackage[subpreambles,sort]{standalone}
 
-\usepackage{tikz}
-\usetikzlibrary{external}
-\tikzexternalize[prefix=cache/]
+\documentclass{article}
+% \usepackage[subpreambles,sort]{standalone}
+% \usepackage{tikz}
+% \usetikzlibrary{external}
+% \tikzexternalize[prefix=cache/]
+\usepackage{graphicx}
 
 \begin{document}
-	\input{tensor_networks/mps.tex}
-	% \input{tensor_networks/mps.tex}
+
+	\section{circuits}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{circuits/circ_holo_MERA.pdf}
+		\caption{circuits/circ\_holo\_MERA.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{circuits/circ_holo_MPS.pdf}
+		\caption{circuits/circ\_holo\_MPS.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{circuits/circ_naive_MPS2.pdf}
+		\caption{circuits/circ\_naive\_MPS2.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{circuits/circ_naive_MPS.pdf}
+		\caption{circuits/circ\_naive\_MPS.tex}
+		\end{figure}
+	\section{tensor\_networks}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/gmera_on_qc.pdf}
+		\caption{tensor\_networks/gmera\_on\_qc.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/gmera.pdf}
+		\caption{tensor\_networks/gmera.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mera_on_qc.pdf}
+		\caption{tensor\_networks/mera\_on\_qc.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mera.pdf}
+		\caption{tensor\_networks/mera.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mps_on_qc.pdf}
+		\caption{tensor\_networks/mps\_on\_qc.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mps_rightcan_arrows.pdf}
+		\caption{tensor\_networks/mps\_rightcan\_arrows.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mps_rightcan.pdf}
+		\caption{tensor\_networks/mps\_rightcan.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mps.pdf}
+		\caption{tensor\_networks/mps.tex}
+		\end{figure}
+		\begin{figure}
+		\includegraphics[width=\textwidth]{tensor_networks/mps_with_qc_inner.pdf}
+		\caption{tensor\_networks/mps\_with\_qc\_inner.tex}
+		\end{figure}
+
 \end{document}
+
