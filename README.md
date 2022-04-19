@@ -3,15 +3,18 @@
 This is a collection of [tikz](https://www.ctan.org/pkg/pgf) figures, which I've generated for various papers/seminar talks.
 
 Simply call `make` to generate all the PDFs in subfolders and collect them into the `main_article.pdf`.
+Or compile the tex files by hand with `pdflatex -shell-escape file.tex`.
 
-The figures are built wrapped with the [standalone](https://www.ctan.org/pkg/standalone) package to produce one PDF per figure.
+The figures are wrapped with the [standalone](https://www.ctan.org/pkg/standalone) package to produce one PDF per figure.
 This means you can directly include the latex file with ``\input{some/figure.tex}``, provided that you include the following preamble:
 ```latex
 \usepackage{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{braket}
 ```
 If you have many figures, consider also adding:
 ```latex
-\usepackage{tikz}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=cache/]
 ```
@@ -52,11 +55,10 @@ Then, you can define tensor networks, e.g. like this:
     \end{scope}
 \end{tikzpicture} 
 ```
+The `tmatrix` allows to adjust the width of the tensors dynamically depending on the content with a default distance of 1cm between tensors;
+in other cases it might be more convenient to place the tensors in a fixed coordinate grid with `\node (A1) at (1, 2) [tensor] {$A_1$};`.
 
-The `tmatrix` allows to adjust the width of the tensors dynamically depending on the content;
-in other cases it might be more convenient to place the tensors in a fixed coordinate grid.
-
-
+![example_MPS.png](example_MPS.png)
 
 
 

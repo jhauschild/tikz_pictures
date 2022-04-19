@@ -1,0 +1,29 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(AN.base)]
+    \matrix[tmatrix]{
+        \node (A1)  [tensor] {$A_1$}; \&
+        \node (A2)  [tensor] {$A_2$}; \&
+        \node (An)  [tensor] {$A_n$}; \&
+        \node (An1) [tensor] {$A_{n+1}$}; \&
+        \node (An2) [tensor] {$A_{n+2}$}; \&
+        \node (AN)  [tensor] {$A_N$}; \\
+    };
+    \draw[tedge] 
+        (A1) -- (A2) -- (An) -- (An1) -- (An2) -- (AN);
+    \draw[tedge,dotted] 
+        (A1.west) -- +(-0.3,0.0)
+        (AN.east) -- +(+0.3,0.0);
+    \foreach \T in {A1,A2,An,An1,An2,AN} 
+        \draw[tedge] (\T.south) -- +(0.,-0.3);
+    \node at ($ (A1.south) + (0.0,-0.3) $) [tindex,right] {$\sigma_1$};
+    \node at ($ (AN.south) + (0.0,-0.3) $) [tindex,right] {$\sigma_N$};
+    \node (thl) at (An1.north west) [above] {$\theta$};
+    \begin{scope}[on background layer]
+        \node (th) [tensor=orange!60,draw,fit=(An) (An1) (thl)] {};
+    \end{scope}
+\end{tikzpicture}
+\end{document}

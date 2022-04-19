@@ -7,7 +7,7 @@ SUBDIRPDFS=$(SUBDIRTEXS:.tex=.pdf)
 
 all: $(SUBDIRS) main
 
-main: main_article.pdf
+main: main_article.pdf example_MPS.png
 
 $(SUBDIRS):
 	$(MAKE) -C $@ $(MAKECMDGOALS)
@@ -22,6 +22,9 @@ $(SUBDIRPDFS):
 
 main_article.tex: generate_main.sh
 	bash generate_main.sh
+
+example_MPS.png : example_MPS.pdf
+	pdftoppm -scale-to 800 $< -png > $@
 
 clean: $(SUBDIRS)
 	-rm -rf cache
