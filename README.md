@@ -7,7 +7,7 @@ Simply call `make` to generate all the PDFs in subfolders and collect them into 
 The figures are built wrapped with the [standalone](https://www.ctan.org/pkg/standalone) package to produce one PDF per figure.
 This means you can directly include the latex file with ``\input{some/figure.tex}``, provided that you include the following preamble:
 ```latex
-\usepackage[subpreambles,sort]{standalone}
+\usepackage{standalone}
 ```
 If you have many figures, consider also adding:
 ```latex
@@ -15,6 +15,7 @@ If you have many figures, consider also adding:
 \usetikzlibrary{external}
 \tikzexternalize[prefix=cache/]
 ```
+The standalone package has an option `\usepackage[subpreambles,sort]{standalone}` to auto-include packages, but I found this conflicts with the `external` tikz library.
 
 Alternatively, you can directly include the PDFs with `\usepackage{graphicx}` and the usual `\includegraphics(some/figure.pdf}`.
 

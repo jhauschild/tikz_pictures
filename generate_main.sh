@@ -5,10 +5,10 @@ SUBDIRS=$(find * -type d)  # exclude .git !
 {
 	echo '
 \documentclass{article}
-% \usepackage[subpreambles,sort]{standalone}
+% \usepackage{standalone}
 % \usepackage{tikz}
 % \usetikzlibrary{external}
-% \tikzexternalize[prefix=cache/]
+% \tikzexternalize[prefix=cache/]  % requires to create cache/* subfolders as necessary
 \usepackage{graphicx}
 \usepackage{hyperref}
 
