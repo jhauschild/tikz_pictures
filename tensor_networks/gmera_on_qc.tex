@@ -95,46 +95,16 @@
 		M9/U009,U009/U008,U008/U108,U108/V107}
 	\draw [connect,color=colQ5] (\S) to (\T) ;
 \node(iV107)[colQ5] at ($ (V107) + (135:0.6) $)  {$\ket{0}_5$};
-%
-%
-% \node(iV23)[colQ2] at ($ (V23) + (135:0.6) $)  {$\ket{0}_2$};
-% \draw [connect,colQ2] (M4) to (U12) ;
-% \draw [connect,colQ2] (U12) to (V13) ;
-% \draw [connect,colQ2] (M10) to (U15) ;
-% \draw [connect,colQ2] (U15) to (V16) ;
-% \draw [connect,colQ2] (V13) .. controls (4,2) and (3,2) .. (U21) ;
-% \draw [connect,colQ2] (V16) .. controls (10,3) and (7,3) .. (V23) ;
-% \draw [connect,colQ2] (U21) .. controls (1.5,2) .. (V21) ;
-% %
-% \node(iV21)[colQ3] at ($ (V22) + (135:0.6) $)  {$\ket{0}_3$};
-% \draw [connect,colQ3] (M8) to (U14) ;
-% \draw [connect,colQ3] (U14) to (V15) ;
-% \draw [connect,colQ3] (V15) .. controls (8,2) and (7,2) .. (U22) ;
-% \draw [connect,colQ3] (U22) .. controls (4,2) and (4,3) .. (V22) ;
-% %
-% \node(iV11)[colQ4] at ($ (V11) + (135:0.6) $)  {$\ket{0}_4$};
-% \node(iV13)[colQ4] at ($ (V13) + (135:0.6) $)  {$\ket{0}_4$};
-% \node(iV15)[colQ4] at ($ (V15) + (135:0.6) $)  {$\ket{0}_4$};
-% \draw [connect,colQ4] (M3) .. controls (3,0) .. (U11) ;
-% \draw [connect,colQ4] (M7) .. controls (7,0) .. (U13) ;
-% \draw [connect,colQ4] (M11) .. controls (11,0) .. (U15) ;
-% \draw [connect,colQ4] (U13) .. controls (5,0) and (5, 1) .. (V13);
-% \draw [connect,colQ4] (U15) .. controls (9,0) and (9, 1) .. (V15);
-% \draw [connect,colQ4] (U11) .. controls (1.5,0) .. (V11) ;
-% %
-% \node(iV12)[colQ5] at ($ (V12) + (135:0.6) $)  {$\ket{0}_5$};
-% \node(iV14)[colQ5] at ($ (V14) + (135:0.6) $)  {$\ket{0}_5$};
-% \node(iV16)[colQ5] at ($ (V16) + (135:0.6) $)  {$\ket{0}_5$};
-% \draw [connect,colQ5] (M5) .. controls (5,0) .. (U12) ;
-% \draw [connect,colQ5] (M9) .. controls (9,0) .. (U14) ;
-% \draw [connect,colQ5] (M12) .. controls (12,0)  and (11, 1).. (V16) ;
-% \draw [connect,colQ5] (U12) .. controls (3,0) and (3, 1) .. (V12);
-% \draw [connect,colQ5] (U14) .. controls (7,0) and (7, 1) .. (V14);
-% %
 % add measure pics
 \foreach \M in {M1,M2,M3,M4,M5,%
 	M6,M7,M8,M9,M10,M11,M12}
 	\draw ($ (\M) + (0,-0.2) $) pic {measure};
 \end{scope}
+% layers
+\draw[very thin,gray,dashed] (0, -0.35) -- (12.5,-0.35);
+\node[rotate=90,gray,node font=\footnotesize] at (12.5,0.5) {layer 1};
+\draw[very thin,gray,dashed] (0, 1.65) -- (12.5,1.65);
+\node[rotate=90,gray,node font=\footnotesize] at (12.5,2.5) {layer 2};
+\draw[very thin,gray,dashed] (0, 3.65) -- (12.5,3.65);
 \end{tikzpicture}
 \end{document}

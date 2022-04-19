@@ -8,10 +8,10 @@ The figures are built wrapped with the [standalone](https://www.ctan.org/pkg/sta
 This means you can directly include the latex file with ``\input{some/figure.tex}``, provided that you include the following preamble:
 ```latex
 \usepackage[subpreambles,sort]{standalone}
-\usepackage{tikz}
 ```
 If you have many figures, consider also adding:
 ```latex
+\usepackage{tikz}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=cache/]
 ```
