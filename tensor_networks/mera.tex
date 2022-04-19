@@ -1,3 +1,9 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}
 \begin{scope}[
 		U/.style={tensor=blue!60},
 		V/.style={tensor=red!60,trapezium,trapezium left angle=75,trapezium right angle=75},
@@ -43,3 +49,5 @@
 % \foreach \T in {V21,V22,V23}
 %     \node at ($ (\T.north) + (0.0,0.5) $) [above] {$\ket{0}$};
 \end{scope}
+\end{tikzpicture}
+\end{document}

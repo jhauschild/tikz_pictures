@@ -1,3 +1,11 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}
 \begin{scope}[
 		U/.style={tensor=blue!60,rotate=30,scale=0.7},
 		V/.style={tensor=red!60,rotate=30,scale=0.7,trapezium,trapezium left angle=75,trapezium right angle=75},
@@ -114,3 +122,5 @@
 	M6,M7,M8,M9,M10,M11,M12}
 	\draw ($ (\M) + (0,-0.2) $) pic {measure};
 \end{scope}
+\end{tikzpicture}
+\end{document}

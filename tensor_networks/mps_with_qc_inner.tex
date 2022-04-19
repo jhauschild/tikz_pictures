@@ -1,3 +1,11 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}
 \begin{scope}[connect/.style={tedge,postaction={decorate}},
 		decoration={markings,mark=at position 0.7 with {\arrow{<}}},
 		hightensor/.style={tensor=orange!75,minimum height=3cm},
@@ -108,3 +116,5 @@
 	\draw [thin] ($ (\T.180) + (0,-0.9) $) [out=0,in=90] to (\T.270) ;
 }
 \end{scope}
+\end{tikzpicture}
+\end{document}

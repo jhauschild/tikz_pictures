@@ -1,9 +1,22 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}
 \begin{scope}[
 		U/.style={tensor=blue!60,rotate=30,scale=0.7},
 		V/.style={tensor=red!60,rotate=30,scale=0.7,trapezium,trapezium left angle=75,trapezium right angle=75},
 		M/.style={draw,fill=black},
 		connect/.style={tedge,postaction={decorate}},
 		decoration={markings,mark=at position 0.5 with {\arrow{<}}},
+		measure/.pic={
+			\draw[fill=black] (-3mm,-3mm) rectangle (3mm,3mm) ;
+			\draw[color=white,thick] (0,-1mm) -- ([yshift=-1mm] 60:3mm)
+			 (2mm,-1mm) arc [start angle=0, end angle=180, radius=2mm];
+		}
 		]
 \definecolor{colQ1}{rgb}{0.3,0.5,0.0}
 \definecolor{colQ2}{rgb}{0.5,0.3,1.0}
@@ -123,3 +136,5 @@
 	M6,M7,M8,M9,M10,M11,M12}
 	\draw ($ (\M) + (0,-0.2) $) pic {measure};
 \end{scope}
+\end{tikzpicture}
+\end{document}

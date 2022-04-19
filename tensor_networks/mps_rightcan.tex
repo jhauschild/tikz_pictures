@@ -1,3 +1,9 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}
 \begin{scope}[connect/.style={tedge,postaction={decorate}},decoration={markings,mark=at position 0.6 with {\arrow{<}}}]
 \matrix[tmatrix]{
 	\node (B1)  [tensor] {}; \& \node (B2)  [tensor] {}; \& \node (B3)  [tensor] {}; \&
@@ -11,3 +17,5 @@
 % \node at ($ (B1.south) + (0.0,-0.3) $) [tindex,below] {$\sigma_1$};
 % \node at ($ (BN.south) + (0.0,-0.3) $) [tindex,below] {$\sigma_N$};
 \end{scope}
+\end{tikzpicture}
+\end{document}
