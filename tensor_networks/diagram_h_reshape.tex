@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(h.base)]
+	\node (h) [tensor=orange!60!white,minimum width=2cm] {$h$};
+	\coordinate (j1) at ($ (h.south) + (-0.5,0.) $) ;
+	\coordinate (j2) at ($ (h.south) + (+0.5,0.) $) ;
+	\coordinate (k) at ($ (h.south) + (0,-0.5) $) ;
+	\coordinate (j1s) at ($ (h.north) + (-0.5,0.) $) ;
+	\coordinate (j2s) at ($ (h.north) + (+0.5,0.) $) ;
+	\coordinate (ks) at ($ (h.north) + (0,+0.5) $) ;
+	\node at ($ (j1) + (0,-0.2) $)  [tindex,left] {$j_1$};
+	\node at ($ (j2) + (0,-0.2) $) [tindex,right] {$j_2$};
+	\node at (k) [tindex,right] {$k = d \, j_1 + j_2$};
+	\draw[tedge]
+		(j1) to [out=270,in=90] (k)
+		(j2) to [out=270,in=90] (k)
+		(j1s) to [out=90,in=270] (ks)
+		(j2s) to [out=90,in=270] (ks)
+		;
+\end{tikzpicture}
+\end{document}

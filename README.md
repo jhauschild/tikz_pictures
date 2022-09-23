@@ -2,6 +2,9 @@
 
 This is a collection of [tikz](https://www.ctan.org/pkg/pgf) figures, which I've generated for various papers/seminar talks.
 
+For more examples and details see the great, original [tikz manual](https://tikz.org).
+
+
 Simply call `make` to generate all the PDFs in subfolders and collect them into the `main_article.pdf`.
 Or compile the tex files by hand with `pdflatex -shell-escape file.tex`.
 

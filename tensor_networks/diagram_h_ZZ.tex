@@ -1,0 +1,23 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(Z1.base)]
+	\matrix[tmatrix]{
+		\node (Z1)  [tensor] {$Z$}; \&
+		\node (Z2)  [tensor] {$Z$}; \\
+	};
+	\draw[tedge] 
+		(Z1.north) -- +(0.,+0.3)
+		(Z2.north) -- +(0.,+0.3)
+		(Z1.south) -- +(0.,-0.3)
+		(Z2.south) -- +(0.,-0.3);
+	\node at ($ (Z1.south) + (0,-0.3) $) [tindex,below] {$j_1$};
+	\node at ($ (Z2.south) + (0,-0.3) $) [tindex,below] {$j_2$};
+	\node (h) at  ($ (Z1.west) + (-0.3,0) $) {$h$};
+    \begin{scope}[on background layer]
+		\node (ht) [tensor=orange!60,draw,fit=(h) (Z1) (Z2)] {};
+    \end{scope}
+\end{tikzpicture}
+\end{document}

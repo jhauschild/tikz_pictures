@@ -1,0 +1,15 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(M.base)]
+	\matrix[tmatrix]{
+		\node (M)  [tensor] {$M$}; \&
+		\node (v)  [tensor] {$v$}; \\
+	};
+	\draw[tedge] (M.west) -- +(-0.3,0);
+	\node at ($ (M.west) + (-0.3,0) $) [tindex,left] {$a$};
+	\draw[tedge] (M) to node[above,tindex] {$b$} (v);
+\end{tikzpicture}
+\end{document}

@@ -20,7 +20,7 @@ $(SUBDIRPDFS):
 	pdflatex -shell-escape $<
 	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta $*.toc
 
-main_article.tex: generate_main.sh
+main_article.tex: generate_main.sh $(SUBDIRTEXS)
 	bash generate_main.sh
 
 example_MPS.png : example_MPS.pdf

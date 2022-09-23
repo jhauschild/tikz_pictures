@@ -1,0 +1,13 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(M.base)]
+	\node (M)  [tensor] {$M$};
+	\draw[tedge] (M.west) -- +(-0.3,0);
+	\draw[tedge] (M.east) -- +(+0.3,0);
+	\node at ($ (M.west) + (-0.3,0) $) [tindex,left] {$a$};
+	\node at ($ (M.east) + (+0.3,0) $) [tindex,right] {$b$};
+\end{tikzpicture}
+\end{document}
