@@ -1,0 +1,18 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fit,backgrounds,calc,decorations.markings,arrows.meta,shapes.geometric}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}
+	% \draw[->] (0, 0) -- (5., 0) ;
+	\foreach \i in {0,...,5} {
+		\shade[ball color=black!30!white] (\i, 0) circle [radius=0.3] ;
+		% \draw[fill=black!30!white] (\i, 0) circle [radius=0.3] ;
+	}
+	\draw[thin,dashed,red]    (2.5,-0.5) -- (2.5,1.0);
+	\node[above,red,left]  at (2.5, 0.7) {A};
+	\node[above,red,right] at (2.5,0.7) {B};
+\end{tikzpicture}
+\end{document}
