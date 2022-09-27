@@ -1,0 +1,33 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(A.base)]
+	\matrix[tmatrix]{
+		\node (A)  [tensor,minimum width=1.2cm] {$A$}; \&
+		\node (L)  [tensor,shape=circle] {$\Lambda$}; \&
+		\node (B)  [tensor,minimum width=1.2cm] {$B$}; \\
+	};
+	\foreach \j/\x in {j1/-0.4,j2/0.,j3/+0.4}
+		\coordinate (\j) at ($ (A.south) + (\x,0.) $) ;
+	\foreach \j/\x in {j4/-0.4,j5/0.,j6/+0.4}
+		\coordinate (\j) at ($ (B.south) + (\x,0.) $) ;
+	\coordinate (kA) at ($ (A.south) + (-0.4,-0.5) $) ;
+	\coordinate (kB) at ($ (B.south) + (+0.4,-0.5) $) ;
+	% \node [tindex,left] at (kA) {$k_A$};
+	% \node [tindex,right] at (kB) {$k_B$};
+	\draw[tedge]
+		(j1) to [out=270,in=90] (kA)
+		(j2) to [out=270,in=90] (kA)
+		(j3) to [out=270,in=90] (kA)
+		(j4) to [out=270,in=90] (kB)
+		(j5) to [out=270,in=90] (kB)
+		(j6) to [out=270,in=90] (kB)
+		;
+	% \draw[tedge] (A) to (L) to (B);
+	\draw[tedge] (A) to node[tindex,above] {$\alpha$}
+		(L) to node[tindex,above] {$\alpha'$}
+		(B);
+\end{tikzpicture}
+\end{document}

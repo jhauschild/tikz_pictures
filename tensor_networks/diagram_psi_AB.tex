@@ -1,0 +1,23 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(psi.base)]
+	\node (psi)  [tensor,minimum width=2.4cm] {$\psi$};
+	\foreach \j/\x in {j1/-1.0,j2/-0.6,j3/-0.2,j4/0.2,j5/0.6,j6/1.0}
+		\coordinate (\j) at ($ (psi.south) + (\x,0.) $) ;
+	\coordinate (kA) at ($ (psi.south) + (-1.0,-0.5) $) ;
+	\coordinate (kB) at ($ (psi.south) + (+1.0,-0.5) $) ;
+	\node [tindex,left] at (kA) {$k_A$};
+	\node [tindex,right] at (kB) {$k_B$};
+	\draw[tedge]
+		(j1) to [out=270,in=90] (kA)
+		(j2) to [out=270,in=90] (kA)
+		(j3) to [out=270,in=90] (kA)
+		(j4) to [out=270,in=90] (kB)
+		(j5) to [out=270,in=90] (kB)
+		(j6) to [out=270,in=90] (kB)
+		;
+\end{tikzpicture}
+\end{document}

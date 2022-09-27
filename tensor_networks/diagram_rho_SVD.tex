@@ -1,0 +1,32 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(A.north)]
+	\matrix[tmatrix]{
+		\node (Ad)  [tensor,minimum width=1.2cm] {$\bar{A}$}; \&
+		\node (Ld)  [tensor,shape=circle] {$\Lambda$}; \&
+		\node (Bd)  [tensor,minimum width=1.2cm] {$\bar{B}$}; \\
+		\node (A)  [tensor,minimum width=1.2cm] {$A$}; \&
+		\node (L)  [tensor,shape=circle] {$\Lambda$}; \&
+		\node (B)  [tensor,minimum width=1.2cm] {$B$}; \\
+	};
+	\foreach \x in {-0.4,0.,0.4}
+	{
+		\draw[tedge] ($ (A.south) + (\x,0.) $) to +(0,-0.3); 
+		\draw[tedge] ($ (Ad.north) + (\x,0.) $) to +(0,0.3); 
+	}
+	\draw[tedge] (A) to (L) to (B);
+	\draw[tedge] (Ad) to (Ld) to (Bd);
+	\coordinate (r) at ($ (B.south east) + (0,-0.3) $); 
+	\coordinate (rd) at ($ (Bd.north east) + (0,+0.3) $); 
+	\foreach \x in {-0.4,0.,0.4}
+	{
+		\draw[tedge] ($ (B.south) + (\x,0.) $) to[out=270,in=180] (r) ;
+		\draw[tedge] ($ (Bd.north) + (\x,0.) $) to[out=90,in=180] (rd) ;
+	}
+	\draw[tedge] (r) to [in=0,out=0] (rd);
+\end{tikzpicture}
+\end{document}
