@@ -1,0 +1,33 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(B6.base)]
+	\useasboundingbox (-3.5,-1.7) rectangle (3.7,1.0);
+	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
+		\node (A1)  [tensor] {$A^{[1]}$}; \&
+		\node (L2)  [tensor,shape=circle] {$\Lambda^{[2]}$}; \&
+		\node (B2)  [tensor] {$B^{[2]}$}; \&
+		\node (B3)  [tensor] {$B^{[3]}$}; \&
+		\node (B4)  [tensor] {$B^{[4]}$}; \&
+		\node (B5)  [tensor] {$B^{[5]}$}; \&
+		\node (B6)  [tensor] {$B^{[6]}$}; \\
+	};
+	\foreach \j/\x/\T in {j_1/0.35/A1,j_2/0.35/B2,j_3/0.35/B3,j_4/0.35/B4,j_5/0.35/B5,j_6/0.35/B6}
+	{
+		\node (\j) [tindex,below] at ($ (\T.south west) + (\x,-0.3) $) {$\ket{\j}$};
+		\draw[tedge] ($ (\T.south west) + (\x,0) $) to (\j);
+	}
+	% % \node[below] (alphaA) at ($ (A) + (0,-1.0) $) {$\ket{\alpha}_{1:5}$};
+	% % \node[above] (alphaA) at ($ (A) + (0,-1.0) $) {$\ket{\alpha}_{1:5}$};
+	% \node (theta) at (0,0.6) {$\Theta$};
+	% \node[below] (alphaB) at ($ (B6) + (0,-1.0) $) {$\ket{\alpha'}_{6}$};
+	% \begin{scope}[on background layer]
+	%     \node (th) [tket,fit=(A) (L) (theta)] {};
+	%     \node (aB) [tket,fit=(B6) (j_6) (alphaB)] {};
+	% \end{scope}
+	\draw[tedge] (A1) to (L2) to (B2) to (B3) to (B4) to (B5) to (B6);
+\end{tikzpicture}
+\end{document}
