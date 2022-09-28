@@ -8,11 +8,11 @@
 \begin{tikzpicture}
 	% \draw[->] (0, 0) -- (5., 0) ;
 	\foreach \i in {0,...,4}
-		\draw[thick] (\i,0) to[in=140,out=40] +(1,0);
+		\draw[thick,color=black] (\i,0) to[in=140,out=40] +(1,0);
 	\foreach \i in {0,...,3}
-		\draw[thin] (\i,0) to[in=140,out=40] +(2,0);
+		\draw[color=black!40] (\i,0) to[in=140,out=40] +(2,0);
 	\foreach \i in {0,...,2}
-		\draw[ultra thin] (\i,0) to[in=140,out=40] +(3,0);
+		\draw[ultra thin,color=black!10] (\i,0) to[in=140,out=40] +(3,0);
 	\foreach \i in {0,...,5} {
 		\shade[ball color=black!30!white] (\i, 0) circle [radius=0.3] ;
 		% \draw[fill=black!30!white] (\i, 0) circle [radius=0.3] ;

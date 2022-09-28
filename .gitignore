@@ -53,3 +53,7 @@ main_article.tex
 *.nav
 *.snm
 *.vrb
+
+# tikz externalize files
+*.md5
+*.dpth

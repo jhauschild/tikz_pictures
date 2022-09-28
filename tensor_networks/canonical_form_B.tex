@@ -1,0 +1,20 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+	\begin{tikzpicture}[baseline=(equal.base)]
+		\matrix[tmatrix,matrix anchor=B.center] at (1,0.5) {
+			\node (B)  [tensor] {$B$}; \\
+			\node (Bdag)  [tensor] {$\bar{B}$}; \\
+		};
+		\draw[tedge] (B.south)  -- (Bdag.north);
+		\draw[tedge] (B.west) to  +(-0.3,0) ;
+		\draw[tedge] (Bdag.west) to  +(-0.3,0) ;
+		\draw[tedge] (B.east) to[in=0,out=0] (Bdag.east) ;
+		\node (equal) at (0,0) {$=$};
+		\draw[tedge] (-0.7,0.5) to[in=0,out=0] +(0,-1)
+					 (-0.7, 0.5) -- +(-0.1,0)
+					 (-0.7,-0.5) -- +(-0.1,0) ;
+	\end{tikzpicture} 
+\end{document}

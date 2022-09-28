@@ -5,7 +5,7 @@
 
 \begin{document}
 \begin{tikzpicture}[baseline=(A.base)]
-	\matrix[tmatrix]{
+	\matrix[tmatrix,matrix anchor=L.center] at (0,0){
 		\node (A)  [tensor,minimum width=1.2cm] {$A$}; \&
 		\node (L)  [tensor,shape=circle] {$\Lambda$}; \&
 		\node (B)  [tensor,minimum width=1.2cm] {$B$}; \\
@@ -15,11 +15,11 @@
 		\coordinate (s\j) at ($ (\T.south) + (\x,0.) $) ;
 		\node (\j) [tindex,below] at ($ (\T.south) + (\x,-0.3) $) {$\ket{\j}$};
 	}
-	\node (alphaA) [left of=A] {$\ket{\alpha}_A$};
-	\node (alphaB) [right of=B] {~$\ket{\alpha'}_B$};
+	\node[left] (alphaA) at (-2.,-0.5) {$\ket{\alpha}_A$};
+	\node[right] (alphaB) at (2.,-0.5) {$\ket{\alpha'}_B$};
 	\begin{scope}[on background layer]
-		\node (aA) [tensor=orange!60,draw,fit=(A) (j_1) (alphaA)] {};
-		\node (aB) [tensor=orange!60,draw,fit=(B) (j_6) (alphaB)] {};
+		\node (aA) [tket,fit=(A) (j_1) (alphaA)] {};
+		\node (aB) [tket,fit=(B) (j_6) (alphaB)] {};
 	\end{scope}
 	\foreach \j in {j_1,j_2,j_3,j_4,j_5,j_6}
 		\draw[tedge] (s\j) to (\j);

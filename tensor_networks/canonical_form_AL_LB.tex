@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+	\begin{tikzpicture}[baseline=(equal.base)]
+		\matrix[tmatrix,matrix anchor=L2.center] at (-1,0.) {
+			\node (A1)  [tensor] {$A^{[n]}$}; \&
+			\node (L2)  [tensor,circle] {\scalebox{0.7}{$\Lambda^{[n+1]}$}}; \\
+		};
+		\node (equal) at (0,0) {$=$};
+		\matrix[tmatrix,matrix anchor=L1.center] at (1,0.) {
+			\node (L1)  [tensor,circle] {$\Lambda^{[n]}$}; \&
+			\node (B1)  [tensor] {$B^{[n]}$}; \\
+		};
+		\draw[tedge] (A1.south) to  +(0,-0.3);
+		\draw[tedge] (B1.south) to  +(0,-0.3);
+		\draw[tedge] (A1.west)  to  +(-0.3,0);
+		\draw[tedge] (L1.west)  to  +(-0.3,0);
+		\draw[tedge] (L2.east)  to  +(+0.3,0);
+		\draw[tedge] (B1.east)  to  +(+0.3,0);
+		\draw[tedge] (A1) to (L2) (L1) to (B1);
+	\end{tikzpicture} 
+\end{document}

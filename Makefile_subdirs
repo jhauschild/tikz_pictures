@@ -11,7 +11,7 @@ all: $(STANDALONE_PDF)
 	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta
 
 clean:
-	-rm -f *.log *.aux *.auxlock *.out *.sta
+	-rm -f *.log *.aux *.auxlock *.out *.sta *.md5 *.dpth
 
 distclean: clean
 	-rm -f *.pdf

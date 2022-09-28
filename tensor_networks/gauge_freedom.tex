@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(M.base)]
+	\matrix[tmatrix,matrix anchor=X.center] at (0,0){
+		\node (M)  [tensor] {$M$}; \&
+		\node (X)     [tensor=yellow!50] {$X$}; \&
+		\node (Xi)  [tensor=yellow!50] {$X^{-1}$}; \&
+		\node (N)  [tensor] {$N$}; \\
+	};
+	\draw[tedge] (M) -- (X) -- (Xi) -- (N);
+	\draw[tedge] (M.west) -- +(-0.3,0);
+	\draw[tedge] (M.south) -- +(0,-0.3);
+	\draw[tedge] (N.south) -- +(0,-0.3);
+	\draw[tedge] (N.east) -- +(0.3,0);
+	\node[above] (Mt) at ($ (M) + (0.5,0.3) $) {$\tilde{M}$};
+	\node[above] (Nt) at ($ (N) + (-0.5,0.3) $) {$\tilde{N}$};
+	\begin{scope}[on background layer]
+		\node (Mn) [tensor=orange!60,fit=(M) (X) (Mt)] {};
+		\node (Nn) [tensor=orange!60,fit=(N) (Xi) (Nt)] {};
+	\end{scope}
+\end{tikzpicture}
+\end{document}

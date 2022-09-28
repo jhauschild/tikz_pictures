@@ -1,0 +1,23 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+	\begin{tikzpicture}[baseline=(equal.base)]
+		\matrix[tmatrix,matrix anchor=B.center] at (1.2,0.5){
+		\node (B)  [tensor,minimum width=1.2cm] {$B$}; \\
+		\node (Bdag)  [tensor,minimum width=1.2cm] {$\bar{B}$}; \\
+		};
+		\foreach \x in {-0.4,0.,0.4}
+			\draw[tedge] ($ (B.south) + (\x,0) $) -- ($ (Bdag.north) + (\x,0) $);
+		\draw[tedge] (B.west) to node[tindex,above] {$\alpha$} +(-0.3,0) ;
+		\draw[tedge] (Bdag.west) to node[tindex,above] {$\bar{\alpha}$} +(-0.3,0) ;
+		%
+		\node (equal) at (0,0) {$=$};
+		% 
+		\draw[tedge] (-0.7,0.5) to[in=0,out=0] +(0,-1)
+			         (-0.7, 0.5) to node[tindex,above] {$\alpha$} +(-0.1,0)
+			         (-0.7,-0.5) to node[tindex,above] {$\bar{\alpha}$} +(-0.1,0) ;
+	\end{tikzpicture} 
+\end{document}
+
