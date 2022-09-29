@@ -7,10 +7,10 @@
 \begin{tikzpicture}[baseline=(A.north)]
 	\matrix[tmatrix]{
 		\node (Ad)  [tensor,minimum width=1.2cm] {$\bar{A}$}; \&
-		\node (Ld)  [tensor,shape=circle] {$\Lambda$}; \&
+		\node (Ld)  [dtensor] {$\Lambda$}; \&
 		\node (Bd)  [emptytensor,minimum width=1.2cm] {}; \\
 		\node (A)  [tensor,minimum width=1.2cm] {$A$}; \&
-		\node (L)  [tensor,shape=circle] {$\Lambda$}; \&
+		\node (L)  [dtensor] {$\Lambda$}; \&
 		\node (B)  [emptytensor,minimum width=1.2cm] {}; \\
 	};
 	\foreach \x in {-0.4,0.,0.4}

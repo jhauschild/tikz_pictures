@@ -20,4 +20,8 @@
 \tikzset{emptytensor/.style={rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt}}
 \tikzset{tedge/.style={thick}}
 \tikzset{tindex/.style={node font=\tiny}}
+% ampersand replacement avoid the need to declare beamer frames as fragile
 \tikzset{tmatrix/.style={row sep=3mm,column sep=3mm,ampersand replacement=\&}}
+
+\tikzset{dtensor/.style={tensor=#1,shape=circle},
+         dtensor/.default={orange!50!red!60!white}}

@@ -1,0 +1,28 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(W1.base)]
+	\matrix[tmatrix]{
+		\node[tensor=red!20] (wL) {$\vec{e}_1$}; \&
+		\node[tensor=red!60] (W1) {$W^{[1]}$}; \&
+		\node[tensor=red!60] (W2) {$W^{[2]}$}; \&
+		\node[tensor=red!60] (W3) {$W^{[3]}$}; \&
+		\node[tensor=red!60] (W4) {$W^{[4]}$}; \&
+		\node[tensor=red!60] (W5) {$W^{[5]}$}; \&
+		\node[tensor=red!60] (W6) {$W^{[6]}$}; \&
+		\node[tensor=red!20] (wR) {$\vec{e}_D$}; \\
+	};
+	\draw[tedge] 
+		(wL) -- (W1) -- (W2) -- (W3) -- (W4) -- (W5) -- (W6) -- (wR);
+	\foreach \i in {1,...,6}
+	{
+		\draw[tedge] (W\i.south) -- +(0.0,-0.3);
+		\draw[tedge] (W\i.north) -- +(0.0,+0.3);
+		\node[tindex,above] at ($ (W\i.north) + (0.0,+0.3) $) {$\bra{j_\i'}$};
+		\node[tindex,below] at ($ (W\i.south) + (0.0,-0.3) $) {$\ket{j_\i}$};
+	}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,29 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(A1.south)]
+	\matrix[tmatrix]{
+		\node[tensor] (A1) {}; \&
+		\node[tensor] (A2) {}; \&
+		\node[tensor] (A3) {}; \&
+		\node[tensor] (A4) {}; \&
+		\node[tensor] (A5) {}; \&
+		\node[tensor] (A6) {};
+		\\
+	};
+	\draw[tedge] 
+		(A1) -- (A2) -- (A3) -- (A4) -- (A5) -- (A6);
+	\foreach \T in {A1,A2,A3,A4,A5,A6} 
+		\draw[tedge] (\T.south) -- +(0.0,-0.3);
+	\node[tindex,below] at ($ (A1.south) + (0.0,-0.3) $) {$j_1$};
+	\node[tindex,below] at ($ (A6.south) + (0.0,-0.3) $) {$j_N$};
+	\node[above] (bonddim) at ($ (A4.north west) + (-0.15,0.15) $) {max. bond dimension $\chi$};
+	\draw[->] ($ (bonddim.south) + (-1.6,0) $) to[out=-140,in=90] ($ (A2.west) + (-0.15,0.15) $) ;
+	\draw[->] ($ (bonddim.south) + (-0.8,0) $) to[out=-120,in=90] ($ (A3.west) + (-0.15,0.15) $) ;
+	\draw[->] ($ (bonddim.south) + (+0.,0) $) to[out=-90,in=90] ($ (A4.west) + (-0.15,0.15) $) ;
+	\draw[->] ($ (bonddim.south) + (+0.8,0) $) to[out=-60,in=90] ($ (A5.west) + (-0.15,0.15) $) ;
+	\draw[->] ($ (bonddim.south) + (+1.6,0) $) to[out=-50,in=90] ($ (A6.west) + (-0.15,0.15) $) ;
+\end{tikzpicture}
+\end{document}

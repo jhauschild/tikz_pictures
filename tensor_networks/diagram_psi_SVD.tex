@@ -6,7 +6,7 @@
 \begin{tikzpicture}[baseline=(A.base)]
 	\matrix[tmatrix]{
 		\node (A)  [tensor,minimum width=1.2cm] {$A$}; \&
-		\node (L)  [tensor,shape=circle] {$\Lambda$}; \&
+		\node (L)  [dtensor] {$\Lambda$}; \&
 		\node (B)  [tensor,minimum width=1.2cm] {$B$}; \\
 	};
 	\foreach \j/\x in {j1/-0.4,j2/0.,j3/+0.4}

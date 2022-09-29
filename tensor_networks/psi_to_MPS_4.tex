@@ -5,10 +5,10 @@
 
 \begin{document}
 \begin{tikzpicture}[baseline=(B6.base)]
-	\useasboundingbox (-3.5,-1.7) rectangle (3.7,1.0);
+	\useasboundingbox (-3.7,-1.7) rectangle (3.7,1.0);
 	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
 		\node (A)  [tensor,minimum width=1.6cm] {$A^{[1:4]}$}; \&
-		\node (L5)  [tensor,shape=circle] {$\Lambda^{[5]}$}; \&
+		\node (L5)  [dtensor] {$\Lambda^{[5]}$}; \&
 		\node (B5)  [tensor] {$B^{[5]}$}; \&
 		\node (B6)  [tensor] {$B^{[6]}$}; \\
 	};

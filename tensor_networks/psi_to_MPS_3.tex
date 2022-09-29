@@ -5,10 +5,10 @@
 
 \begin{document}
 \begin{tikzpicture}[baseline=(B6.base)]
-	\useasboundingbox (-3.5,-1.7) rectangle (3.7,1.0);
+	\useasboundingbox (-3.7,-1.7) rectangle (3.7,1.0);
 	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
 		\node (Th)  [tensor,minimum width=3.0cm] {$\Theta^{[1:5]}$}; \&
-		% \node (L)  [tensor,shape=circle] {$\Lambda^{[6]}$}; \&
+		% \node (L)  [dtensor] {$\Lambda^{[6]}$}; \&
 		\node (B6)  [tensor] {$B^{[6]}$}; \\
 	};
 	\foreach \j/\x/\T in {j_1/0.2/Th,j_2/0.6/Th,j_3/1.0/Th,j_4/1.4/Th,j_5/2.65/Th,j_6/0.35/B6}

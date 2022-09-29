@@ -6,11 +6,11 @@
 	\begin{tikzpicture}[baseline=(equal.base)]
 		\matrix[tmatrix,matrix anchor=L2.center] at (-1,0.) {
 			\node (A1)  [tensor] {$A^{[n]}$}; \&
-			\node (L2)  [tensor,circle] {\scalebox{0.7}{$\Lambda^{[n+1]}$}}; \\
+			\node (L2)  [dtensor] {\scalebox{0.7}{$\Lambda^{[n+1]}$}}; \\
 		};
 		\node (equal) at (0,0) {$=$};
 		\matrix[tmatrix,matrix anchor=L1.center] at (1,0.) {
-			\node (L1)  [tensor,circle] {$\Lambda^{[n]}$}; \&
+			\node (L1)  [dtensor] {$\Lambda^{[n]}$}; \&
 			\node (B1)  [tensor] {$B^{[n]}$}; \\
 		};
 		\draw[tedge] (A1.south) to  +(0,-0.3);

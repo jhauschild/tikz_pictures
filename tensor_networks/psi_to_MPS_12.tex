@@ -5,11 +5,11 @@
 
 \begin{document}
 \begin{tikzpicture}[baseline=(B6.base)]
-	\useasboundingbox (-3.5,-1.7) rectangle (3.7,1.0);
+	\useasboundingbox (-3.7,-1.7) rectangle (3.7,1.0);
 	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
 		\node (A1)  [tensor] {$A^{[1]}$}; \&
 		\node (A2)  [tensor] {$A^{[2]}$}; \&
-		\node (L3)  [tensor,shape=circle] {$\Lambda^{[3]}$}; \&
+		\node (L3)  [dtensor] {$\Lambda^{[3]}$}; \&
 		\node (B3)  [tensor] {$B^{[3]}$}; \&
 		\node (B4)  [tensor] {$B^{[4]}$}; \&
 		\node (B5)  [tensor] {$B^{[5]}$}; \&
@@ -20,13 +20,17 @@
 		\node (\j) [tindex,below] at ($ (\T.south west) + (\x,-0.3) $) {$\ket{\j}$};
 		\draw[tedge] ($ (\T.south west) + (\x,0) $) to (\j);
 	}
-	\node[below] (alphaA) at ($ (A2) + (-0.5,-1.0) $) {$\ket{\alpha}_{1:2}$};
-	\node (theta) at ($ (B3) + (0,0.6) $) {$\Theta^{[3:4]}$};
-	\node[below] (alphaB) at ($ (B5) + (0.5,-1.0) $) {$\ket{\alpha'}_{5:6}$};
+	\node[below] (alphaA) at ($ (A1) + (0,-1.0) $) {$\ket{\alpha}_{1}$};
+	\node (theta) at ($ (L3) + (0,0.6) $) {$\Theta^{[2:3]}$};
+	\node[below] (alphaB) at ($ (B5) + (0,-1.0) $) {$\ket{\alpha'}_{4:6}$};
+	\coordinate (vL) at ($ (A1.west) +(-0.3,0) $);
+	\coordinate (vR) at ($ (B6.east) +(+0.3,0) $);
+	\draw[tedge,dotted] (A1.west) -- (vL) 
+		         (B6.east) -- (vR) ;
 	\begin{scope}[on background layer]
-		\node (aA) [tket,fit=(A1) (A2) (j_1) (alphaA)] {};
-		\node (th) [tensor=orange!60,fit=(L3) (B3) (B4) (theta)] {};
-		\node (aB) [tket,fit=(B5) (B6) (j_6) (alphaB)] {};
+		\node (aA) [tket,fit=(A1) (j_1) (alphaA) (vL)] {};
+		\node (th) [tensor=orange!60,fit=(A2) (L3) (B3) (theta)] {};
+		\node (aB) [tket,fit=(B4) (B6) (j_6) (alphaB) (vR)] {};
 	\end{scope}
 	\draw[tedge] (A1) to (A2) to (L3) to (B3) to (B4) to (B5) to (B6);
 \end{tikzpicture}
