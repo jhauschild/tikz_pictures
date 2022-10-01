@@ -1,0 +1,51 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(B6.base)]
+	\useasboundingbox (-3.8,-1.8) rectangle (3.8,1.0);
+	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
+		\node (A1)  [tensor] {$A^{[1]}$}; \&
+		\node (A2)  [tensor] {$A^{[2]}$}; \&
+		\node (L3)  [dtensor] {$\Lambda^{[3]}$}; \&
+		\node (B3)  [tensor] {$B^{[3]}$}; \&
+		\node (B4)  [tensor] {$B^{[4]}$}; \&
+		\node (B5)  [tensor] {$B^{[5]}$}; \&
+		\node (B6)  [tensor] {$B^{[6]}$}; \\
+	};
+	\foreach \j/\x/\T in {j_1/0.35/A1,j_2/0.35/A2,j_3/0.35/B3,j_4/0.35/B4,j_5/0.35/B5,j_6/0.35/B6}
+	{
+		\node (\j) [tindex,below] at ($ (\T.south west) + (\x,-0.3) $) {$\ket{\j}$};
+		\draw[tarrowleg] (\j) to ($ (\T.south west) + (\x,0) $) ;
+	}
+	\node[below] (alphaA) at ($ (A2) + (-0.5,-1.0) $) {$\ket{\alpha}_{1:2}$};
+	\node (theta) at ($ (B3) + (0,0.6) $) {$\Theta^{[3:4]}$};
+	\node[below] (alphaB) at ($ (B5) + (0.5,-1.0) $) {$\ket{\alpha'}_{5:6}$};
+	\coordinate (vL) at ($ (A1.west) +(-0.3,0) $);
+	\coordinate (vR) at ($ (B6.east) +(+0.3,0) $);
+	\draw[tarrowleg,dotted] (vL) to (A1.west) ;
+	\draw[tarrowleg,dotted] (vR) to (B6.east) ;
+	\node (isoAlbl) at ($ (A2) + (-0.5,0.6) $) {\scriptsize$\ket{\alpha'}\bra{j_1}\bra{j_2}$};
+	\node (isoBlbl) at ($ (B5) + ( 0.5,0.6) $) {\scriptsize$\ket{\alpha'}\bra{j_5}\bra{j_6}$};
+	% \begin{scope}[on background layer]
+	%     \node (a1) [tket,fit=(A1) (A2) (j_1) (alphaA) (vL)] {};
+	%     \node (th) [tensor=orange!60,fit=(L3) (B3) (B4) (theta)] {};
+	%     \node (aB) [tket,fit=(B5) (B6) (j_6) (alphaB) (vR)] {};
+	% \end{scope}
+	\begin{scope}[on background layer]
+		\node (th)   [tensor=orange!60,fit=(L3) (B3) (B4) (theta)] {};
+		\node (aA)   [tket  ,inner sep=3pt,fit=(A1) (A2) (isoAlbl) (j_1) (alphaA) (vL)] {};
+		\node (aB)   [tket  ,inner sep=3pt,fit=(B5) (B6) (isoBlbl) (j_6) (alphaB) (vR)] {};
+		\node (isoA) [tensor=orange!30,inner sep=1pt,fit=(A1) (A2) (isoAlbl) (vL)] {};
+		\node (isoB) [tensor=orange!30,inner sep=1pt,fit=(B5) (B6) (isoBlbl) (vR)] {};
+	\end{scope}
+	\draw[tarrowleg] (A1) to (A2);
+	\draw[tarrowleg] (A2) to (L3);
+	\draw[tarrowleg] (B6) to (B5);
+	\draw[tarrowleg] (B5) to (B4);
+	\draw[tarrowleg] (B4) to (B3);
+	\draw[tarrowleg] (B3) to (L3);
+\end{tikzpicture}
+\end{document}

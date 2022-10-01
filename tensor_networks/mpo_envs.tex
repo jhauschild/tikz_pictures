@@ -16,15 +16,15 @@
 		\node[tensor] (A6) {$B^{[6]}$}; \&
 		\node[emptytensor] (vR) {}; 
 		\\
-		\node[tensor=red!20] (wL) {$v^L$}; \&
-		\node[tensor=red!60] (W1) {$W$}; \&
-		\node[tensor=red!60] (W2) {$W$}; \&
+		\node[tensor=red!20] (wL) {$\vec{e}_1$}; \&
+		\node[tensor=red!60] (W1) {$W^{[1]}$}; \&
+		\node[tensor=red!60] (W2) {$W^{[2]}$}; \&
 			\&
-		\node[tensor=red!60] (W3) {$W$}; \&
-		\node[tensor=red!60] (W4) {$W$}; \&
-		\node[tensor=red!60] (W5) {$W$}; \&
-		\node[tensor=red!60] (W6) {$W$}; \&
-		\node[tensor=red!20] (wR) {$v^R$};
+		\node[tensor=red!60] (W3) {$W^{[3]}$}; \&
+		\node[tensor=red!60] (W4) {$W^{[4]}$}; \&
+		\node[tensor=red!60] (W5) {$W^{[5]}$}; \&
+		\node[tensor=red!60] (W6) {$W^{[6]}$}; \&
+		\node[tensor=red!20] (wR) {$\vec{e}_D$};
 		\\
 		\node[emptytensor] (vdL) {}; \&
 		\node[tensor] (Ad1) {$\overline{A^{[1]}}$}; \&
@@ -58,5 +58,13 @@
 	\draw[tedge,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.south);
 	\draw[tedge,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.north);
 	\draw[tedge,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.south);
+	\begin{scope}[on background layer]
+		\node (L3) [tensor=yellow!60,inner sep=3pt,fit=(wL) (vL) (vdL) (tL1) (tL2) (tL3)] {};
+		\node (L2) [tensor=yellow!40,inner sep=2pt,fit=(wL) (vL) (vdL) (tL1) (tL2)] {};
+		\node (L1) [tensor=yellow!20,inner sep=1pt,fit=(wL) (vL) (vdL) (tL1)] {};
+		\node (R3) [tensor=yellow!60,inner sep=3pt,fit=(wR) (vR) (vdR) (tR6) (tR5) (tR4)] {};
+		\node (R2) [tensor=yellow!40,inner sep=2pt,fit=(wR) (vR) (vdR) (tR6) (tR5)] {};
+		\node (R1) [tensor=yellow!20,inner sep=1pt,fit=(wR) (vR) (vdR) (tR6)] {};
+	\end{scope}
 \end{tikzpicture}
 \end{document}
