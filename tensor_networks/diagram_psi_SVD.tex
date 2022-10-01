@@ -17,7 +17,7 @@
 	\coordinate (kB) at ($ (B.south) + (+0.4,-0.5) $) ;
 	% \node [tindex,left] at (kA) {$k_A$};
 	% \node [tindex,right] at (kB) {$k_B$};
-	\draw[tedge]
+	\draw[tleg]
 		(j1) to [out=270,in=90] (kA)
 		(j2) to [out=270,in=90] (kA)
 		(j3) to [out=270,in=90] (kA)
@@ -25,8 +25,8 @@
 		(j5) to [out=270,in=90] (kB)
 		(j6) to [out=270,in=90] (kB)
 		;
-	% \draw[tedge] (A) to (L) to (B);
-	\draw[tedge] (A) to node[tindex,above] {$\alpha$}
+	% \draw[tleg] (A) to (L) to (B);
+	\draw[tleg] (A) to node[tindex,above] {$\alpha$}
 		(L) to node[tindex,above] {$\alpha'$}
 		(B);
 \end{tikzpicture}

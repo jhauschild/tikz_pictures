@@ -15,18 +15,18 @@
 	};
 	\foreach \x in {-0.4,0.,0.4}
 	{
-		\draw[tedge] ($ (A.south) + (\x,0.) $) to +(0,-0.3); 
-		\draw[tedge] ($ (Ad.north) + (\x,0.) $) to +(0,0.3); 
+		\draw[tleg] ($ (A.south) + (\x,0.) $) to +(0,-0.3); 
+		\draw[tleg] ($ (Ad.north) + (\x,0.) $) to +(0,0.3); 
 	}
-	\draw[tedge] (A) to (L) to (B);
-	\draw[tedge] (Ad) to (Ld) to (Bd);
+	\draw[tleg] (A) to (L) to (B);
+	\draw[tleg] (Ad) to (Ld) to (Bd);
 	\coordinate (r) at ($ (B.south east) + (0,-0.3) $); 
 	\coordinate (rd) at ($ (Bd.north east) + (0,+0.3) $); 
 	\foreach \x in {-0.4,0.,0.4}
 	{
-		\draw[tedge] ($ (B.south) + (\x,0.) $) to[out=270,in=180] (r) ;
-		\draw[tedge] ($ (Bd.north) + (\x,0.) $) to[out=90,in=180] (rd) ;
+		\draw[tleg] ($ (B.south) + (\x,0.) $) to[out=270,in=180] (r) ;
+		\draw[tleg] ($ (Bd.north) + (\x,0.) $) to[out=90,in=180] (rd) ;
 	}
-	\draw[tedge] (r) to [in=0,out=0] (rd);
+	\draw[tleg] (r) to [in=0,out=0] (rd);
 \end{tikzpicture}
 \end{document}

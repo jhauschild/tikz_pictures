@@ -13,10 +13,10 @@
 		\node[tensor] (A6) {};
 		\\
 	};
-	\draw[tedge] 
+	\draw[tleg] 
 		(A1) -- (A2) -- (A3) -- (A4) -- (A5) -- (A6);
 	\foreach \T in {A1,A2,A3,A4,A5,A6} 
-		\draw[tedge] (\T.south) -- +(0.0,-0.3);
+		\draw[tleg] (\T.south) -- +(0.0,-0.3);
 	\node[tindex,below] at ($ (A1.south) + (0.0,-0.3) $) {$j_1$};
 	\node[tindex,below] at ($ (A6.south) + (0.0,-0.3) $) {$j_N$};
 	\node[above] (bonddim) at ($ (A4.north west) + (-0.15,0.15) $) {max. bond dimension $\chi$};

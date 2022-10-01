@@ -9,14 +9,14 @@
 		\foreach \y in {1,...,5}
 		{
 			\node[tensor=green!50!blue!50!white,minimum size=6mm] (A\x\y) at (\x,\y) {};
-			\draw[tedge] ($ (A\x\y.225) + (45:0.05) $) -- +(225:0.35) ;
+			\draw[tleg] ($ (A\x\y.225) + (45:0.05) $) -- +(225:0.35) ;
 		}
 	}
 	\foreach \x in {1,...,5}
 		\foreach \y [remember=\y as \lasty (initially 1)] in {2,...,5}
-			\draw[tedge] (A\x\lasty) -- (A\x\y);
+			\draw[tleg] (A\x\lasty) -- (A\x\y);
 	\foreach \y in {1,...,5}
 		\foreach \x [remember=\x as \lastx (initially 1)] in {2,...,5}
-			\draw[tedge] (A\lastx\y) -- (A\x\y);
+			\draw[tleg] (A\lastx\y) -- (A\x\y);
 \end{tikzpicture}
 \end{document}

@@ -22,8 +22,8 @@
 		\node (aB) [tket,fit=(B) (j_6) (alphaB)] {};
 	\end{scope}
 	\foreach \j in {j_1,j_2,j_3,j_4,j_5,j_6}
-		\draw[tedge] (s\j) to (\j);
-		\draw[tedge] (A) to node[tindex,above] {$\alpha$}
+		\draw[tleg] (s\j) to (\j);
+		\draw[tleg] (A) to node[tindex,above] {$\alpha$}
 			(L) to node[tindex,above] {$\alpha'$}
 			(B);
 \end{tikzpicture}

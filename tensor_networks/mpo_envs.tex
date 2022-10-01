@@ -47,17 +47,17 @@
 		\node (tR6) {$R^{[6]}$}; \\
 	};	
 	\foreach \i in {1,...,6}
-		\draw[tedge] (Ad\i) -- (W\i) -- (A\i);
-	\draw[tedge] 
+		\draw[tleg] (Ad\i) -- (W\i) -- (A\i);
+	\draw[tleg] 
 		(wL) -- (W1) -- (W2) -- (W3) -- (W4) -- (W5) -- (W6) -- (wR);
-	\draw[tedge] 
+	\draw[tleg] 
 		(A1) -- (A2) -- (L) -- (A3) -- (A4) -- (A5) -- (A6) ;
-	\draw[tedge] 
+	\draw[tleg] 
 		(Ad1) -- (Ad2) -- (Ld) -- (Ad3) -- (Ad4) -- (Ad5) -- (Ad6) ;
-	\draw[tedge,dotted] (A1.west) -- +(-0.3,0) to[out=180,in=90] (wL.north);
-	\draw[tedge,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.south);
-	\draw[tedge,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.north);
-	\draw[tedge,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.south);
+	\draw[tleg,dotted] (A1.west) -- +(-0.3,0) to[out=180,in=90] (wL.north);
+	\draw[tleg,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.south);
+	\draw[tleg,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.north);
+	\draw[tleg,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.south);
 	\begin{scope}[on background layer]
 		\node (L3) [tensor=yellow!60,inner sep=3pt,fit=(wL) (vL) (vdL) (tL1) (tL2) (tL3)] {};
 		\node (L2) [tensor=yellow!40,inner sep=2pt,fit=(wL) (vL) (vdL) (tL1) (tL2)] {};

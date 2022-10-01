@@ -9,13 +9,13 @@
 		\node (Adag)  [tensor,minimum width=1.2cm] {$\bar{A}$}; \\
 		};
 		\foreach \x in {-0.4,0.,0.4}
-			\draw[tedge] ($ (A.south) + (\x,0) $) -- ($ (Adag.north) + (\x,0) $);
-		\draw[tedge] (A.east) to node[tindex,above] {$\alpha$} +(0.3,0) ;
-		\draw[tedge] (Adag.east) to node[tindex,above] {$\bar{\alpha}$} +(0.3,0) ;
+			\draw[tleg] ($ (A.south) + (\x,0) $) -- ($ (Adag.north) + (\x,0) $);
+		\draw[tleg] (A.east) to node[tindex,above] {$\alpha$} +(0.3,0) ;
+		\draw[tleg] (Adag.east) to node[tindex,above] {$\bar{\alpha}$} +(0.3,0) ;
 		%
 		\node (equal) at (0,0) {$=$};
 		% 
-		\draw[tedge] (0.7,0.5) to[in=180,out=180] +(0,-1)
+		\draw[tleg] (0.7,0.5) to[in=180,out=180] +(0,-1)
 			         (0.7, 0.5) to node[tindex,above] {$\alpha$} +(0.1,0)
 			         (0.7,-0.5) to node[tindex,above] {$\bar{\alpha}$} +(0.1,0) ;
 	\end{tikzpicture} 

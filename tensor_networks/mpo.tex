@@ -15,12 +15,12 @@
 		\node[tensor=red!60] (W6) {$W^{[6]}$}; \&
 		\node[tensor=red!20] (wR) {$\vec{e}_D$}; \\
 	};
-	\draw[tedge] 
+	\draw[tleg] 
 		(wL) -- (W1) -- (W2) -- (W3) -- (W4) -- (W5) -- (W6) -- (wR);
 	\foreach \i in {1,...,6}
 	{
-		\draw[tedge] (W\i.south) -- +(0.0,-0.3);
-		\draw[tedge] (W\i.north) -- +(0.0,+0.3);
+		\draw[tleg] (W\i.south) -- +(0.0,-0.3);
+		\draw[tleg] (W\i.north) -- +(0.0,+0.3);
 		\node[tindex,above] at ($ (W\i.north) + (0.0,+0.3) $) {$\bra{j_\i'}$};
 		\node[tindex,below] at ($ (W\i.south) + (0.0,-0.3) $) {$\ket{j_\i}$};
 	}

@@ -6,7 +6,7 @@
 \begin{tikzpicture}[baseline=(psi.base)]
 	\node (psi)  [tensor,minimum width=2.4cm] {$\psi$};
 	\foreach \x in {-1.0,-0.6,...,1.001}
-		\draw[tedge] ($ (psi.south) + (\x,0) $) -- +(0,-0.3);
+		\draw[tleg] ($ (psi.south) + (\x,0) $) -- +(0,-0.3);
 	\node at ($ (psi.south) + (-1.0,-0.3) $) [tindex,below] {$j_1$};
 	\node at ($ (psi.south) + (-0.6,-0.3) $) [tindex,below] {$j_2$};
 	\node at ($ (psi.south) + (+0.2,-0.3) $) [tindex,below] {$\cdots$};

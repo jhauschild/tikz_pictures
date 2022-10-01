@@ -15,19 +15,19 @@
 	};
 	\foreach \x in {-0.4,0.,0.4}
 	{
-		\draw[tedge] ($ (A.south) + (\x,0.) $) to +(0,-0.3); 
-		\draw[tedge] ($ (Ad.north) + (\x,0.) $) to +(0,0.3); 
+		\draw[tleg] ($ (A.south) + (\x,0.) $) to +(0,-0.3); 
+		\draw[tleg] ($ (Ad.north) + (\x,0.) $) to +(0,0.3); 
 	}
-	\draw[tedge] (A) to (L);
-	\draw[tedge] (Ad) to (Ld);
-	\draw[tedge] (L) to [in=0,out=0] (Ld);
+	\draw[tleg] (A) to (L);
+	\draw[tleg] (Ad) to (Ld);
+	\draw[tleg] (L) to [in=0,out=0] (Ld);
 	\coordinate (r) at ($ (B.south east) + (0,-0.3) $); 
 	\coordinate (rd) at ($ (Bd.north east) + (0,+0.3) $); 
 	\phantom{
 		\foreach \x in {-0.4,0.,0.4}
 		{
-			\draw[tedge] ($ (B.south) + (\x,0.) $) to[out=270,in=180] (r) ;
-			\draw[tedge] ($ (Bd.north) + (\x,0.) $) to[out=90,in=180] (rd) ;
+			\draw[tleg] ($ (B.south) + (\x,0.) $) to[out=270,in=180] (r) ;
+			\draw[tleg] ($ (Bd.north) + (\x,0.) $) to[out=90,in=180] (rd) ;
 		}
 		\draw (r) to [in=0,out=0] (rd);
 	}

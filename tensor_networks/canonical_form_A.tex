@@ -8,12 +8,12 @@
 			\node (A)  [tensor] {$A$}; \\
 			\node (Adag)  [tensor] {$\bar{A}$}; \\
 		};
-		\draw[tedge] (A.south)  -- (Adag.north);
-		\draw[tedge] (A.east) to  +(0.3,0) ;
-		\draw[tedge] (Adag.east) to  +(0.3,0) ;
-		\draw[tedge] (A.west) to[in=180,out=180] (Adag.west) ;
+		\draw[tleg] (A.south)  -- (Adag.north);
+		\draw[tleg] (A.east) to  +(0.3,0) ;
+		\draw[tleg] (Adag.east) to  +(0.3,0) ;
+		\draw[tleg] (A.west) to[in=180,out=180] (Adag.west) ;
 		\node (equal) at (0,0) {$=$};
-		\draw[tedge] (0.7,0.5) to[in=180,out=180] +(0,-1)
+		\draw[tleg] (0.7,0.5) to[in=180,out=180] +(0,-1)
 			         (0.7, 0.5) -- +(0.1,0)
 			         (0.7,-0.5) -- +(0.1,0) ;
 	\end{tikzpicture} 

@@ -14,7 +14,7 @@
 	\foreach \j/\x/\T in {j_1/0.2/Th,j_2/0.6/Th,j_3/1.0/Th,j_4/1.4/Th,j_5/2.65/Th,j_6/0.35/B6}
 	{
 		\node (\j) [tindex,below] at ($ (\T.south west) + (\x,-0.3) $) {$\ket{\j}$};
-		\draw[tedge] ($ (\T.south west) + (\x,0) $) to (\j);
+		\draw[tleg] ($ (\T.south west) + (\x,0) $) to (\j);
 	}
 	\draw[thin,dashed,red]  (1.5,-1.0) -- (1.5,0.7);
 	% % \node[below] (alphaA) at ($ (A) + (0,-1.0) $) {$\ket{\alpha}_{1:5}$};
@@ -25,6 +25,6 @@
 	%     \node (th) [tket,fit=(A) (L) (theta)] {};
 	%     \node (aB) [tket,fit=(B6) (j_6) (alphaB)] {};
 	% \end{scope}
-	\draw[tedge] (Th) to (B6);
+	\draw[tleg] (Th) to (B6);
 \end{tikzpicture}
 \end{document}

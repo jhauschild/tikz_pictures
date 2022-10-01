@@ -11,11 +11,11 @@
 		\node (Xi)  [tensor=yellow!50] {$X^{-1}$}; \&
 		\node (N)  [tensor] {$N$}; \\
 	};
-	\draw[tedge] (M) -- (X) -- (Xi) -- (N);
-	\draw[tedge] (M.west) -- +(-0.3,0);
-	\draw[tedge] (M.south) -- +(0,-0.3);
-	\draw[tedge] (N.south) -- +(0,-0.3);
-	\draw[tedge] (N.east) -- +(0.3,0);
+	\draw[tleg] (M) -- (X) -- (Xi) -- (N);
+	\draw[tleg] (M.west) -- +(-0.3,0);
+	\draw[tleg] (M.south) -- +(0,-0.3);
+	\draw[tleg] (N.south) -- +(0,-0.3);
+	\draw[tleg] (N.east) -- +(0.3,0);
 	\node[above] (Mt) at ($ (M) + (0.5,0.3) $) {$\tilde{M}$};
 	\node[above] (Nt) at ($ (N) + (-0.5,0.3) $) {$\tilde{N}$};
 	\begin{scope}[on background layer]
