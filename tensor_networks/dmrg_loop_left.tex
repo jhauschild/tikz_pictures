@@ -1,0 +1,68 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{scope}[loop/.style={->,double,thick,color=blue}]
+	% \useasboundingbox (-9,-5.4) rectangle (6,2.1);
+		\matrix[tmatrix,matrix anchor=AA4.center] at (-3,0){
+			\node[tensor]  (AA3) {$A^{[n]}$}; \&
+			\node[tensor]  (AA4) {$A^{[n+1]}$}; \&
+			\node[dtensor] (AL5) {\scriptsize $\Lambda^{[n+2]}$}; 
+			\\
+		};	
+		\draw[tleg] (AA3.south) -- + (0.,-0.3) ;
+		\draw[tleg] (AA4.south) -- + (0.,-0.3) ;
+		\draw[tleg] (AA3) -- (AA4) -- (AL5);
+		\draw[tleg] (AA3.west) -- + (-0.3,0) ;
+		\draw[tleg] (AL5.east) -- + (+0.3,0) ;
+	\draw[loop] (-0.8,0) -- node[above=1ex]{contract} node[below=1ex] {(and $R^{[n+1]}$)}(0.8,0);
+		\matrix[tmatrix,matrix anchor=BA4.center] at (3,0){
+			\node[tensor]  (BA3)  {$A^{[n]}$}; \&
+			\node[tensor]  (BA4) {$A^{[n+1]}$}; \&
+			\node[dtensor] (BL5) {\scriptsize $\Lambda^{[n+2]}$}; 
+			\\
+		};	
+		\node (Btheta) at ($ (BA4) + (0,0.6) $) {$\Theta$};
+		\draw[tleg] (BA3.south) -- + (0.,-0.3) ;
+		\draw[tleg] (BA4.south) -- + (0.,-0.3) ;
+		\draw[tleg] (BA3) -- (BA4) -- (BL5);
+		\draw[tleg] (BA3.west) -- + (-0.3,0) ;
+		\draw[tleg] (BL5.east) -- + (+0.3,0) ;
+		\begin{scope}[on background layer]
+			\node (th)   [tensor=orange!60,fit=(BA3) (BA4) (BL5) (Btheta)] {};
+		\end{scope}
+	\draw[loop] (3,-1) -- node[left]{diagonalize} node[right]{$\hat{H}_\mathrm{eff}$} (3,-2);
+		\matrix[tmatrix,matrix anchor=CA4.center] at (3,-3){
+			\node[emptytensor]  (CA3)  {\phantom{$A^{[n]}$}}; \&
+			\node[emptytensor]  (CA4)  {$\tilde{\Theta}$}; \&
+			\node[emptytensor]  (CL5)  {\phantom{\scriptsize $\Lambda^{[n+2]}$}}; 
+			\\
+		};	
+		\begin{scope}[on background layer]
+			\node (Cth)   [tensor=orange!60,fit=(CA3) (CA4) (CL5)] {};
+		\end{scope}
+		\draw[tleg] ($ (CA3.south) +(0,-1pt) $) -- + (0.,-0.3) ;
+		\draw[tleg] ($ (CA4.south) +(0,-1pt) $)-- + (0.,-0.3) ;
+		\draw[tleg] ($ (CA3.west) +(-1pt,0) $)-- + (-0.3,0) ;
+		\draw[tleg] ($ (CL5.east) +(+1pt,0) $)-- + (+0.3,0) ;
+		\draw[thin,dashed,red]  ($ (CA4.center) + (-0.5,0.6) $) -- +(0,-1.2);
+	\draw[loop] (0.8,-3) -- node[above=1ex]{SVD}node[below=1ex]{truncate} (-0.8,-3);
+		\matrix[tmatrix,matrix anchor=DL4.center] at (-3,-3){
+			\node[tensor](DA3) {$A^{[n]}$}; \&
+			\node[dtensor] (DL4) {\scriptsize $\Lambda^{[n+1]}$}; \&
+			\node[tensor] (DB4) {$B^{[n+1]}$}; 
+			\\
+		};	
+		\draw[tleg] (DA3.south) -- + (0.,-0.3) ;
+		\draw[tleg] (DB4.south) -- + (0.,-0.3) ;
+		\draw[tleg] (DA3) -- (DL4) -- (DB4);
+		\draw[tleg] (DA3.west) -- + (-0.3,0) ;
+		\draw[tleg] (DB4.east) -- + (+0.3,0) ;
+		\draw[loop] (-3,-2) -- node[right=1ex]{\parbox[t]{2cm}{sweep left \\
+		$n\rightarrow n-1$}} (-3,-1);
+\end{scope}
+\end{tikzpicture}
+\end{document}

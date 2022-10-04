@@ -1,0 +1,126 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(W1.base)]
+	\useasboundingbox (-9,-5.4) rectangle (6,2.1);
+	\matrix[tmatrix,matrix anchor=W3.center] at (0,0){
+		\node[emptytensor] (vL) {}; \&
+		\node[tensor] (A1) {$A^{[1]}$}; \&
+		\node[tensor] (A2) {$A^{[2]}$}; \&
+		\node[dtensor] (L)  {$\Lambda^{[3]}$}; \&
+		\node[tensor] (A3) {$B^{[3]}$}; \&
+		\node[tensor] (A4) {$B^{[4]}$}; \&
+		\node[tensor] (A5) {$B^{[5]}$}; \&
+		\node[tensor] (A6) {$B^{[6]}$}; \&
+		\node[emptytensor] (vR) {}; 
+		\\
+		\node[tensor=red!20] (wL) {$\vec{e}_1$}; \&
+		\node[tensor=red!60] (W1) {$W^{[1]}$}; \&
+		\node[tensor=red!60] (W2) {$W^{[2]}$}; \&
+			\&
+		\node[tensor=red!60] (W3) {$W^{[3]}$}; \&
+		\node[tensor=red!60] (W4) {$W^{[4]}$}; \&
+		\node[tensor=red!60] (W5) {$W^{[5]}$}; \&
+		\node[tensor=red!60] (W6) {$W^{[6]}$}; \&
+		\node[tensor=red!20] (wR) {$\vec{e}_D$};
+		\\
+		\node[emptytensor] (vdL) {}; \&
+		\node[tensor] (Ad1) {$\overline{A^{[1]}}$}; \&
+		\node[tensor] (Ad2) {$\overline{A^{[2]}}$}; \&
+		\node[dtensor] (Ld)  {$\Lambda^{[3]}$}; \&
+		\node[tensor] (Ad3) {$\overline{B^{[3]}}$}; \&
+		\node[tensor] (Ad4) {$\overline{B^{[4]}}$}; \&
+		\node[tensor] (Ad5) {$\overline{B^{[5]}}$}; \&
+		\node[tensor] (Ad6) {$\overline{B^{[6]}}$}; \&
+		\node[emptytensor] (vdR) {}; 
+		\\[-3mm]  % revert row-sep
+		\node[tlabel] (tL1) {\phantom{$L^{[1]}$}}; \&
+		\node[tlabel] (tL2) {}; \&
+		\node[tlabel] (tL3) {}; \&
+			\&
+			\&
+			\&
+		\node[tlabel] (tR4) {}; \&
+		\node[tlabel] (tR5) {}; \&
+		\node[tlabel] (tR6) {\phantom{$R^{[6]}$}}; 
+		\\[+3mm]  % additional space
+			\& 
+			\&
+		\node[emptytensor] (HA2) {}; \&
+		\node[emptytensor] (HL) {}; \&
+		\node[emptytensor] (HA3) {}; \&
+		\node[emptytensor] (HA4) {}; \&
+		\node[emptytensor] (HA5) {}; \&
+			\&
+		\\
+			\& 
+			\&
+		\node[emptytensor] (HW2) {$L^{[3]}$}; \&
+			\&
+		\node[tensor=red!60] (HW3) {$W^{[3]}$}; \&
+		\node[tensor=red!60] (HW4) {$W^{[4]}$}; \&
+		\node[emptytensor] (HW5) {$R^{[4]}$}; \&
+			\&
+		\\
+			\& 
+			\&
+		\node[emptytensor] (HAd2) {}; \&
+		\node[emptytensor] (HLd) {}; \&
+		\node[emptytensor] (HAd3) {}; \&
+		\node[emptytensor] (HAd4) {}; \&
+		\node[emptytensor] (HAd5) {}; \&
+			\&
+		\\
+	};	
+\node (isoAlbl) at ($ (A1) + (-0.0,0.6) $) {\scriptsize$\ket{j_1}\ket{j_2}\bra{\alpha}$};
+	\node (isoBlbl) at ($ (A6) + ( 0.0,0.6) $) {\scriptsize$\ket{j_5}\ket{j_6}\bra{\alpha'}$};
+	\node (isoAdlbl) at ($ (Ad1) + (-0.0,-0.6) $) {\scriptsize$\ket{\bar\alpha}\bra{\bar{j}_1}\bra{\bar{j}_2}$};
+	\node (isoBdlbl) at ($ (Ad6) + ( 0.0,-0.6) $) {\scriptsize$\ket{\bar\alpha'}\bra{\bar{j}_5}\bra{\bar{j}_6}$};
+	\node (theta) at ($ (A3) + (0,0.6) $) {$\Theta$};
+	\node (thetad) at ($ (Ad3) + (0,-0.6) $) {$\overline{\Theta}$};
+	\foreach \i in {1,...,6}
+		\draw[tleg] (Ad\i) -- (W\i) -- (A\i);
+	\draw[tleg] 
+		(wL) -- (W1) -- (W2) -- (W3) -- (W4) -- (W5) -- (W6) -- (wR);
+	\draw[tleg] 
+		(A1) -- (A2) -- (L) -- (A3) -- (A4) -- (A5) -- (A6) ;
+	\draw[tleg] 
+		(Ad1) -- (Ad2) -- (Ld) -- (Ad3) -- (Ad4) -- (Ad5) -- (Ad6) ;
+	\draw[tleg,dotted] (A1.west) -- +(-0.3,0) to[out=180,in=90] (wL.north);
+	\draw[tleg,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.south);
+	\draw[tleg,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.north);
+	\draw[tleg,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.south);
+	\begin{scope}[on background layer]
+		\node (L3) [tensor=yellow!60,inner sep=3pt,fit=(wL) (vL) (vdL) (isoAlbl) (isoAdlbl) (tL1) (A2)] {};
+		\node (R3) [tensor=yellow!60,inner sep=3pt,fit=(wR) (vR) (vdR) (isoBlbl) (isoBdlbl) (tR6) (A5)] {};
+		\node (th) [tensor=orange!60,fit=(L) (A3) (A4) (theta)] {};
+		\node (th) [tensor=orange!60,fit=(Ld) (Ad3) (Ad4) (thetad)] {};
+		\node (HL3) [tensor=yellow!60,inner sep=3pt,fit=(HA2) (HAd2) (HW2)] {};
+		\node (HR4) [tensor=yellow!60,inner sep=3pt,fit=(HA5) (HAd5) (HW5)] {};
+		\node (isoA) [tensor=orange!30,inner sep=1pt,fit=(A1) (A2) (isoAlbl) (vL)] {};
+		\node (isoB) [tensor=orange!30,inner sep=1pt,fit=(A5) (A6) (isoBlbl) (vR)] {};
+		\node (isoAd) [tensor=orange!30,inner sep=1pt,fit=(Ad1) (Ad2) (isoAdlbl) (vdL)] {};
+		\node (isoBd) [tensor=orange!30,inner sep=1pt,fit=(Ad5) (Ad6) (isoBdlbl) (vdR)] {};
+	\end{scope}
+	\draw[tleg] (HL3) -- (HW3) -- (HW4) -- (HR4);
+	\draw[tleg] ($ (HA2.east) + (3pt,0) $) -- (HL);
+	\draw[tleg] ($ (HAd2.east) + (3pt,0) $) -- (HLd);
+	\draw[tleg] ($ (HA5.west) + (-3pt,0) $) -- (HA4);
+	\draw[tleg] ($ (HAd5.west) + (-3pt,0) $) -- (HAd4);
+	\foreach \i in {3,4}
+		\draw[tleg] (HAd\i) -- (HW\i) -- (HA\i);
+	\node[left] at ($ (wL.west) + (-0.5,0) $) {$E = \braket{\Theta | \hat{H}_\mathrm{eff} | \Theta } = $};
+	\node[left] at ($ (HW2.west) + (-0.5,0) $) {$\hat{H}_\mathrm{eff} = $};
+	\node[tindex,right] at (HL.west) {$\bra{\alpha}$};
+	\node[tindex,right] at (HLd.west) {$\ket{\bar{\alpha}}$};
+	\node[tindex,left] at (HA4.east) {$\bra{\alpha'}$};
+	\node[tindex,left] at (HAd4.east) {$\ket{\bar{\alpha}'}$};
+	\node[tindex,left] at (HA4.south) {$\bra{j_4}$};
+	\node[tindex,left] at (HAd4.north) {$\ket{\bar{j}_4}$};
+	\node[tindex,left] at (HA3.south) {$\bra{j_3}$};
+	\node[tindex,left] at (HAd3.north) {$\ket{\bar{j}_3}$};
+\end{tikzpicture}
+\end{document}

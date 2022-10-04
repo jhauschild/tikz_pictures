@@ -13,17 +13,19 @@
 
 % minium size = 7mm - 0.5pt such that standard tensors with tmatrix repeat every 1cm
 % TODO: don't use fixed unit width, but allow to scale?
-\tikzset{tensor/.style={fill=#1,draw,rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt},
+\tikzset{tlabel/.style={node font=\small}}
+\tikzset{emptytensor/.style={rounded corners,tlabel,minimum size=6.83mm,inner sep=1pt}}
+\tikzset{tensor/.style={fill=#1,draw,emptytensor},
          tensor/.default={orange}}
-\tikzset{tket/.style={fill=#1,rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt},
+% dtensor == diagonal tensor
+\tikzset{dtensor/.style={tensor=#1,shape=circle},
+         dtensor/.default={orange!50!red!60!white}}
+\tikzset{tket/.style={fill=#1,emptytensor},
          tket/.default={black!20}}
-\tikzset{emptytensor/.style={rounded corners,node font=\small,minimum size=6.83mm,inner sep=1pt}}
-\tikzset{tedge/.style={thick}}
 \tikzset{tleg/.style={thick}}
+\tikzset{tedge/.style={tleg}}  % deprecated
 \tikzset{tarrowleg/.style={thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{>}}}}}
 \tikzset{tindex/.style={node font=\tiny}}
 % ampersand replacement avoid the need to declare beamer frames as fragile
 \tikzset{tmatrix/.style={row sep=3mm,column sep=3mm,ampersand replacement=\&}}
 
-\tikzset{dtensor/.style={tensor=#1,shape=circle},
-         dtensor/.default={orange!50!red!60!white}}

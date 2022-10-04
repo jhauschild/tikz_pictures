@@ -5,7 +5,8 @@
 
 \begin{document}
 \begin{tikzpicture}[baseline=(W1.base)]
-	\matrix[tmatrix]{
+	\useasboundingbox (-9,-5.4) rectangle (6,2.1);
+	\matrix[tmatrix,matrix anchor=W3.center] at (0,0){
 		\node[emptytensor] (vL) {}; \&
 		\node[tensor] (A1) {$A^{[1]}$}; \&
 		\node[tensor] (A2) {$A^{[2]}$}; \&
@@ -36,16 +37,46 @@
 		\node[tensor] (Ad6) {$\overline{B^{[6]}}$}; \&
 		\node[emptytensor] (vdR) {}; 
 		\\[-3mm]  % revert row-sep
-		\node (tL1) {$L^{[1]}$}; \&
-		\node (tL2) {$L^{[2]}$}; \&
-		\node (tL3) {$L^{[3]}$}; \&
+		\node[tlabel] (tL1) {$L^{[1]}$}; \&
+		\node[tlabel] (tL2) {$L^{[2]}$}; \&
+		\node[tlabel] (tL3) {$L^{[3]}$}; \&
 			\&
 			\&
 			\&
-		\node (tR4) {$R^{[4]}$}; \&
-		\node (tR5) {$R^{[5]}$}; \&
-		\node (tR6) {$R^{[6]}$}; \\
+		\node[tlabel] (tR4) {$R^{[4]}$}; \&
+		\node[tlabel] (tR5) {$R^{[5]}$}; \&
+		\node[tlabel] (tR6) {$R^{[6]}$}; 
+		\\[+3mm]  % additional space
+			\& 
+			\&
+		\node[emptytensor] (HA2) {}; \&
+		\node[emptytensor] (HL) {}; \&
+		\node[emptytensor] (HA3) {}; \&
+		\node[emptytensor] (HA4) {}; \&
+		\node[emptytensor] (HA5) {}; \&
+			\&
+		\\
+			\& 
+			\&
+		\node[emptytensor] (HW2) {$L^{[3]}$}; \&
+			\&
+		\node[tensor=red!60] (HW3) {$W^{[3]}$}; \&
+		\node[tensor=red!60] (HW4) {$W^{[4]}$}; \&
+		\node[emptytensor] (HW5) {$R^{[4]}$}; \&
+			\&
+		\\
+			\& 
+			\&
+		\node[emptytensor] (HAd2) {}; \&
+		\node[emptytensor] (HLd) {}; \&
+		\node[emptytensor] (HAd3) {}; \&
+		\node[emptytensor] (HAd4) {}; \&
+		\node[emptytensor] (HAd5) {}; \&
+			\&
+		\\
 	};	
+	\node (theta) at ($ (A3) + (0,0.6) $) {$\Theta$};
+	\node (thetad) at ($ (Ad3) + (0,-0.6) $) {$\overline{\Theta}$};
 	\foreach \i in {1,...,6}
 		\draw[tleg] (Ad\i) -- (W\i) -- (A\i);
 	\draw[tleg] 
@@ -65,6 +96,19 @@
 		\node (R3) [tensor=yellow!60,inner sep=3pt,fit=(wR) (vR) (vdR) (tR6) (tR5) (tR4)] {};
 		\node (R2) [tensor=yellow!40,inner sep=2pt,fit=(wR) (vR) (vdR) (tR6) (tR5)] {};
 		\node (R1) [tensor=yellow!20,inner sep=1pt,fit=(wR) (vR) (vdR) (tR6)] {};
+		\node (th) [tensor=orange!60,fit=(L) (A3) (A4) (theta)] {};
+		\node (th) [tensor=orange!60,fit=(Ld) (Ad3) (Ad4) (thetad)] {};
+		\node (HL3) [tensor=yellow!60,inner sep=3pt,fit=(HA2) (HAd2) (HW2)] {};
+		\node (HR4) [tensor=yellow!60,inner sep=3pt,fit=(HA5) (HAd5) (HW5)] {};
 	\end{scope}
+	\draw[tleg] (HL3) -- (HW3) -- (HW4) -- (HR4);
+	\draw[tleg] ($ (HA2.east) + (3pt,0) $) -- (HL);
+	\draw[tleg] ($ (HAd2.east) + (3pt,0) $) -- (HLd);
+	\draw[tleg] ($ (HA5.west) + (-3pt,0) $) -- (HA4);
+	\draw[tleg] ($ (HAd5.west) + (-3pt,0) $) -- (HAd4);
+	\foreach \i in {3,4}
+		\draw[tleg] (HAd\i) -- (HW\i) -- (HA\i);
+	\node[left] at ($ (wL.west) + (-0.5,0) $) {$E = \braket{\Theta | \hat{H}_\mathrm{eff} | \Theta } = $};
+	\node[left] at ($ (HW2.west) + (-0.5,0) $) {$\hat{H}_\mathrm{eff} = $};
 \end{tikzpicture}
 \end{document}

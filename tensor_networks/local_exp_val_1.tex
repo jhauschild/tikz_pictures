@@ -4,8 +4,9 @@
 \usepackage{braket}
 
 \begin{document}
-\begin{tikzpicture}[baseline=(W1.base)]
-	\matrix[tmatrix]{
+\begin{tikzpicture}[baseline=(X3.base)]
+	\useasboundingbox(-4.2,-1.4) rectangle (4.2,1.4);
+	\matrix[tmatrix,matrix anchor=X3.center]{
 		\node[emptytensor] (vL) {}; \&
 		\node[tensor] (A1) {$A^{[1]}$}; \&
 		\node[tensor] (A2) {$A^{[2]}$}; \&
@@ -16,15 +17,15 @@
 		\node[tensor] (A6) {$B^{[6]}$}; \&
 		\node[emptytensor] (vR) {}; 
 		\\
-		\node[tensor=red!20] (wL) {$\vec{e}_1$}; \&
-		\node[tensor=red!60] (W1) {$W^{[1]}$}; \&
-		\node[tensor=red!60] (W2) {$W^{[2]}$}; \&
+		\node[emptytensor] (wL) {}; \&
 			\&
-		\node[tensor=red!60] (W3) {$W^{[3]}$}; \&
-		\node[tensor=red!60] (W4) {$W^{[4]}$}; \&
-		\node[tensor=red!60] (W5) {$W^{[5]}$}; \&
-		\node[tensor=red!60] (W6) {$W^{[6]}$}; \&
-		\node[tensor=red!20] (wR) {$\vec{e}_D$};
+			\&
+			\&
+		\node[tensor=red!60] (X3) {$\hat{X}^{[3]}$}; \&
+			\&
+			\&
+			\&
+		\node[emptytensor] (wR) {};
 		\\
 		\node[emptytensor] (vdL) {}; \&
 		\node[tensor] (Ad1) {$\overline{A^{[1]}}$}; \&
@@ -37,17 +38,16 @@
 		\node[emptytensor] (vdR) {}; 
 		\\
 	};	
-	\foreach \i in {1,...,6}
-		\draw[tleg] (Ad\i) -- (W\i) -- (A\i);
-	\draw[tleg] 
-		(wL) -- (W1) -- (W2) -- (W3) -- (W4) -- (W5) -- (W6) -- (wR);
+	\foreach \i in {1,2,4,5,6}
+		\draw[tleg] (Ad\i)  -- (A\i);
+	\draw[tleg] (Ad3)  -- (X3) -- (A3);
 	\draw[tleg] 
 		(A1) -- (A2) -- (L) -- (A3) -- (A4) -- (A5) -- (A6) ;
 	\draw[tleg] 
 		(Ad1) -- (Ad2) -- (Ld) -- (Ad3) -- (Ad4) -- (Ad5) -- (Ad6) ;
-	\draw[tleg,dotted] (A1.west) -- +(-0.3,0) to[out=180,in=90] (wL.north);
-	\draw[tleg,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.south);
-	\draw[tleg,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.north);
-	\draw[tleg,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.south);
+	\draw[tleg,dotted] (A1.west) -- +(-0.3,0) to[out=180,in=90] (wL.center);
+	\draw[tleg,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.center);
+	\draw[tleg,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.center);
+	\draw[tleg,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.center);
 \end{tikzpicture}
 \end{document}
