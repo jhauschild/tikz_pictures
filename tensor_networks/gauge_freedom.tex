@@ -7,8 +7,8 @@
 \begin{tikzpicture}[baseline=(M.base)]
 	\matrix[tmatrix,matrix anchor=X.center] at (0,0){
 		\node (M)  [tensor] {$M$}; \&
-		\node (X)     [tensor=yellow!50] {$X$}; \&
-		\node (Xi)  [tensor=yellow!50] {$X^{-1}$}; \&
+		\node (X)  [tensor=orange!20] {$X$}; \&
+		\node (Xi) [tensor=orange!20] {$X^{-1}$}; \&
 		\node (N)  [tensor] {$N$}; \\
 	};
 	\draw[tleg] (M) -- (X) -- (Xi) -- (N);

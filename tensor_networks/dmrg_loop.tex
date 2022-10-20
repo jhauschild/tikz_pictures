@@ -7,7 +7,7 @@
 \begin{tikzpicture}
 \begin{scope}[loop/.style={->,double,thick,color=blue}]
 	% \useasboundingbox (-9,-5.4) rectangle (6,2.1);
-		\matrix[tmatrix,matrix anchor=AB3.center] at (-3,0){
+		\matrix[tmatrix,matrix anchor=AB3.center] at (-3.5,0){
 			\node[dtensor](AL3)  {$\Lambda^{[n]}$}; \&
 			\node[tensor] (AB3) {$B^{[n]}$}; \&
 			\node[tensor] (AB4) {$B^{[n+1]}$}; 
@@ -18,7 +18,7 @@
 		\draw[tleg] (AL3) -- (AB3) -- (AB4);
 		\draw[tleg] (AL3.west) -- + (-0.3,0) ;
 		\draw[tleg] (AB4.east) -- + (+0.3,0) ;
-	\draw[loop] (-0.8,0) -- node[above=1ex]{contract} node[below=1ex] {(and $L^{[n]}$)}(0.8,0);
+	\draw[loop] (-1.0,0) -- node[above=1ex]{contract} node[below=1ex] {(and $L^{[n]}$)}(0.8,0);
 		\matrix[tmatrix,matrix anchor=BB3.center] at (3,0){
 			\node[dtensor](BL3)  {$\Lambda^{[n]}$}; \&
 			\node[tensor] (BB3) {$B^{[n]}$}; \&
@@ -49,8 +49,8 @@
 		\draw[tleg] ($ (CL3.west) +(-1pt,0) $)-- + (-0.3,0) ;
 		\draw[tleg] ($ (CB4.east) +(+1pt,0) $)-- + (+0.3,0) ;
 		\draw[thin,dashed,red]  ($ (CB3.center) + (0.5,0.6) $) -- +(0,-1.2);
-	\draw[loop] (0.8,-3) -- node[above=1ex]{SVD}node[below=1ex]{truncate} (-0.8,-3);
-		\matrix[tmatrix,matrix anchor=DL4.center] at (-3,-3){
+	\draw[loop] (0.8,-3) -- node[above=1ex]{SVD}node[below=1ex]{truncate} (-1.0,-3);
+		\matrix[tmatrix,matrix anchor=DL4.center] at (-3.5,-3){
 			\node[tensor](DA3) {$A^{[n]}$}; \&
 			\node[dtensor] (DL4) {\scriptsize $\Lambda^{[n+1]}$}; \&
 			\node[tensor] (DB4) {$B^{[n+1]}$}; 
@@ -61,8 +61,7 @@
 		\draw[tleg] (DA3) -- (DL4) -- (DB4);
 		\draw[tleg] (DA3.west) -- + (-0.3,0) ;
 		\draw[tleg] (DB4.east) -- + (+0.3,0) ;
-		\draw[loop] (-3,-2) -- node[right=1ex]{\parbox[t]{2cm}{sweep right \\
-		$n\rightarrow n+1$}} (-3,-1);
+	\draw[loop] (-3.5,-2) -- node[right=1ex]{\parbox[t]{2cm}{sweep right \\ $n\rightarrow n+1$}} (-3.5,-1);
 \end{scope}
 \end{tikzpicture}
 \end{document}
