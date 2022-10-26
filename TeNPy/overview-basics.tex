@@ -12,7 +12,7 @@
 			minimum height=0.5cm,text width=3.8cm,anchor=north west},
 		class/.style={modulecontent,draw=red,fill=yellow!30},
 		subclass/.style={class=#1,text width=3.3cm},
-		uses/.style={thick,rounded corners=2mm},
+		used_in/.style={thick,rounded corners=2mm},
 		inherit/.style={thick,color=red,rounded corners=2mm},
 		%
 		package/.style={draw,fill=black!40,rounded corners=1mm,inner sep=2mm},
@@ -64,7 +64,7 @@
 		\foreach \subcls in {SingleSiteTDVP,TEBD}
 			\draw[inherit,->] (TimeEvolutionAlgorithm.east) -- + ($ (\colw,0) + (0.4,0) $) |- (\subcls.west) ;
 		\draw[inherit,->] (TimeEvolutionAlgorithm.east) -- + (0.5,0) |- (ExpMPOEvolution.west) ;
-		\draw[uses,->] ($ (VariationalApplyMPO.south east) + (-0.5,0) $) -- ($ (ExpMPOEvolution.north east) + (-0.5,0) $) ;
+		\draw[used_in,->] ($ (VariationalApplyMPO.south east) + (-0.5,0) $) -- ($ (ExpMPOEvolution.north east) + (-0.5,0) $) ;
 	\end{scope}
 	%
 	\begin{scope}[xshift=16cm,yshift=8cm]
@@ -95,14 +95,14 @@
 		\node[class]   (FermiHubbardModel)  at (\cb3 ,-3.5) {FermiHubbardModel};
 		\node[class]   (BoseHubbardModel)   at (\cb3 ,-4.5) {BoseHubbardModel};
 		%
-		\draw[uses,->] (Lattice.east) -- (NearestNeighborModel.west);
+		\draw[used_in,->] (Lattice.east) -- (NearestNeighborModel.west);
 		\foreach \dest in {MPOModel,CouplingMPOModel}
-			\draw[uses,->] (Lattice.east) -- +(0.5,0) |- (\dest.west);
+			\draw[used_in,->] (Lattice.east) -- +(0.5,0) |- (\dest.west);
 		\foreach \subcls in {Chain,Square,Honeycomb,Kagome}
 			\draw[inherit,->] ($ (Lattice.south west) + (0.2,0) $) |- (\subcls.west) ;
 		\foreach \subcls in {SpinModel,BoseHubbardModel}
 			\draw[inherit,->] (CouplingMPOModel.east) -- +(0.4,0) |- (\subcls.west) ;
-		\draw[inherit,->] (CouplingMPOModel.east) -- (FermiHubbardModel.west) ;
+		\draw[inherit,->] (CouplingMPOModel.east) -- +(0.4,0) to[out=0,in=180] (FermiHubbardModel.west) ;
 		\draw[inherit,->] (NearestNeighborModel.east) -- +(0.6,0) |- (SpinChain.west) ;
 		\draw[inherit,->] ($ (SpinModel.south west) + (0.2,0) $) |- (SpinChain.west) ;
 		\draw[inherit,->] (MPOModel.south) -- (CouplingMPOModel.north) ;
@@ -128,11 +128,11 @@
 		\node[subclass]   (TransferMatrix)         at (\cs2,-3)    {TransferMatrix \\ \quad .eigenvectors()};
 		\node[class]   (MPOEnvironment)         at (\cb3 , -2.25)    {MPOEnvironment };
 		%
-		\draw[uses,->] ($ (Site.north east) + (0,-0.25) $) --  ($ (MPS.north west) + (0,-0.25) $);
-		\draw[uses] ($ (Site.north east) + (0,-0.5) $) --  +(0.8,0);
-		\draw[uses,->] ($ (MPO.north west) + (-0.8,-0.5) $) -- +(0.8,0);
+		\draw[used_in,->] ($ (Site.north east) + (0,-0.25) $) --  ($ (MPS.north west) + (0,-0.25) $);
+		\draw[used_in] ($ (Site.north east) + (0,-0.5) $) --  +(0.8,0);
+		\draw[used_in,->] ($ (MPO.north west) + (-0.8,-0.5) $) -- +(0.8,0);
 		\foreach \dest in {MPSEnvironment,TransferMatrix}
-			\draw[uses,->] ($ (MPS.south west) + (0.2,0) $) |- (\dest.west) ;
+			\draw[used_in,->] ($ (MPS.south west) + (0.2,0) $) |- (\dest.west) ;
 		\foreach \subcls in {SpinSite,FermionSite,BosonSite}
 			\draw[inherit,->] ($ (Site.south west) + (0.2,0) $) |- (\subcls.west) ;
 			\draw[inherit,->] (MPSEnvironment.east) -- (MPOEnvironment.west) ;
@@ -162,9 +162,9 @@
 		%
 		\draw[inherit,->] ($ (LegCharge.south west) + (0.2,0) $) |- (LegPipe.west) ;
 		\foreach \src in {LegCharge,LegPipe}
-			\draw[uses,->] (\src.east) -- +(0.5,0) |- ($ (Array.west) + (0,0.3) $);
-		\draw[uses,->] ($ (Array.south west) + (1,0) $) --  ($ (npc_fct.north west) + (1,0) $);
-		\draw[uses,->] ($ (Array.north east) + (0,-0.25) $) --  ($ (KrylovBased.north west) + (0,-0.25) $);
+			\draw[used_in,->] (\src.east) -- +(0.5,0) |- ($ (Array.west) + (0,0.3) $);
+		\draw[used_in,->] ($ (Array.south west) + (1,0) $) --  ($ (npc_fct.north west) + (1,0) $);
+		\draw[used_in,->] ($ (Array.north east) + (0,-0.25) $) --  ($ (KrylovBased.north west) + (0,-0.25) $);
 		\foreach \subcls in {Arnoldi,LanczosGroundState,LanczosEvolution}
 			\draw[inherit,->] ($ (KrylovBased.south west) + (0.2,0) $) |- (\subcls.west) ;
 	\end{scope}
