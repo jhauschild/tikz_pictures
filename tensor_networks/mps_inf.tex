@@ -1,0 +1,27 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(B3.base)]
+	\matrix[tmatrix]{
+		\node[emptytensor] {$\cdots$}; \&
+		\node[tensor] (B1) {$B^{[1]}$}; \&
+		\node[tensor] (B2) {$B^{[2]}$}; \&
+		\node[tensor] (B3) {$B^{[1]}$}; \&
+		\node[tensor] (B4) {$B^{[2]}$}; \&
+		\node[tensor] (B5) {$B^{[1]}$}; \&
+		\node[tensor] (B6) {$B^{[2]}$}; \&
+		\node[emptytensor] {$\cdots$}; 
+		\\
+	};
+	\draw[tleg] 
+		(B1) -- (B2) -- (B3) -- (B4) -- (B5) -- (B6);
+	\foreach \T in {B1,B2,B3,B4,B5,B6} 
+		\draw[tleg] (\T.south) -- +(0.0,-0.3);
+	\draw[tleg] (B1.west) -- +(-0.3,0);
+	\draw[tleg] (B6.east) -- +(+0.3,0);
+	\foreach \t/\T in {-1/B1,0/B2,1/B3,2/B4,3/B5,4/B6}
+		\node[tindex,below] at ($ (\T.south) + (0.0,-0.3) $) {$j_{\t}$};
+\end{tikzpicture}
+\end{document}

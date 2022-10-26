@@ -1,0 +1,69 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}%[baseline=(W1.base)]
+	% \useasboundingbox (-9,-5.4) rectangle (6,2.1);
+	\begin{scope}
+		\matrix[tmatrix,matrix anchor=EW1.center] at (-3,0){
+			\node[emptytensor] (EvL) {}; \&
+			\node[tensor] (EA1) {$A^{[1]}$}; \&
+			\node[tensor] (EA2) {$A^{[2]}$}; \\
+			\node[emptytensor] (EwL) {$L^{[1]}$}; \&
+			\node[tensor=red!60] (EW1) {$W^{[1]}$}; \&
+			\node[tensor=red!60] (EW2) {$W^{[2]}$}; \\
+			\node[emptytensor] (EvdL) {}; \&
+			\node[tensor] (EAd1) {$\overline{A^{[1]}}$}; \&
+			\node[tensor] (EAd2) {$\overline{A^{[2]}}$}; \\
+		};
+		\node[tlabel,anchor=north] (EtL2) at (EAd1.south)   {new $L^{[1]}$};
+		\begin{scope}[on background layer]
+			\node (L3) [tensor=yellow!60,inner sep=2pt,fit=(EwL) (EvL) (EvdL) (EA1) (EW1) (EtL2) (EA2)] {};
+			\node (L2) [tensor=yellow!40,inner sep=1pt,fit=(EwL) (EvL) (EvdL)] {};
+		%     \node (L1) [tensor=yellow!20,inner sep=1pt,fit=(wL) (vL) (vdL) (tL1)] {};
+		\end{scope}
+		\foreach \T in {EA1,EW1,EAd1}
+			\draw[tleg] let \p1=(\T.west), \p2=(L2.east) in
+				(\p1) -- (\x2,\y1);
+		\foreach \T in {EA2,EW2,EAd2}
+			\draw[tleg] (\T.east) -- +(0.3,0);
+		\draw[tleg] (EAd1) -- (EW1) -- (EA1);
+		\draw[tleg] (EAd2) -- (EW2) -- (EA2);
+		\draw[tleg] (EA1) -- (EA2);
+		\draw[tleg] (EW1) -- (EW2);
+		\draw[tleg] (EAd1) -- (EAd2);
+	\end{scope}
+	\begin{scope}
+		\matrix[tmatrix,matrix anchor=FwR.center] at (3,0){
+			\node[tensor] (FB1) {$B^{[1]}$}; \&
+			\node[tensor] (FB2) {$B^{[2]}$}; \&
+			\node[emptytensor] (FvR) {}; \\
+			\node[tensor=red!60] (FW1) {$W^{[1]}$}; \&
+			\node[tensor=red!60] (FW2) {$W^{[2]}$}; \&
+			\node[emptytensor] (FwR) {$R^{[2]}$}; \\
+			\node[tensor] (FBd1) {$\overline{B^{[1]}}$}; \&
+			\node[tensor] (FBd2) {$\overline{B^{[2]}}$}; \&
+			\node[emptytensor] (FvdR) {}; \\
+		};
+		\node[tlabel,anchor=north] (FtR2) at (FBd2.south)  {new $R^{[2]}$};
+		\begin{scope}[on background layer]
+			\node (L3) [tensor=yellow!60,inner sep=2pt,fit=(FwR) (FvR) (FvdR) (FB1) (FW1) (FtR2)] {};
+			\node (L2) [tensor=yellow!40,inner sep=1pt,fit=(FwR) (FvR) (FvdR)] {};
+		%     \node (L1) [tensor=yellow!20,inner sep=1pt,fit=(wL) (vL) (vdL) (tL1)] {};
+		\end{scope}
+		\foreach \T in {FB2,FW2,FBd2}
+			\draw[tleg] let \p1=(\T.east), \p2=(L2.west) in
+				(\p1) -- (\x2,\y1);
+		\foreach \T in {FB1,FW1,FBd1}
+			\draw[tleg] (\T.west) -- +(-0.3,0);
+		\draw[tleg] (FBd1) -- (FW1) -- (FB1);
+		\draw[tleg] (FBd2) -- (FW2) -- (FB2);
+		\draw[tleg] (FB1) -- (FB2);
+		\draw[tleg] (FW1) -- (FW2);
+		\draw[tleg] (FBd1) -- (FBd2);
+	\end{scope}
+	% \node[left] at ($ (wL.west) + (-0.5,0) $) {$E = \braket{\psi | \hat{H} | \psi } = $};
+\end{tikzpicture}
+\end{document}

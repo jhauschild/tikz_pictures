@@ -61,7 +61,31 @@
 		\draw[tleg] (DA3) -- (DL4) -- (DB4);
 		\draw[tleg] (DA3.west) -- + (-0.3,0) ;
 		\draw[tleg] (DB4.east) -- + (+0.3,0) ;
-	\draw[loop] (-3.5,-2) -- node[right=1ex]{\parbox[t]{2cm}{sweep left \\ $n\rightarrow n-1$}} (-3.5,-1);
+	\draw[loop,rounded corners] (-5,-2) -- (-5.5,-1.5) -- (-5,-1.);
+	\node[loop,right=1ex] at (-5,-1.5)  {\parbox[t]{2cm}{sweep left \\ $n\rightarrow n-1$}};
+	\begin{scope}
+		\matrix[tmatrix,matrix anchor=EwR.center] at (-6.5,-1.5){
+			\node[tensor] (EB1) {$B^{[n+1]}$}; \&
+			\node[emptytensor] (EvR) {}; \\
+			\node[tensor=red!60] (EW1) {$W^{[n+1]}$}; \&
+			\node[emptytensor] (EwR) {$R^{[n+1]}$}; \\
+			\node[tensor] (EBd1) {$\overline{B^{[n+1]}}$}; \&
+			\node[emptytensor] (EvdR) {}; \\
+		};
+		\node[tlabel,anchor=north] (EtR2) at ($ (EBd1.south east) + (0.15,0) $)  {$R^{[n]}$};
+		\begin{scope}[on background layer]
+			\node (L3) [tensor=yellow!60,inner sep=2pt,fit=(EwR) (EvR) (EvdR) (EB1) (EW1) (EtR2)] {};
+			\node (L2) [tensor=yellow!40,inner sep=1pt,fit=(EwR) (EvR) (EvdR)] {};
+		%     \node (L1) [tensor=yellow!20,inner sep=1pt,fit=(wL) (vL) (vdL) (tL1)] {};
+		\end{scope}
+		\foreach \T in {EB1,EW1,EBd1}
+		{
+			\draw[tleg] (\T.west) -- +(-0.3,0);
+			\draw[tleg] let \p1=(\T.east), \p2=(L2.west) in
+				(\p1) -- (\x2,\y1);
+		}
+		\draw[tleg] (EBd1) -- (EW1) -- (EB1);
+	\end{scope}
 \end{scope}
 \end{tikzpicture}
 \end{document}
