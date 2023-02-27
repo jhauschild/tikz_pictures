@@ -1,0 +1,123 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+
+\begin{document}
+\begin{tikzpicture}[baseline=(AB1.base),
+		loop/.style={->,double,thick,color=blue}
+	]
+	\useasboundingbox (-5.5,1.5) rectangle (10.5,-6.5);
+	\begin{scope}[on background layer]
+	\filldraw [color=black!20]
+		(-5.5, 1.5) rectangle (4,-6.5);
+		% (-5.5, 1.5) rectangle (4,-2.7)
+		% (-5.5, -3.2) rectangle (4,-6.5);
+	\filldraw [color=black!20]
+		(4.5, 1.5) rectangle  (10.5,-0.3)
+		(4.5, -0.8) rectangle (10.5,-2.7)
+		(4.5, -3.2) rectangle (10.5,-6.5);
+	\end{scope}
+	% left top
+		\matrix[tmatrix,matrix anchor=AB1.center] at (-3.0,0){
+			\node[dtensor] (AL)  {$\Xi^{[n]}$}; \&
+			\node[tensor] (AB1) {$B^{[n]}$}; \&
+			\node[tensor] (AB2) {$B^{[n+1]}$}; \\
+			\node[emptytensor] (AUL)  {}; \&
+			\node[tensor] (AU1) {}; \&
+			\node[tensor] (AU2) {}; \\
+			\node[emptytensor] (ALb)  {}; \&
+			\node[emptytensor] (AB1b) {}; \&
+			\node[tensor] (AB2b) {$\overline{B^{[n+1]}}$}; \\
+		};
+		\draw[tleg] 
+			(AL) -- (AB1) -- (AB2) 
+			(ALb) -- (AB1b) -- (AB2b) 
+			(AB1) -- (AU1) -- (AB1b)
+			(AB2) -- (AU2) -- (AB2b)
+			(ALb.east) -- (ALb.west);
+		\draw[tleg] (AL) to[out=180,in=180] (ALb)
+			(AB2) to[out=0,in=0] (AB2b);
+		\node (AU) [tensor=blue!60,inner sep=0pt,fit=(AU1) (AU2)] {};
+		\node at (AU) {$U$};
+		\node (AUtheta) at ($ (AB1) + (0,0.6) $) {$U \ket{\Theta}$};
+		\begin{scope}[on background layer]
+			\node (AUth) [tensor=orange!30,inner sep=3pt,fit=(AL) (AB1) (AB2) (AUtheta) (AU)] {};
+		\end{scope}
+	\draw[loop] (-0.5,0) -- node[above=1ex]{QR} +(1.,0);
+	% Q R
+		\matrix[tmatrix,matrix anchor=BQ.center] at (1.5,0){
+			\node[tensor=orange!50!red] (BQ) {$Q^{[n]}$}; \&
+			\node[dtensor] (BR) {$R$}; \\
+		};
+		\draw[tleg] (BQ) -- (BR)
+			(BR.east) -- +(0.3,0)
+			(BQ.west) -- +(-0.3,0) 
+			(BQ.south) -- +(0,-0.3) ;
+	% U theta Qn
+		\matrix[tmatrix,matrix anchor=CB1.center] at (-3.0,-4.5){
+			\node[tensor] (CB1) {}; \&
+			\node[tensor] (CB2) {}; \\
+			\node[tensor=orange!50!red] (CB1b) {$\overline{Q^{[n]}}$}; \&
+			\node[emptytensor] (CB2b) {}; \\
+		};
+		\node (CU) [tensor=orange!30,inner sep=0pt,fit=(CB1) (CB2)] {};
+		\node at (CU) {$U\ket{\Theta}$};
+		\draw[tleg] 
+			(CB1) -- (CB1b) 
+			(CB2) -- (CB2b)
+			(CB1b.east) -- +(0.3,0) ;
+		\draw[tleg] (CB1) to[out=180,in=180] (CB1b)
+			(CB2) to[out=0,in=0] (CB2b);
+	\draw[loop] (-0.5,-4.5) -- node[above=1ex]{LQ} +(1.,0);
+	% L Q
+		\matrix[tmatrix,matrix anchor=DL.center] at (1.5,-4.5){
+			\node[dtensor] (DL) {$L$}; \&
+			\node[tensor=orange!50!red] (DQ) {$Q^{[n+1]}$}; \\
+		};
+		\draw[tleg] (DL) -- (DQ)
+			(DQ.east) -- +(0.3,0)
+			(DL.west) -- +(-0.3,0) 
+			(DQ.south) -- +(0,-0.3) ;
+	%%%%%%%%%%%%%%
+	% second row
+	%%%%%%%%%%%%%%
+	% Xin+1
+		\node[dtensor] (EL) at (8.5,0.5) {$L$};
+		\node (EXi) at ($ (EL) + (-1.7,0) $) {\large $\tilde{\Xi}^{[n+1]} =$} ;
+		\draw[tleg]
+			(EL.east) -- +(0.3,0)
+			(EL.west) -- +(-0.3,0) ;
+	% Bn+1
+		\node[tensor=orange!50!red] (FQ) at (8.5,-1.5) {$Q^{[n+1]}$};
+		\node (FBnp1) at ($ (FQ) + (-2,0) $) {\large $\tilde{B}^{[n+1]} =$} ;
+		\draw[tleg] 
+			(FQ.east) -- +(0.3,0)
+			(FQ.west) -- +(-0.3,0) 
+			(FQ.south) -- +(0,-0.3) ;
+	% Bn
+		\matrix[tmatrix,matrix anchor=GU1.center] at (8,-5.0){
+			\node[emptytensor] (GB0) {}; \&
+			\node[tensor] (GB1) {$B^{[n]}$}; \&
+			\node[tensor] (GB2) {$B^{[n+1]}$}; 
+			\\
+			\node[emptytensor] (GU0) {}; \&
+			\node[tensor] (GU1) {}; \&
+			\node[tensor] (GU2) {}; 
+			\\
+			\node[emptytensor] (GV0) {}; \&
+			\node[emptytensor] (GV1) {}; \&
+			\node[tensor] (GB2bar) {$\overline{\tilde{B}^{[n+1]}}$}; 
+			\\
+		};
+		\node (GU) [tensor=blue!60,inner sep=0pt,fit=(GU1) (GU2)] {};
+		\node at (GU) {$U$};
+		\draw[tleg] (GB1) -- (GB2) ;
+		\draw[tleg]  (GB1.west) -- +(-0.5,0) (GB2bar.west) -- +(-0.3,0)
+			(GB1) -- (GU1) (GB2) -- (GU2) -- (GB2bar)
+			(GU1.south) -- +(0,-0.5) ;
+		\draw[tleg] (GB2) to [out=0,in=0] (GB2bar);
+		\node (GB1) at ($ (GU1) + (-2,0) $) {\large $\tilde{B}^{[n]} =$} ;
+\end{tikzpicture}
+\end{document}

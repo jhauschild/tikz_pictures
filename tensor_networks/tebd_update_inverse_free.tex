@@ -21,8 +21,8 @@
 			\node[tensor] (AB1) {$B^{[n]}$}; \&
 			\node[tensor] (AB2) {$B^{[n+1]}$}; \\
 			\node[emptytensor] (AUL)  {}; \&
-			\node[tensor] (AU1) {}; \&
-			\node[tensor] (AU2) {}; \\
+			\node[emptytensor] (AU1) {}; \&
+			\node[emptytensor] (AU2) {}; \\
 		};
 		\draw[tleg] 
 			($ (AL.west) + (-0.3,0) $) -- (AL) -- (AB1) -- (AB2)-- ($ (AB2.east) + (0.3,0) $);
@@ -64,17 +64,28 @@
 		\end{scope}
 	\draw[loop] (7.5,-0.8) -- +(0,-0.5);
 	% Bn
-		\matrix[tmatrix,matrix anchor=CA1.center] at (7.5,-3.5){
-				\node[dtensor=red!80] (CLL)  {${\Lambda^{[n]}}^{-1}$}; \&
-				\node[tensor] (CA1) {$\tilde{A}^{[n]}$}; \&
-			\node[dtensor] (CLR) {\scriptsize $\tilde{\Lambda}^{[n+1]}$}; \\
+		\matrix[tmatrix,matrix anchor=CB1.center] at (7.5,-2.0){
+			\node[emptytensor] (CB0) {}; \&
+			\node[tensor] (CB1) {$B^{[n]}$}; \&
+			\node[tensor] (CB2) {$B^{[n+1]}$}; 
+			\\
+			\node[emptytensor] (CU0) {}; \&
+			\node[tensor] (CU1) {}; \&
+			\node[tensor] (CU2) {}; 
+			\\
+			\node[emptytensor] (CV0) {}; \&
+			\node[emptytensor] (CV1) {}; \&
+			\node[tensor] (CB2bar) {$\overline{\tilde{B}^{[n+1]}}$}; 
+			\\
 		};
-		\draw[tleg] (CLL) -- (CA1) -- (CLR) ;
-		\draw[tleg] (CLR.east) -- +(0.5,0) (CLL.west) -- +(-0.5,0) (CA1.south) -- +(0,-0.5);
-		\node (CB1) at ($ (CA1) + (0,0.7) $) {$\tilde{B}^{[n]}$} ;
-		\begin{scope}[on background layer]
-			\node (CB) [tensor=orange!60,inner sep=3pt,fit=(CLL) (CA1) (CLR) (CB1)] {};
-		\end{scope}
+		\node (CU) [tensor=blue!60,inner sep=0pt,fit=(CU1) (CU2)] {};
+		\node at (CU) {$U$};
+		\draw[tleg] (CB1) -- (CB2) ;
+		\draw[tleg]  (CB1.west) -- +(-0.5,0) (CB2bar.west) -- +(-0.3,0)
+			(CB1) -- (CU1) (CB2) -- (CU2) -- (CB2bar)
+			(CU1.south) -- +(0,-0.5) ;
+		\draw[tleg] (CB2) to [out=0,in=0] (CB2bar);
+		\node (CB1) at ($ (CU1) + (-2,0) $) {\large $\tilde{B}^{[n]} =$} ;
 	\draw[loop] (7.5,-4.8) -- +(0,-0.5);
 	% back to original
 		\matrix[tmatrix,matrix anchor=EB1.center] at (7.5,-6){
