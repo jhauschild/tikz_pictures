@@ -1,0 +1,38 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}
+	\foreach \x in {1,2,4,5}
+	{
+		\foreach \y in {1,...,4}
+		{
+			\node[tensor=green!50!blue!50!white,minimum size=6mm] (A\x\y) at (\x,\y) {};
+			\draw[tarrowleg] ($ (A\x\y.225) + (45:0.05)  +(225:0.35) $) -- +(45:0.35) ;
+		}
+	}
+	\foreach \T/\x in {A15/1,A25/2,A45/4,A55/5}
+	{
+		\node[tensor=red!30,minimum size=6mm] (\T) at (\x,5) {};
+		\draw[tarrowleg] ($ (\T.225) + (45:0.05)  +(225:0.35) $) -- +(45:0.35) ;
+	}
+	\node[dtensor=red!60] (A35) at (3,5) {};
+	\draw[tarrowleg] ($ (A35.225)   +(225:0.35) $) -- +(45:0.35) ;
+	\foreach \y in {1,...,4}
+	{
+			\node[tensor=red!30,minimum size=6mm] (A3\y) at (3,\y) {};
+			\draw[tarrowleg] ($ (A3\y.225) + (45:0.05)  +(225:0.35) $) -- +(45:0.35) ;
+	}
+	\foreach \x in {1,...,5}
+		\foreach \y [remember=\y as \lasty (initially 1)] in {2,...,5}
+			\draw[tarrowleg] (A\x\lasty) -- (A\x\y);
+	\foreach \y in {1,...,5}
+	{
+		\foreach \x [remember=\x as \lastx (initially 1)] in {2,3}
+			\draw[tarrowleg] (A\lastx\y) -- (A\x\y);
+		\foreach \x [remember=\x as \lastx (initially 5)] in {4,3}
+			\draw[tarrowleg] (A\lastx\y) -- (A\x\y);
+	}
+\end{tikzpicture}
+\end{document}

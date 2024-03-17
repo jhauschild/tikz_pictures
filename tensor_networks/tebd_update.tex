@@ -1,0 +1,137 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+
+\begin{document}
+\begin{tikzpicture}[baseline=(AB1.base),
+		loop/.style={->,double,thick,color=blue}
+	]
+	\useasboundingbox (-5.5,1.5) rectangle (10,-7);
+	\begin{scope}[on background layer]
+	\filldraw [color=black!20]
+		(-5.5, 1.5) -- (10,1.5) -- (10,-7) -- (4,-7) -- (4,-2.2) -- (-5.5,-2.2) -- cycle;
+	\filldraw [color=black!20]
+		(-5.5, -2.7) -- (3.5,-2.7) -- (3.5,-6.5) -- (-5.5,-6.5) -- cycle;
+	\end{scope}
+	% left top
+		\matrix[tmatrix,matrix anchor=AB1.center] at (-3.5,0){
+			\node[dtensor] (AL)  {$\Lambda^{[n]}$}; \&
+			\node[tensor] (AB1) {$B^{[n]}$}; \&
+			\node[tensor] (AB2) {$B^{[n+1]}$}; \\
+			\node[emptytensor] (AUL)  {}; \&
+			\node[tensor] (AU1) {}; \&
+			\node[tensor] (AU2) {}; \\
+		};
+		\draw[tleg] 
+			($ (AL.west) + (-0.3,0) $) -- (AL) -- (AB1) -- (AB2)-- ($ (AB2.east) + (0.3,0) $);
+		\foreach \i in {1,2} 
+			\draw[tleg] (AB\i) -- (AU\i) -- ($ (AU\i.south) + (0,-0.3) $) ;
+		\node (AU) [tensor=blue!60,inner sep=0pt,fit=(AU1) (AU2)] {};
+		\node at (AU) {$U$};
+		\node (Atheta) at ($ (AB1) + (0,0.6) $) {$\ket{\Theta}$};
+		\begin{scope}[on background layer]
+			\node (Ath) [tensor=orange!60,inner sep=3pt,fit=(AL) (AB1) (AB2) (Atheta)] {};
+		\end{scope}
+	\draw[loop] (-1.0,0) -- node[above=1ex]{contract} (0.3,0);
+	% U Theta
+		\matrix[tmatrix,matrix anchor=BB1.center] at (1.5,0){
+			\node[emptytensor] (BB1) {$B^{[n]}$}; \&
+			\node[emptytensor] (BB2) {$B^{[n+1]}$}; \\
+		};
+		\node (BTh) [tensor=orange!30,inner sep=0pt,fit=(BB1) (BB2)] {};
+		\node  at (BTh) {$U\ket{\Theta}$};
+		\foreach \i in {1,2}
+			\draw[tleg] (BB\i.south) -- +(0.,-0.3);
+		\draw[tleg] (BB1.west) -- +(-0.3,0.)  (BB2.east) -- +(0.3,0);
+	\draw[loop] (4.0,0) -- node[above=1ex]{SVD} (5.3,0);
+	% SVD of U Theta
+		\matrix[tmatrix,matrix anchor=DL4.center] at (7.5,0){
+			\node[tensor](DA3) {$\tilde{A}^{[n]}$}; \&
+			\node[dtensor] (DL4) {\scriptsize $\tilde{\Lambda}^{[n+1]}$}; \&
+			\node[tensor] (DB4) {$\tilde{B}^{[n+1]}$}; 
+			\\
+		};	
+		\node (DUTh) at ($ (DL4) + (0,0.7) $) {$U\ket{\Theta}$};
+		\draw[tleg] (DA3.south) -- + (0.,-0.4) ;
+		\draw[tleg] (DB4.south) -- + (0.,-0.4) ;
+		\draw[tleg] (DA3) -- (DL4) -- (DB4);
+		\draw[tleg] (DA3.west) -- + (-0.4,0) ;
+		\draw[tleg] (DB4.east) -- + (+0.4,0) ;
+		\begin{scope}[on background layer]
+			\node (th) [tensor=orange!30,inner sep=3pt,fit=(DA3) (DL4) (DB4) (DUTh)] {};
+		\end{scope}
+	\draw[loop] (7.5,-0.8) -- +(0,-0.5);
+	% Bn
+		\matrix[tmatrix,matrix anchor=CA1.center] at (7.5,-3.5){
+				\node[dtensor=red!80] (CLL)  {${\Lambda^{[n]}}^{-1}$}; \&
+				\node[tensor] (CA1) {$\tilde{A}^{[n]}$}; \&
+			\node[dtensor] (CLR) {\scriptsize $\tilde{\Lambda}^{[n+1]}$}; \\
+		};
+		\draw[tleg] (CLL) -- (CA1) -- (CLR) ;
+		\draw[tleg] (CLR.east) -- +(0.5,0) (CLL.west) -- +(-0.5,0) (CA1.south) -- +(0,-0.5);
+		\node (CB1) at ($ (CA1) + (0,0.7) $) {$\tilde{B}^{[n]}$} ;
+		\begin{scope}[on background layer]
+			\node (CB) [tensor=orange!60,inner sep=3pt,fit=(CLL) (CA1) (CLR) (CB1)] {};
+		\end{scope}
+	\draw[loop] (7.5,-4.8) -- +(0,-0.5);
+	% back to original
+		\matrix[tmatrix,matrix anchor=EB1.center] at (7.5,-6){
+			\node[dtensor] (EL)  {$\Lambda^{[n]}$}; \&
+			\node[tensor] (EB1) {$\tilde{B}^{[n]}$}; \&
+			\node[tensor] (EB2) {$\tilde{B}^{[n+1]}$}; \\
+			\\
+		};	
+		\draw[tleg] (EB1.south) -- + (0.,-0.4) ;
+		\draw[tleg] (EB2.south) -- + (0.,-0.4) ;
+		\draw[tleg] (EL) -- (EB1) -- (EB2);
+		\draw[tleg] (EL.west) -- + (-0.4,0) ;
+		\draw[tleg] (EB2.east) -- + (+0.4,0) ;
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Global decomposition
+	\matrix[tmatrix,matrix anchor=GA1.center] at (-2.5,-3.5){
+		\node[emptytensor] (GvL) {$\ket{\psi}$}; \&
+		\node[dtensor] (GL)  {$\Lambda^{[1]}$}; \&
+		\node[tensor] (GA1) {$B^{[1]}$}; \&
+		\node[tensor] (GA2) {$B^{[2]}$}; \&
+		\node[tensor] (GA3) {$B^{[3]}$}; \&
+		\node[tensor] (GA4) {$B^{[4]}$}; \&
+		\node[tensor] (GA5) {$B^{[5]}$}; \&
+		\node[tensor] (GA6) {$B^{[6]}$}; \&
+		\node[emptytensor] (GvR) {}; 
+		\\
+		\node[emptytensor] (GUL) {}; \&
+		\node[emptytensor] (GU0) {}; \&
+		\node[emptytensor] (GU1) {}; \&
+		\node[emptytensor] (GU2) {}; \&
+		\node[emptytensor] (GU3) {}; \&
+		\node[emptytensor] (GU4) {}; \&
+		\node[emptytensor] (GU5) {}; \&
+		\node[emptytensor] (GU6) {}; \&
+		\node[emptytensor] (GUR) {}; 
+		\\
+		\node[emptytensor] (GVL) {}; \&
+		\node[emptytensor] (GV0) {}; \&
+		\node[emptytensor] (GV1) {}; \&
+		\node[emptytensor] (GV2) {}; \&
+		\node[emptytensor] (GV3) {}; \&
+		\node[emptytensor] (GV4) {}; \&
+		\node[emptytensor] (GV5) {}; \&
+		\node[emptytensor] (GV6) {}; \&
+		\node[emptytensor] (GVR) {}; 
+		\\
+	} ;
+	\draw[tleg] 
+		(GvL) -- (GL) -- (GA1) -- (GA2)-- (GA3) -- (GA4) -- (GA5) -- (GA6) -- (GvR) ;
+	\foreach \i in {1,...,6}
+		\draw[tleg] (GA\i) -- (GU\i) -- (GV\i) -- ($ (GV\i.south) + (0,-0.3) $);
+	\draw[tleg] (GV1.north) -- (GV1.south)  (GV6.north) -- (GV6.south) ;
+	\foreach \U/\i/\j in {U/1/2,U/3/4,U/5/6,V/2/3,V/4/5}
+	{
+		\node (GUij) [tensor=blue!60,inner sep=0pt,fit=(G\U\i) (G\U\j)] {};
+		\node at (GUij) {$e^{\mathrm{i} \hat{H}_{\i,\j} \mathrm{d}t}$};
+	}
+	\draw[thick,->] (GUL.center) to node [right]{$e^{\mathrm{i} \hat{H} \mathrm{d}t } \approx$} (GVL.center) ;
+\end{tikzpicture}
+\end{document}

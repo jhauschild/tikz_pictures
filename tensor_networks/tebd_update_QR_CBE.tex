@@ -1,0 +1,160 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+
+\begin{document}
+\begin{tikzpicture}[baseline=(AB1.base),
+		loop/.style={->,double,thick,color=blue}
+	]
+	\useasboundingbox (-5.5,1.5) rectangle (10.5,-6.5);
+	\begin{scope}[on background layer]
+	\filldraw [color=black!20]
+		(-5.5, 1.5) rectangle  (4,-6.5);
+	\filldraw [color=black!20]
+		(4.5, 1.5) rectangle  (10.5,-0.3)
+		(4.5, -0.8) rectangle (10.5,-2.7)
+		(4.5, -3.2) rectangle (10.5,-6.5);
+	\end{scope}
+	% U theta P_eta
+		\matrix[tmatrix,matrix anchor=AB1.center] at (-3,0.5){
+			\node[tensor] (AB1) {}; \&
+			\node[tensor] (AB2) {}; \\
+			\node[tensor=black!50] (AB1b) {$P_\eta$}; \&
+			\node[emptytensor] (AB2b) {}; \\
+		};
+		\node (AU) [tensor=orange!30,inner sep=0pt,fit=(AB1) (AB2)] {};
+		\node at (AU) {$U\ket{\Theta}$};
+		\draw[tleg] 
+			(AB1) -- (AB1b) 
+			(AB2) -- (AB2b)
+			(AB1b.east) -- +(0.3,0) ;
+		\draw[tleg] (AB1) to[out=180,in=180] (AB1b)
+			(AB2) to[out=0,in=0] (AB2b);
+	\draw[loop] (-0.5,0.5) -- node[above=1ex]{contr.} +(1.,0);
+	% Y
+		\matrix[tmatrix,matrix anchor=AY.center] at (1.5,0.5){
+			\node[tensor=green!50!blue!30] (AY) {$Y^{[n+1]}$}; \\
+		};
+		\draw[tleg] 
+			(AY.east) -- +(0.3,0)
+			(AY.west) -- +(-0.3,0) 
+			(AY.south) -- +(0,-0.3) ;
+	%%%%
+	% U theta Y
+		\matrix[tmatrix,matrix anchor=BB1.center] at (-3,-1.5){
+			\node[tensor] (BB1) {}; \&
+			\node[tensor] (BB2) {}; \\
+			\node[emptytensor] (BB1b) {}; \&
+			\node[tensor=green!50!blue!30] (BB2b) {$\overline{Y^{[n+1]}}$}; \\
+		};
+		\node (BU) [tensor=orange!30,inner sep=0pt,fit=(BB1) (BB2)] {};
+		\node at (BU) {$U\ket{\Theta}$};
+		\draw[tleg] 
+			(BB1) -- (BB1b) 
+			(BB2) -- (BB2b)
+			(BB1b.east) -- +(0.3,0) ;
+		\draw[tleg] (BB1) to[out=180,in=180] (BB1b)
+			(BB2) to[out=0,in=0] (BB2b);
+	\draw[loop] (-0.5,-2.0) -- node[above=1ex]{QR} +(1.,0);
+	% Q R
+		\matrix[tmatrix,matrix anchor=BQ.center] at (1.5,-2.0){
+			\node[tensor=orange!50!red] (BQ) {$Q^{[n]}$}; \&
+			\node[dtensor] (BR) {$R$}; \\
+		};
+		\draw[tleg] (BQ) -- (BR)
+			(BR.east) -- +(0.3,0)
+			(BQ.west) -- +(-0.3,0) 
+			(BQ.south) -- +(0,-0.3) ;
+	% U theta Qn
+		\matrix[tmatrix,matrix anchor=CB1.center] at (-3.0,-4.0){
+			\node[tensor] (CB1) {}; \&
+			\node[tensor] (CB2) {}; \\
+			\node[tensor=orange!50!red] (CB1b) {$\overline{Q^{[n]}}$}; \&
+			\node[emptytensor] (CB2b) {}; \\
+		};
+		\node (CU) [tensor=orange!30,inner sep=0pt,fit=(CB1) (CB2)] {};
+		\node at (CU) {$U\ket{\Theta}$};
+		\draw[tleg] 
+			(CB1) -- (CB1b) 
+			(CB2) -- (CB2b)
+			(CB1b.east) -- +(0.3,0) ;
+		\draw[tleg] (CB1) to[out=180,in=180] (CB1b)
+			(CB2) to[out=0,in=0] (CB2b);
+	\draw[loop] (-0.5,-4.0) -- node[above=1ex]{LQ} +(1.,0);
+	% L Q
+		\matrix[tmatrix,matrix anchor=CL.center] at (1.5,-4.){
+			\node[dtensor] (CL) {$L$}; \&
+			\node[tensor=orange!50!red] (CQ) {$Q^{[n+1]}$}; \\
+		};
+		\draw[tleg] (CL) -- (CQ)
+			(CQ.east) -- +(0.3,0)
+			(CL.west) -- +(-0.3,0) 
+			(CQ.south) -- +(0,-0.3) ;
+	% L
+		\matrix[tmatrix,matrix anchor=DL.center] at (-3.0,-6.0){
+			\node[dtensor] (DLb) {$L^\dagger$}; \&
+			\node[dtensor] (DL) {$L$}; \\
+		};
+		\draw[tleg] (DLb) -- (DL)
+			(DL.east) -- +(0.3,0)
+			(DLb.west) -- +(-0.3,0) ;
+	\draw[loop] (-1.5,-6.0) -- node[above=1ex]{EIG} +(1.,0);
+		\matrix[tmatrix,matrix anchor=DS.center] at (1.5,-6.0){
+			\node[tensor] (DVb) {$V^\dagger$}; \&
+			\node[dtensor] (DS) {$S^2$}; \&
+			\node[tensor] (DV) {$V$}; \\
+		};
+		\draw[tleg] (DVb) -- (DS) -- (DV)
+			(DV.east) -- +(0.3,0)
+			(DVb.west) -- +(-0.3,0) ;
+	%%%%%%%%%%%%%%
+	% second column
+	%%%%%%%%%%%%%%
+	% Xin+1
+		\matrix[tmatrix,matrix anchor=ES.center] at (8.5,0.5){
+			\node[tensor=black!50] (EPL) {$P_\chi$}; \&
+			\node[dtensor] (ES) {$S$}; \&
+			\node[tensor=black!50] (EPR) {$P_\chi$}; \\
+		};
+		\node (EXi) at ($ (EPL) + (-1.7,0) $) {\large $\tilde{\Xi}^{[n+1]} =$} ;
+		\draw[tleg] (EPL)-- (ES) -- (EPR)
+			(EPR.east) -- +(0.3,0)
+			(EPL.west) -- +(-0.3,0) ;
+	% Bn+1
+		\matrix[tmatrix,matrix anchor=FV.center] at (8.5,-1.5){
+			\node[tensor=black!50] (FP) {$P_\chi$}; \&
+			\node[tensor] (FV) {$V$}; \&
+			\node[tensor=orange!50!red] (FQ) {$Q^{[n+1]}$}; \\
+		};
+		\node (FBnp1) at ($ (FP) + (-2,0) $) {\large $\tilde{B}^{[n+1]} =$} ;
+		\draw[tleg] (FP) -- (FV) -- (FQ)
+			(FQ.east) -- +(0.3,0)
+			(FP.west) -- +(-0.3,0) 
+			(FQ.south) -- +(0,-0.3) ;
+	% Bn
+		\matrix[tmatrix,matrix anchor=GU1.center] at (8,-5.0){
+			\node[emptytensor] (GB0) {}; \&
+			\node[tensor] (GB1) {$B^{[n]}$}; \&
+			\node[tensor] (GB2) {$B^{[n+1]}$}; 
+			\\
+			\node[emptytensor] (GU0) {}; \&
+			\node[tensor] (GU1) {}; \&
+			\node[tensor] (GU2) {}; 
+			\\
+			\node[emptytensor] (GV0) {}; \&
+			\node[emptytensor] (GV1) {}; \&
+			\node[tensor] (GB2bar) {$\overline{\tilde{B}^{[n+1]}}$}; 
+			\\
+		};
+		\node (GU) [tensor=blue!60,inner sep=0pt,fit=(GU1) (GU2)] {};
+		\node at (GU) {$U$};
+		\draw[tleg] (GB1) -- (GB2) ;
+		\draw[tleg]  (GB1.west) -- +(-0.5,0) (GB2bar.west) -- +(-0.3,0)
+			(GB1) -- (GU1) (GB2) -- (GU2) -- (GB2bar)
+			(GU1.south) -- +(0,-0.5) ;
+		\draw[tleg] (GB2) to [out=0,in=0] (GB2bar);
+		\node (GB1) at ($ (GU1) + (-2,0) $) {\large $\tilde{B}^{[n]} =$} ;
+\end{tikzpicture}
+\end{document}

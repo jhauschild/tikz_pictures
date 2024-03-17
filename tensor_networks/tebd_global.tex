@@ -1,0 +1,54 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\newcommand{\ii}{\mathrm{i}}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(A1.base)]
+	\matrix[tmatrix]{
+		\node[emptytensor] (vL) {$\ket{\psi}$}; \&
+		\node[dtensor] (L)  {$\Lambda^{[1]}$}; \&
+		\node[tensor] (A1) {$B^{[1]}$}; \&
+		\node[tensor] (A2) {$B^{[2]}$}; \&
+		\node[tensor] (A3) {$B^{[3]}$}; \&
+		\node[tensor] (A4) {$B^{[4]}$}; \&
+		\node[tensor] (A5) {$B^{[5]}$}; \&
+		\node[tensor] (A6) {$B^{[6]}$}; \&
+		\node[emptytensor] (vR) {}; 
+		\\
+		\node[emptytensor] (UL) {}; \&
+		\node[emptytensor] (U0) {}; \&
+		\node[emptytensor] (U1) {}; \&
+		\node[emptytensor] (U2) {}; \&
+		\node[emptytensor] (U3) {}; \&
+		\node[emptytensor] (U4) {}; \&
+		\node[emptytensor] (U5) {}; \&
+		\node[emptytensor] (U6) {}; \&
+		\node[emptytensor] (UR) {}; 
+		\\
+		\node[emptytensor] (VL) {}; \&
+		\node[emptytensor] (V0) {}; \&
+		\node[emptytensor] (V1) {}; \&
+		\node[emptytensor] (V2) {}; \&
+		\node[emptytensor] (V3) {}; \&
+		\node[emptytensor] (V4) {}; \&
+		\node[emptytensor] (V5) {}; \&
+		\node[emptytensor] (V6) {}; \&
+		\node[emptytensor] (VR) {}; 
+		\\
+	} ;
+	\draw[tleg] 
+		(vL) -- (L) -- (A1) -- (A2)-- (A3) -- (A4) -- (A5) -- (A6) -- (vR) ;
+	\foreach \i in {1,...,6}
+		\draw[tleg] (A\i) -- (U\i) -- (V\i) -- ($ (V\i.south) + (0,-0.3) $);
+	\draw[tleg] (V1.north) -- (V1.south)  (V6.north) -- (V6.south) ;
+	\foreach \U/\i/\j in {U/1/2,U/3/4,U/5/6,V/2/3,V/4/5}
+	{
+		\node (Uij) [tensor=blue!60,inner sep=0pt,fit=(\U\i) (\U\j)] {};
+		\node at (Uij) {$e^{\mathrm{i} \hat{H}_{\i,\j} \mathrm{d}t}$};
+	}
+	\draw[thick,->] (UL.center) to node [right]{$e^{\mathrm{i} \hat{H} \mathrm{d}t } \approx$} (VL.center) ;
+\end{tikzpicture}
+\end{document}
