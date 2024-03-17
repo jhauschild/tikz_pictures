@@ -1,0 +1,27 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+	\begin{tikzpicture}[baseline=(equal.base)]
+		\matrix[tmatrix,matrix anchor=B.center] at (-1,0.5) {
+			\node (S)  [dtensor] {$S$}; \&
+			\node (B)  [tensor] {$B$}; \\
+			\node (Sdag)  [dtensor] {$S$}; \&
+			\node (Bdag)  [tensor] {$\bar{B}$}; \\
+		};
+		\draw[tleg] (B.south)  -- (Bdag.north);
+		\draw[tleg] (S) -- (B) (Sdag)-- (Bdag);
+		\draw[tleg] (B.east) to  +(0.3,0) ;
+		\draw[tleg] (Bdag.east) to  +(0.3,0) ;
+		\draw[tleg] (S.west) to[in=180,out=180] (Sdag.west) ;
+		\node (equal) at (0,0) {$=$};
+		\matrix[tmatrix,matrix anchor=S2.center] at (1,0.5) {
+			\node (S2)   [dtensor] {$S$}; \\
+			\node (S2dag)[dtensor] {$S$}; \\
+		};
+		\draw[tleg] (S2.west) to[in=180,out=180] (S2dag.west) ;
+		\draw[tleg] (S2.east) to  +(0.3,0) ;
+		\draw[tleg] (S2dag.east) to  +(0.3,0) ;
+	\end{tikzpicture} 
+\end{document}

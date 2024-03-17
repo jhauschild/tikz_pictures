@@ -28,7 +28,7 @@ example_MPS.png : example_MPS.pdf
 
 clean: $(SUBDIRS)
 	-rm -rf cache
-	-rm -f *.incl *.log *.aux *.auxlock *.out *.sta *.toc
+	-rm -f *.incl *.log *.aux *.auxlock *.out *.sta *.toc *.fls *.fdb_latexmk *.synctex.gz
 
 distclean: clean $(SUBDIRS)
 	-rm -f *.pdf

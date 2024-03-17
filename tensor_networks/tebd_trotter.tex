@@ -1,0 +1,27 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}
+\matrix[tmatrix]{
+	\node (A1)  [tensor] {}; \& \node (A2)  [tensor] {}; \& \node (A3)  [tensor] {}; \&
+	\node (A4)  [tensor] {}; \& \node (A5)  [tensor] {}; \& \node (A6)  [tensor] {}; \\
+	\node (U1)  [emptytensor] {}; \& \node (U2)  [emptytensor] {}; \& \node (U3)  [emptytensor] {}; \&
+	\node (U4)  [emptytensor] {}; \& \node (U5)  [emptytensor] {}; \& \node (U6)  [emptytensor] {}; \\
+	\node (V1)  [emptytensor] {}; \& \node (V2)  [emptytensor] {}; \& \node (V3)  [emptytensor] {}; \&
+	\node (V4)  [emptytensor] {}; \& \node (V5)  [emptytensor] {}; \& \node (V6)  [emptytensor] {}; \\
+};
+\draw[tleg] (A1) -- (A2) -- (A3) -- (A4) -- (A5) -- (A6) ;
+\foreach \i in {1,..., 6}
+	\draw[tleg] (A\i) -- (U\i) -- (V\i);
+\foreach \T in {V1,V2,V3,V4,V5,V6} 
+	\draw[tleg] (\T.south) -- +(0.0,-0.3);
+\draw[tleg] (V1.north) -- (V1.south) (V6.north) -- (V6.south) ;
+\foreach \S/\T in {U1/U2,U3/U4,U5/U6,V2/V3,V4/V5}
+{
+	\node[tensor=red!50,inner sep=0pt,fit=(\S) (\T)] (U) {};
+	\node at (U) {$U$};  % otherwise not vertically centered with fit...
+}
+\end{tikzpicture}
+\end{document}
