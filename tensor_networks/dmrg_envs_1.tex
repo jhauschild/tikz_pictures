@@ -50,6 +50,9 @@
 	\draw[tleg,dotted] (Ad1.west) -- +(-0.3,0) to[out=180,in=-90] (wL.south);
 	\draw[tleg,dotted] (A6.east) -- +(+0.3,0) to[out=0,in=90] (wR.north);
 	\draw[tleg,dotted] (Ad6.east) -- +(+0.3,0) to[out=0,in=-90] (wR.south);
-	\node[left] at ($ (wL.west) + (-0.5,0) $) {$E = \braket{\psi | \hat{H} | \psi } = $};
+	\node (ket) at ($ (wL.west) + (-0.7,+1) $) {$\ket{\psi}$};
+	\node (H)   at ($ (wL.west) + (-0.7,+0) $) {$\hat{H}$};
+	\node (bra) at ($ (wL.west) + (-0.7,-1) $) {$\bra{\psi}$};
+	\node[left] at ($ (wL.west) + (-1.0,0) $) {$E = \braket{\psi | \hat{H} | \psi } = $};
 \end{tikzpicture}
 \end{document}

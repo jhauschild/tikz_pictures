@@ -67,6 +67,9 @@
 		\node (R2) [tensor=yellow!40,inner sep=2pt,fit=(wR) (vR) (vdR) (tR6) (tR5)] {};
 		\node (R1) [tensor=yellow!20,inner sep=1pt,fit=(wR) (vR) (vdR) (tR6)] {};
 	\end{scope}
-	\node[left] at ($ (wL.west) + (-0.5,0) $) {$E = \braket{\psi | \hat{H} | \psi } = $};
+	\node (ket) at ($ (wL.west) + (-0.7,+1) $) {$\ket{\psi}$};
+	\node (H)   at ($ (wL.west) + (-0.7,+0) $) {$\hat{H}$};
+	\node (bra) at ($ (wL.west) + (-0.7,-1) $) {$\bra{\psi}$};
+	\node[left] at ($ (wL.west) + (-1.0,0) $) {$E = \braket{\psi | \hat{H} | \psi } = $};
 \end{tikzpicture}
 \end{document}

@@ -112,7 +112,10 @@
 	\draw[tleg] ($ (HAd5.west) + (-3pt,0) $) -- (HAd4);
 	\foreach \i in {3,4}
 		\draw[tleg] (HAd\i) -- (HW\i) -- (HA\i);
-	\node[left] at ($ (wL.west) + (-0.5,0) $) {$E = \braket{\Theta | \hat{H}_\mathrm{eff} | \Theta } = $};
+	\node (ket) at ($ (wL.west) + (-0.7,+1) $) {$\ket{\psi}$};
+	\node (H)   at ($ (wL.west) + (-0.7,+0) $) {$\hat{H}$};
+	\node (bra) at ($ (wL.west) + (-0.7,-1) $) {$\bra{\psi}$};
+	\node[left] at ($ (wL.west) + (-1.0,0) $) {$E = \braket{\Theta | \hat{H}_\mathrm{eff} | \Theta } = $};
 	\node[left] at ($ (HW2.west) + (-0.5,0) $) {$\hat{H}_\mathrm{eff} = $};
 	\node[tindex,right] at (HL.west) {$\bra{\alpha}$};
 	\node[tindex,right] at (HLd.west) {$\ket{\bar{\alpha}}$};
