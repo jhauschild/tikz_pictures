@@ -130,8 +130,8 @@
 	\foreach \U/\i/\j in {U/1/2,U/3/4,U/5/6,V/2/3,V/4/5}
 	{
 		\node (GUij) [tensor=blue!60,inner sep=0pt,fit=(G\U\i) (G\U\j)] {};
-		\node at (GUij) {$e^{\mathrm{i} \hat{H}_{\i,\j} \mathrm{d}t}$};
+		\node at (GUij) {$e^{-\mathrm{i} \hat{H}_{\i,\j} \mathrm{d}t}$};
 	}
-	\draw[thick,->] (GUL.center) to node [right]{$e^{\mathrm{i} \hat{H} \mathrm{d}t } \approx$} (GVL.center) ;
+	\draw[thick,->] (GUL.center) to node [right]{$e^{-\mathrm{i} \hat{H} \mathrm{d}t } \approx$} (GVL.center) ;
 \end{tikzpicture}
 \end{document}
