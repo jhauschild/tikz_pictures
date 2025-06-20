@@ -7,7 +7,7 @@ SUBDIRPDFS=$(SUBDIRTEXS:.tex=.pdf)
 
 all: $(SUBDIRS) main
 
-main: main_article.pdf example_MPS.png
+main: main_article.pdf
 
 $(SUBDIRS):
 	$(MAKE) -C $@ $(MAKECMDGOALS)
