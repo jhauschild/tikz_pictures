@@ -1,0 +1,25 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+
+\begin{document}
+\begin{tikzpicture}
+	% Bottom layer
+	\foreach \x in {1,...,5}
+	{
+		\foreach \y in {1,...,5}
+		{
+			\node[tensor=green!35!blue!50!white,minimum size=6mm] (A\x\y) at (\x,\y) {};
+			% \draw[tleg] ($ (A\x\y.225) + (45:0.06) $) -- +(225:0.35)  ;
+			% \draw[tleg] ($ (A\x\y.225) + (45:0.06) +(225:0.35) $) --  +(0.15,0.05)  ;
+		}
+	}
+	\foreach \x in {1,...,5}
+		\foreach \y [remember=\y as \lasty (initially 1)] in {2,...,5}
+			\draw[tleg,double] (A\x\lasty) -- (A\x\y);
+	\foreach \y in {1,...,5}
+		\foreach \x [remember=\x as \lastx (initially 1)] in {2,...,5}
+			\draw[tleg,double] (A\lastx\y) -- (A\x\y);
+	\node[tensor=red!80!blue!50!white,minimum size=6mm] (ZA) at (4,3) {};
+\end{tikzpicture}
+\end{document}
