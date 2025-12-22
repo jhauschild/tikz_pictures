@@ -1,0 +1,36 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usetikzlibrary{3d}
+
+\begin{document}
+\begin{tikzpicture}[z=(80:4mm),scale=0.7]
+	\begin{scope}
+		\draw[tleg,color=blue] (2.5,0.5) -- +(0,4);
+		\foreach \y in {0.5,1.5,...,4.5} {
+			\draw[tleg,color=black] (2.5,\y, 1) -- (2.0,\y,1)--(2.0,\y,0)-- (3.2,\y,0) -- (3.2,\y,0.5);
+			\node[smalltensor=blue] at (2.5,\y){};
+		}
+	\end{scope}
+	\foreach \x in {3.2} {
+		\foreach \y in {0.5,1.5,...,3.5}
+			\draw[tleg,color=green!50!black] (\x,\y,0.5) -- + (0,1);
+		\foreach \y in {0.5,1.5,...,4.5}{
+			\node[smalltensor,color=green!50!black] at (\x,\y,0.5){};
+			\draw[tleg,color=black] (\x,\y,0.5) -- +(0,0,+0.5);
+		}
+	}
+	\begin{scope}[shift={(0,0,1)}]
+		\draw[tleg,color=blue!70!white] (2.5,0.5) -- +(0,4);
+		\foreach \y in {0.5,1.5,...,4.5} {
+			\draw[tleg,color=black] (2.0,\y) -- (2.5,\y) -- (3.2,\y);
+			\node[color=gray,smalltensor=blue!70!white] at (2.5,\y){$*$};
+		}
+	\end{scope}
+	\foreach \x in {2.0} {
+		\foreach \y in {0.5,1.5,...,4.5} {
+			\draw[tleg] (\x,\y,0) -- +(0,0,1);
+		}
+	}
+\end{tikzpicture}
+\end{document}

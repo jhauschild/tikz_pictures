@@ -11,6 +11,28 @@
 \draw[thin,color=blue,->] (0., -1.) -- (0., 3.) ;
 }
 
+% Define arrow tip for marking IsoTNS
+\pgfarrowsdeclare{M<}{M>}
+{
+  \pgfarrowsleftextend{0pt}
+  \pgfarrowsrightextend{0pt}
+}
+{
+  \pgfutil@tempdima=1.5pt%
+  \advance\pgfutil@tempdima by1.5\pgflinewidth%
+  \pgfutil@tempdimb=0.5\pgfutil@tempdima%
+  \advance\pgfutil@tempdimb by\pgflinewidth%
+  \pgfsetdash{}{+0pt}
+  \pgfsetmiterjoin
+  \pgfsetbuttcap
+  \pgfpathmoveto{\pgfqpoint{-.5\pgfutil@tempdimb}{-1\pgfutil@tempdima}}
+  \pgfpathlineto{\pgfqpoint{.5\pgfutil@tempdimb}{0pt}}
+  \pgfpathlineto{\pgfqpoint{-.5\pgfutil@tempdimb}{\pgfutil@tempdima}}
+  \pgfusepathqstroke
+}
+\pgfarrowsdeclarereversed{M>}{M<}{M<}{M>}
+\makeatother
+
 % minium size = 7mm - 0.5pt such that standard tensors with tmatrix repeat every 1cm
 % TODO: don't use fixed unit width, but allow to scale?
 \tikzset{tlabel/.style={node font=\small}}
@@ -24,8 +46,11 @@
          tket/.default={black!20}}
 \tikzset{tleg/.style={thick}}
 \tikzset{tedge/.style={tleg}}  % deprecated
-\tikzset{tarrowleg/.style={thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{>}}}}}
+\tikzset{tarrowleg/.style={thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{#1}}}}}
+\tikzset{tarrowleg/.default={M>}}
 \tikzset{tindex/.style={node font=\tiny}}
 % ampersand replacement avoid the need to declare beamer frames as fragile
 \tikzset{tmatrix/.style={row sep=3mm,column sep=3mm,ampersand replacement=\&}}
 
+\tikzset{smalltensor/.style={circle,fill=#1,inner sep=0pt,minimum size=3mm},
+         smalltensor/.default={black}}

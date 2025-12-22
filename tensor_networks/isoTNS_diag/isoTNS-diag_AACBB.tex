@@ -1,0 +1,65 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usetikzlibrary{3d}
+
+\begin{document}
+\begin{tikzpicture}[z=(80:6mm),scale=0.7]
+	% right arrows
+	\foreach \x in {0}{
+		\foreach \y in {0,2,4}
+			\draw[tarrowleg] (\x,\y) -- +(+1,+1) ;	
+		\foreach \y in {2,4}
+			\draw[tarrowleg] (\x,\y) -- +(+1,-1) ;
+	} 
+	\foreach \x in {1} {
+		 \foreach \y in {1,3}
+			\draw[tarrowleg] (\x,\y) -- +(+1,+1) ;
+		 \foreach \y in {1,3,5}
+			\draw[tarrowleg] (\x,\y) -- +(+1,-1) ;
+	}
+	\foreach \x in {4}{
+		\foreach \y in {0,2,4}
+			\draw[tarrowleg] (\x,\y) -- +(-1,+1) ;	
+		\foreach \y in {2,4}
+			\draw[tarrowleg] (\x,\y) -- +(-1,-1) ;
+	} 
+	\foreach \x in {5} {
+		 \foreach \y in {1,3}
+			\draw[tarrowleg] (\x,\y) -- +(-1,+1) ;
+		 \foreach \y in {1,3,5}
+			\draw[tarrowleg] (\x,\y) -- +(-1,-1) ;
+	}
+	\foreach \x in {2} {
+		\foreach \y in {0,2,4}
+			\draw[tarrowleg] (\x,\y) -- +(+0.5,+0.5) ;
+		\foreach \y in {2,4}
+			\draw[tarrowleg] (\x,\y) -- +(+0.5,-0.5) ;
+	}
+	\foreach \x in {3} {
+		\foreach \y in {1,3}
+			\draw[tarrowleg] (\x,\y) -- +(-0.5,+0.5) ;
+		\foreach \y in {1,3,5}
+			\draw[tarrowleg] (\x,\y) -- +(-0.5,-0.5) ;
+	}
+	\foreach \y in {0.5,1.5}
+		\draw[tarrowleg,color=blue] (2.5,\y) -- +(0,1);
+	\foreach \y in {3.5,4.5}
+		\draw[tarrowleg,color=blue] (2.5,\y) -- +(0,-1);
+	\foreach \x in {0,2,4} {
+		\foreach \y in {0,2,4} {
+			\node[smalltensor] at (\x,\y) {};
+			\node[smalltensor] at ($(\x,\y) + (1,1) $){};
+			\draw[tarrowleg, color=gray] (\x,\y,1) -- +(0,0,-1);
+			\draw[tarrowleg, color=gray] ($(\x,\y) + (1,1,1) $) -- +(0,0,-1);
+		}
+	}
+	\foreach \y in {0.5,1.5,...,4.5}
+		\node[smalltensor=blue] at (2.5,\y){};
+	\node[smalltensor=blue!60!white] at (2.5,2.5){};
+	\foreach \x/\lbl in {0/A_L,1/A_L,2/A_L,
+			2.5/C, 
+			3/A_R, 4/A_R, 5/A_R}
+		\node at (\x,-.5){$\lbl$};
+\end{tikzpicture}
+\end{document}
