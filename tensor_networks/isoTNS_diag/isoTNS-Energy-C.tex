@@ -1,0 +1,84 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usetikzlibrary{3d}
+
+\begin{document}
+\begin{tikzpicture}[z=(80:4mm),scale=0.7]
+	\begin{scope}
+		\foreach \x in {2}{
+			\foreach \y in {0,2,4}
+				\draw[tleg] (\x,\y) -- +(+1,+1);	
+			\foreach \y in {2,4}
+				\draw[tleg] (\x,\y) -- +(+1,-1);
+		} 
+		\foreach \x in {3} {
+			 \foreach \y in {1,3}
+				\draw[tleg] (\x,\y) -- +(+0.5,+0.5);
+			 \foreach \y in {1,3,5}
+				\draw[tleg] (\x,\y) -- +(+0.5,-0.5);
+		}
+		\foreach \x in {2} {
+			 \foreach \y in {0,2,4}
+				\draw[tleg] (\x,\y) -- +(-0.5,+0.5);
+			 \foreach \y in {2,4}
+				\draw[tleg] (\x,\y) -- +(-0.5,-0.5);
+		}
+		\draw[tleg,color=blue] (2.5,0.5) -- +(0,4);
+		\foreach \x in {2}
+			\foreach \y in {0,2,4} {
+				\node[smalltensor] at (\x,\y){};
+				\node[smalltensor] at ($ (\x,\y) + (1,1) $){};
+				\draw[tleg,color=gray] (\x,\y) -- +(0,0,1);
+				\draw[tleg,color=gray] ($ (\x,\y)  + (1,1) $) -- +(0,0,1);
+			}
+		\foreach \y in {0.5,1.5,...,4.5}
+			\node[smalltensor=blue] at (2.5,\y){};
+	\end{scope}
+	\foreach \x in {2} {
+		\foreach \y in {0,2,4}{
+			\node[smalltensor,color=green!80!black] at (\x,\y,0.5){};
+			\draw[tleg,color=green!80!black] (\x,\y,0.5) -- +(+1,1);
+			\node[smalltensor,color=green!80!black] at (\x+1,\y+1,0.5){};
+			% \draw[tleg,color=green!80!black] (\x,\y,0.5) -- +(-1,1);
+			% \node[smalltensor,color=green!80!black] at (\x-1,\y+1,0.5){};
+		}
+		\foreach \y in {2,4}
+			\draw[tleg,color=green!80!black] (\x,\y,0.5) -- +(+1,-1);
+			% \draw[tleg,color=green!80!black] (\x,\y,0.5) -- +(-1,-1);
+	}
+	\begin{scope}[shift={(0,0,1)}]
+		\foreach \x in {2}{
+			\foreach \y in {0,2,4}
+				\draw[tleg] (\x,\y) -- +(+1,+1);	
+			\foreach \y in {2,4}
+				\draw[tleg] (\x,\y) -- +(+1,-1);
+		} 
+		\foreach \x in {3} {
+			 \foreach \y in {1,3}
+				\draw[tleg] (\x,\y) -- +(+0.5,+0.5);
+			 \foreach \y in {1,3,5}
+				\draw[tleg] (\x,\y) -- +(+0.5,-0.5);
+		}
+		\foreach \x in {2} {
+			 \foreach \y in {0,2,4}
+				\draw[tleg] (\x,\y) -- +(-0.5,+0.5);
+			 \foreach \y in {2,4}
+				\draw[tleg] (\x,\y) -- +(-0.5,-0.5);
+		}
+		\draw[tleg,color=blue] (2.5,0.5) -- +(0,4);
+		\foreach \x in {2}
+			\foreach \y in {0,2,4} {
+				\node[color=gray,smalltensor] at (\x,\y){$*$};
+				\node[color=gray,smalltensor] at ($ (\x,\y) + (1,1) $){$*$};
+			}
+		\foreach \y in {0.5,1.5,...,4.5}
+			\node[color=gray,smalltensor=blue] at (2.5,\y){$*$};
+	\end{scope}
+	\foreach \x in {1.5,3.5} {
+		\foreach \y in {0.5,1.5,...,4.5} {
+			\draw[tleg] (\x,\y) -- +(0,0,1);
+		}
+	}
+\end{tikzpicture}
+\end{document}

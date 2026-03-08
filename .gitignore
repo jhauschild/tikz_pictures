@@ -1,6 +1,7 @@
 main*.pdf
 main_article.tex
 */*.pdf
+*.png
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

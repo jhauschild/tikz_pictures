@@ -1,0 +1,51 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usetikzlibrary{3d}
+
+\begin{document}
+\begin{tikzpicture}[z=(80:8mm),scale=0.7]
+	\begin{scope}
+		\draw[tarrowleg] (-1,+1) -- (-0.5,+0.5);
+		\draw[tarrowleg] (-1,-1) -- (-0.5,-0.5);
+		\draw[tarrowleg] (0,0) -- (-0.5,-0.5);
+		\draw[tarrowleg] (0,0) -- (-0.5,+0.5);
+		\draw[tarrowleg=M<] (0, 0) -- (1,+1);
+		\draw[tarrowleg=M<] (0, 0) -- (1,-1);
+		\draw[tarrowleg,color=blue] (-0.5,+1.5) -- (-0.5,+0.5);
+		\draw[tarrowleg,color=blue] (-0.5,+0.5) -- (-0.5,-0.5);
+		\draw[tarrowleg,color=blue] (-0.5,-1.5) -- (-0.5,-0.5);
+		\node[smalltensor] at (0,0) {};
+		\node[smalltensor=blue] at (-0.5,+0.5) {};
+		\node[smalltensor=blue!50!white,thick,draw=blue] at (-0.5,-0.5) {};
+		\draw[tarrowleg=M<,color=gray] (0,0) -- (0,0,1);
+	\end{scope}
+	\draw[-Stealth,color=gray,ultra thick] (1,0) -- (2,0);
+	\begin{scope}[shift={(3,0)}]
+		\draw[tarrowleg=M<] (0,0) -- (-1,-1);
+		\draw[tarrowleg=M<] (0,0) -- (-1,+1);
+		\draw[tarrowleg=M<] (0,0) -- (+1,-1);
+		\draw[tarrowleg=M<] (0,0) -- (+1,+1);
+		\draw[tarrowleg,color=blue] (0,+1.5) -- (0,0);
+		\draw[tarrowleg,color=blue] (0,-1.5) -- (0,0);
+		\node[smalltensor=blue!50!white,thick,draw=blue] at (0,0) {};
+		\draw[tarrowleg=M<,color=gray] (0,0) -- (0,0,1);
+	\end{scope}
+	\draw[-Stealth,color=gray,ultra thick] (4,0) -- (5,0);
+	\begin{scope}[shift={(6,0)}]
+		\draw[tarrowleg=M<] (0,0) -- (-1,-1);
+		\draw[tarrowleg=M<] (0,0) -- (-1,+1);
+		\draw[tarrowleg=M>] (0, 0) -- (+0.5,+0.5);
+		\draw[tarrowleg=M>] (0, 0) -- (+0.5,-0.5);
+		\draw[tarrowleg=M>] (+1,+1) -- (+0.5,+0.5);
+		\draw[tarrowleg=M>] (+1,-1) -- (+0.5,-0.5);
+		\draw[tarrowleg,color=blue] (+0.5,+1.5) -- (+0.5,+0.5);
+		\draw[tarrowleg,color=blue] (+0.5,-0.5) -- (+0.5,+0.5);
+		\draw[tarrowleg,color=blue] (+0.5,-1.5) -- (+0.5,-0.5);
+		\node[smalltensor] at (0,0) {};
+		\node[smalltensor=blue!50!white,thick,draw=blue] at (+0.5,+0.5) {};
+		\node[smalltensor=blue] at (+0.5,-0.5) {};
+		\draw[tarrowleg=M<,color=gray] (0,0) -- (0,0,1);
+	\end{scope}
+\end{tikzpicture}
+\end{document}

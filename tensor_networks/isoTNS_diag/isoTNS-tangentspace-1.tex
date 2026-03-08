@@ -1,0 +1,58 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usetikzlibrary{3d}
+\usepackage{xifthen}
+
+\begin{document}
+\begin{tikzpicture}[z=(80:6mm),scale=0.7]
+	% arrows outside center column at 2
+	\foreach \x in {0,2,4}{
+		\foreach \y in {0,2,4} {
+			\ifthenelse{\x < 6}{
+				\def\arrowdirection{M>}
+			}{
+				\def\arrowdirection{M<}
+			}
+			\ifthenelse{\y < 5}{\draw[tarrowleg=\arrowdirection] (\x,\y) -- +(+1,+1) ;}{}
+			\ifthenelse{\y > 0}{\draw[tarrowleg=\arrowdirection] (\x,\y) -- +(+1,-1) ;}{}
+		}
+	} 
+	\foreach \x in {1,3}{
+		\foreach \y in {1,3,5} {
+			\ifthenelse{\x < 6}{
+				\def\arrowdirection{M>}
+			}{
+				\def\arrowdirection{M<}
+			}
+			\ifthenelse{\y < 5}{\draw[tarrowleg=\arrowdirection] (\x,\y) -- +(+1,+1) ;}{}
+			\ifthenelse{\y > 0}{\draw[tarrowleg=\arrowdirection] (\x,\y) -- +(+1,-1) ;}{}
+		}
+	} 
+	% arrows to orthogonality center
+	\foreach \x in {5} {
+		\foreach \y in {1,3,5}{
+			\ifthenelse{\y < 5}{\draw[tarrowleg=M>] (\x,\y) -- +(+0.5,+0.5) ;}{}
+			\ifthenelse{\y > 0}{\draw[tarrowleg=M>] (\x,\y) -- +(+0.5,-0.5) ;}{}
+		}
+	}
+	% center column
+	\foreach \y in {0.5,1.5,2.5,3.5} {
+		\draw[tarrowleg=M>,color=blue] (5.5,\y) -- +(0,1);
+	}
+	\foreach \x in {0,2,4} {
+		\foreach \y in {0,2,4} {
+			\node[smalltensor] at (\x,\y) {};
+			\draw[tarrowleg, color=gray] (\x,\y,1) -- +(0,0,-1);
+			\node[smalltensor] at ($(\x,\y) + (1,1) $){};
+			\draw[tarrowleg, color=gray] ($(\x,\y) + (1,1,1) $) -- +(0,0,-1);
+		}
+	}
+	\foreach \y in {0.5,1.5,...,4.5}
+		\node[smalltensor=blue] at (5.5,\y){};
+	% ifthenelse can't handle floats, so it's simpler to (re)draw purple tensor above the black one
+	\node[smalltensor=purple] at (3,3){};
+	\draw[tarrowleg, color=gray] (3,3,1) -- +(0,0,-1);
+	\node[right,color=purple] at (3,3){$B^{[n_x,y]}$};
+\end{tikzpicture}
+\end{document}

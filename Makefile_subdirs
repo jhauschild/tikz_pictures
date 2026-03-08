@@ -1,17 +1,24 @@
 STANDALONE_TEX=$(filter-out tikzlibrarytensornetwork.code.tex, $(wildcard *.tex))
 STANDALONE_PDF=$(STANDALONE_TEX:.tex=.pdf)
+STANDALONE_PNG=$(STANDALONE_TEX:.tex=.png)
 
-.PHONY: all clean distclean
+.PHONY: all pngs clean distclean
 
 all: $(STANDALONE_PDF)
+
+pngs: $(STANDALONE_PNG)
 
 %.pdf: %.tex
 	@echo "==========================================="
 	pdflatex -shell-escape $<
 	-rm -f $*.log $*.aux $*.auxlock $*.out $*.sta
 
+%.png: %.pdf
+	@echo "==========================================="
+	magick -verbose -density 300 $< $*.png
+
 clean:
 	-rm -f *.log *.aux *.auxlock *.out *.sta *.md5 *.dpth
 
 distclean: clean
-	-rm -f *.pdf
+	-rm -f *.pdf *.png

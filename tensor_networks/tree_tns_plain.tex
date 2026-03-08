@@ -1,0 +1,69 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{scope}[
+		U/.style={tensor=blue!60},
+		V/.style={tensor=red!60,trapezium,trapezium left angle=75,trapezium right angle=75},
+		connect/.style={tleg,postaction={decorate}},
+		decoration={markings,mark=at position 0.5 with {\arrow{<}}}]
+% tensors in matrix grid; one column per tensor alignment
+% I should have done this with coordinates directly instead of building a grid...
+\matrix[column sep={0.7cm,between origins},row sep={1.6cm,between origins},ampersand replacement=\&]{
+	\& \& \& \& \& \& \& \& \node (V41) [V] {}; 
+	\& \& \& \& \& \& \& \&  \\
+	\& \& \& \& \node (V31) [V] {}; \& \& \& \& 
+	\& \& \& \& \node (V32) [V] {}; \& \& \& \&  \\
+	\& \& \node (V21) [V] {}; \& \& \& \& \node (V22) [V] {}; \& \& 
+	\& \& \node (V23) [V] {}; \& \& \& \& \node (V24) [V] {}; \&  \\
+	\& \node (V11) [V] {}; \& \& \node (V12) [V] {}; \& \& \node (V13) [V] {}; \& \& \node (V14) [V] {}; \&
+	\& \node (V15) [V] {}; \& \& \node (V16) [V] {}; \& \& \node (V17) [V] {}; \& \& \node (V18) [V] {}; \& \\
+	\coordinate (p005) ; \& \coordinate (p015) ; \& \coordinate (p025) ; \& \coordinate (p035) ; \& 
+	\coordinate (p045) ; \& \coordinate (p055) ; \& \coordinate (p065) ; \& \coordinate (p075) ; \& 
+	\coordinate (p085) ; \& \coordinate (p095) ; \& \coordinate (p105) ; \& \coordinate (p115) ; \&
+	\coordinate (p125) ; \& \coordinate (p135) ; \& \coordinate (p145) ; \& \coordinate (p155) ; \& \coordinate (p165) ; \\
+};
+% define coordinates for physical indices halfway between tensors
+\foreach \LP/\RP/\CP in {p005/p015/p01,p015/p025/p02,p025/p035/p03,p035/p045/p04,
+						 p045/p055/p05,p055/p065/p06,p065/p075/p07,p075/p085/p08,
+						 p085/p095/p09,p095/p105/p10,p105/p115/p11,p115/p125/p12,
+						 p125/p135/p13,p135/p145/p14,p145/p155/p15,p155/p165/p16}
+	\coordinate (\CP) at ($ (\LP)!0.5!(\RP) $);
+% connect tensors
+\foreach \S/\T in {V31/V41}
+	\draw[connect] (\S) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {V32/V41}
+	\draw[connect] (\S) to [out=90,in=300] (\T.300);
+\foreach \S/\T in {V21/V31,V23/V32}
+	\draw[connect] (\S) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {V22/V31,V24/V32}
+	\draw[connect] (\S) to [out=90,in=300] (\T.300);
+\foreach \S/\T in {V11/V21,V13/V22,V15/V23,V17/V24}
+	\draw[connect] (\S) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {V12/V21,V14/V22,V16/V23,V18/V24}
+	\draw[connect] (\S) to [out=90,in=300] (\T.300);
+% physical
+\foreach \S/\T in {p01/V11,p03/V12,p05/V13,p07/V14,p09/V15,p11/V16,p13/V17,p15/V18}
+	\draw[connect] (\S) to [out=90,in=240] (\T.240);
+\foreach \S/\T in {p02/V11,p04/V12,p06/V13,p08/V14,p10/V15,p12/V16,p14/V17,p16/V18}
+	\draw[connect] (\S) to [out=90,in=300] (\T.300);
+% top
+\foreach \T in {V41}
+	\draw[connect] (\T.north) -- +(0.0,0.5);
+\end{scope}
+% physical labels
+% \foreach \T in {V21,V22,V23}
+%     \node at ($ (\T.north) + (0.0,0.5) $) [above] {$\ket{0}$};
+% \node at (p01) [tindex,below] {$\sigma_1$};
+% \node at (p12) [tindex,below] {$\sigma_L$};
+% layers
+\foreach \y in {-2.4,-1.0,0.6,2.2,3.8}
+	\draw[very thin,gray,dashed] (-5.5, \y) -- (6.0,\y);
+\foreach \y/\ll in {-1.8/1,-0.2/2,1.4/3,3.0/4}
+	\node[rotate=90,gray,node font=\footnotesize] at (5.8,\y) {layer \ll};
+\end{tikzpicture}
+\end{document}
