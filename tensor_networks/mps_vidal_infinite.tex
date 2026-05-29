@@ -1,0 +1,32 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(G1.base)]
+	\matrix[tmatrix,matrix anchor=G1.center] at (0,0) {
+		\node (L0)  [dtensor] {$\Lambda^{[2]}$}; \&
+		\node (G0)  [tensor] {$\Gamma^{[2]}$}; \&
+		\node (L1)  [dtensor] {$\Lambda^{[1]}$}; \&
+		\node (G1)  [tensor] {$\Gamma^{[1]}$}; \&
+		\node (L2)  [dtensor] {$\Lambda^{[2]}$}; \&
+		\node (G2)  [tensor] {$\Gamma^{[2]}$}; \&
+		\node (L3)  [dtensor] {$\Lambda^{[1]}$}; \&
+		\node (G3)  [tensor] {$\Gamma^{[1]}$}; \&
+		\node (L4)  [dtensor] {$\Lambda^{[2]}$}; \&
+		\node (G4)  [tensor] {$\Gamma^{[2]}$}; \\
+	};
+	\node (lbl) at ($ (G2) + (-0.5,0.7) $) {repeating unit cell};
+	\begin{scope}[on background layer]
+		\node [tensor=red!30,inner sep=2pt,fit=(G1) (L3) (lbl)] {};
+	\end{scope}
+	\draw[tleg] (L0) -- (G0) -- (L1) -- (G1) -- (L2) -- (G2) -- (L3) -- (G3) -- (L4) -- (G4) ;
+	\draw[tleg] (L0.west) -- +(-0.3,0) node[left] {$\cdots$};
+	\draw[tleg] (G4.east) -- +(+0.3,0) node[right] {$\cdots$};
+	\foreach \i in {0,1,2,3,4}
+	{
+		\draw[tleg] (G\i.south) -- +(0,-0.3) node[below] {$\ket{j_\i}$};
+	}
+\end{tikzpicture}
+\end{document}

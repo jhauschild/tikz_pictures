@@ -1,0 +1,27 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(B6.base)]
+	% \useasboundingbox (-3.8,-1.8) rectangle (3.8,1.0);
+	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
+		\node (B1)  [tensor] {}; \&
+		\node (B2)  [tensor] {}; \&
+		\node (B3)  [tensor] {}; \&
+		\node (B4)  [tensor] {}; \&
+		\node (B5)  [tensor] {}; \&
+		\node (B6)  [tensor] {}; \\
+	};
+	\foreach \j/\x/\T in {j_1/0.35/B1,j_2/0.35/B2,j_3/0.35/B3,j_4/0.35/B4,j_5/0.35/B5,j_N/0.35/B6}
+	{
+		\node (\j) [tindex,below] at ($ (\T.south west) + (\x,-0.3) $) {$\ket{\j}$};
+		\draw[tleg] ($ (\T.south west) + (\x,0) $) to (\j);
+	}
+	\coordinate (vL) at ($ (B1.west) +(-0.3,0) $);
+	\coordinate (vR) at ($ (B6.east) +(+0.3,0) $);
+	\draw[tleg] (B1) to (B2) to (B3) to (B4) to (B5) to (B6);
+	\draw[tleg] (B1.west) to [out=180,in=180] ($ (B1.north west) + (0.2,0.2) $) to  ($ (B6.north east) + (-0.2,0.2) $) to[out=0,in=0](B6.east);
+\end{tikzpicture}
+\end{document}

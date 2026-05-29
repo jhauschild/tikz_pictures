@@ -1,0 +1,29 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(G1.base)]
+	\matrix[tmatrix,matrix anchor=G1.center] at (0,0) {
+		\node (L1)  [dtensor] {$\Lambda^{[n]}$}; \&
+		\node (G1)  [tensor] {$\Gamma^{[n]}$}; \&
+		\node (L2)  [dtensor] {\scalebox{0.7}{$\Lambda^{[n+1]}$}}; \\
+	};
+	\node (Abot) [inner sep=2pt,fit=(L1) (G1)] {};
+	\node (Bbot) [inner sep=3pt,fit=(L2) (G1)] {};
+	\node[color=red] (Albl) at ($ (L1.north) + (0,0.4) $) {$A^{[n]}$};
+	\node[color=blue] (Blbl) at ($ (L2.north) + (0,0.4) $) {$B^{[n]}$};
+	\begin{scope}[on background layer]
+		\draw[color=blue,fill=blue!50,rounded corners=2pt] ($ (Bbot.south east) + (-1pt,0) $) -- (Bbot.south west) -- (Bbot.north west)  -- (Blbl.north west) -- (Blbl.north east)  -- cycle;
+		\draw[color=red,fill=red!50,rounded corners=2pt] (Abot.south west) -- (Abot.south east) -- (Abot.north east)  -- (Albl.north east) -- (Albl.north west) -- (Abot.north west) -- cycle;
+	    % \node [tensor=red!50,inner sep=3pt,fit=(Abot) (Albl)] {};
+	    % \node [tensor=blue!50,inner sep=3pt,fit=(Bbot) (Blbl)] {};
+	\end{scope}
+	\draw[color=blue,rounded corners=2pt] ($ (Bbot.south east) + (-1pt,0) $) -- (Bbot.south west) -- (Bbot.north west)  -- (Blbl.north west) -- (Blbl.north east)  -- cycle;
+	\draw[tleg] (L1) -- (G1) -- (L2);
+	\draw[tleg] (L1.west) -- +(-0.3,0);
+	\draw[tleg] (L2.east) -- +(+0.3,0);
+	\draw[tleg] (G1.south) -- +(0,-0.3);
+\end{tikzpicture}
+\end{document}

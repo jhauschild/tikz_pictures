@@ -1,0 +1,17 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(B1.base)]
+	% \useasboundingbox (-3.8,-1.8) rectangle (3.8,1.0);
+	\node (B1) [tensor] at (0,0)  {$B^{[n]}$}; 
+	\node (j1) [tindex,below] at ($ (B1.south west) + (0.35,-0.3) $) {$j_n$};
+	\draw[tleg] ($ (B1.south west) + (0.35,0) $) to (j1);
+	\coordinate (vL) at ($ (B1.west) +(-0.3,0) $);
+	\coordinate (vR) at ($ (B1.east) +(+0.3,0) $);
+	\draw[tleg] (B1.west) to (vL) node[tindex,left] {$\alpha_{n}$}
+		        (B1.east) to  (vR) node[tindex,right] {$\alpha_{n+1}$} ;
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,28 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(G1.base)]
+	\matrix[tmatrix,matrix anchor=G1.center] at (0,0) {
+		\node (L1)  [dtensor,dotted] {$\Lambda^{[1]}$}; \&
+		\node (G1)  [tensor] {$\Gamma^{[1]}$}; \&
+		\node (L2)  [dtensor] {$\Lambda^{[2]}$}; \&
+		\node (G2)  [tensor] {$\Gamma^{[2]}$}; \&
+		\node (L3)  [dtensor] {$\Lambda^{[3]}$}; \&
+		\node (G3)  [tensor] {$\Gamma^{[3]}$}; \&
+		\node (L4)  [dtensor] {$\Lambda^{[4]}$}; \&
+		\node (G4)  [tensor] {$\Gamma^{[4]}$}; \&
+		\node (L5)  [dtensor,dotted] {$\Lambda^{[5]}$}; \\
+	};
+	\draw[tleg] (G1) -- (L2) -- (G2) -- (L3) -- (G3) -- (L4) -- (G4);
+	\draw[tleg,dotted] (L1) -- (G1) (G4)-- (L5);
+	\draw[tleg,dotted] (L1.west) -- +(-0.3,0);
+	\draw[tleg,dotted] (L5.east) -- +(+0.3,0);
+	\foreach \i in {1,2,3,4}
+	{
+		\draw[tleg] (G\i.south) -- +(0,-0.3) node[below] {$\ket{j_\i}$};
+	}
+\end{tikzpicture}
+\end{document}

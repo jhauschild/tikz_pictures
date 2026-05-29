@@ -1,0 +1,80 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[%baseline=(A1.base),
+	projector/.pic={
+		\path[fill=black!20!white,radius=1mm] (0,0) circle (5mm);
+		\path[fill=black,radius=1mm] (-0.3,0) circle (1.5mm) (+0.3,0) circle (1.5mm);
+	},
+    singlet/.pic={
+		\path[fill=orange] (0.3,-0.25) to (2.7,-0.25) arc (-90:90:0.25cm) to (0.3,0.25)  arc (90:270:0.25cm);
+		\path[fill=black,radius=1mm] (+0.3,0) circle (1.5mm) (+2.7,0) circle (1.5mm) ;
+	}]
+		% \path (0,0) circle[fill=black!50!white] (5mm);
+		% \path[fill=black,radius=1mm] (-0.25,0) circle (1mm) (+0.25,0) circle (1mm);
+	\draw (0, 3) pic {projector} (3, 3) pic {projector} (6, 3) pic {projector} (9, 3) pic {projector} ;
+	\draw (0, 3) pic {singlet} (3, 3) pic {singlet} (6, 3) pic {singlet}  ;
+	\node[left] at (0.6,1.5) {$\displaystyle S = \underbrace{\frac{1}{2}\otimes \frac{1}{2}}_{}$};
+	\node[left] at (0.6,1.0) {$\displaystyle = 0 \oplus 1$};
+	\draw[->] (-0.3,2.2) to (-0.3,2.7);
+	\draw[->] (0.3,2.2) to (0.3,2.7);
+	\draw[->] (0.7,0.8) to (2.0,0.2);
+	\draw (2,1.5) pic {singlet} (5,1.5) node[right] {$\displaystyle = \frac{\ket{\uparrow \downarrow} - \ket{\downarrow \uparrow}}{\sqrt{2}}$};
+	\draw (2.6,0.0) pic {projector} (3.2,0.0) node[right] {$\displaystyle = \hat{P}^{S=1} = \ket{+} \bra{\uparrow \uparrow }~ +~ \ket{0} \frac{\bra{\uparrow \downarrow} + \bra{\downarrow \uparrow}}{\sqrt{2}}~+~ \ket{-} \bra{\downarrow \downarrow}$};
+
+	\matrix[tmatrix,matrix anchor=A1L.center] at (-0.5,-2) {
+		\node (A1L)  [tensor,fill=blue!20] {$\Phi^{[L]}$}; \&
+		\node (A1R)  [tensor] {$S^{[L]}$}; \&
+		\node [emptytensor] {}; \&
+		\node (A2L)  [tensor] {$S^{[R]}$}; \&
+		\node (A2R)  [tensor] {$S^{[L]}$}; \&
+		\node [emptytensor] {}; \&
+		\node (A3L)  [tensor] {$S^{[R]}$}; \&
+		\node (A3R)  [tensor] {$S^{[L]}$}; \&
+		\node [emptytensor] {}; \&
+		\node (A4L)  [tensor] {$S^{[R]}$}; \&
+		\node (A4R)  [tensor,fill=blue!20] {$\Phi^{[R]}$};  \\
+		\node (P1L)  [emptytensor] {}; \&
+		\node (P1R)  [emptytensor] {}; \&
+		\node [emptytensor] {}; \&
+		\node (P2L)  [emptytensor] {}; \&
+		\node (P2R)  [emptytensor] {}; \&
+		\node [emptytensor] {}; \&
+		\node (P3L)  [emptytensor] {}; \&
+		\node (P3R)  [emptytensor] {}; \&
+		\node [emptytensor] {}; \&
+		\node (P4L)  [emptytensor] {}; \&
+		\node (P4R)  [emptytensor] {}; \\
+	};
+	\node (P1) [tensor=black!20,inner sep=0pt,fit=(P1L) (P1R)] {}; % somehow text placed in P1 is not centered
+	\node (P2) [tensor=black!20,inner sep=0pt,fit=(P2L) (P2R)] {};
+	\node (P3) [tensor=black!20,inner sep=0pt,fit=(P3L) (P3R)] {};
+	\node (P4) [tensor=black!20,inner sep=0pt,fit=(P4L) (P4R)] {};
+	\node at (P1) {$\hat{P}^{S=1}$};
+	\node at (P2) {$\hat{P}^{S=1}$};
+	\node at (P3) {$\hat{P}^{S=1}$};
+	\node at (P4) {$\hat{P}^{S=1}$};
+	\node (B1lbl) at ($ (P1.north) + (0,1.3) $) {$B^{[1]}$};
+	\node (B2lbl) at ($ (P2.north) + (0,1.3) $) {$B^{[2]}$};
+	\node (B3lbl) at ($ (P3.north) + (0,1.3) $) {$B^{[3]}$};
+	\node (B4lbl) at ($ (P4.north) + (0,1.3) $) {$B^{[4]}$};
+	\begin{scope}[on background layer]
+		\node (B1) [tensor=orange!20,inner sep=2pt,fit=(P1) (A1L) (A1R) (B1lbl)] {};
+		\node (B2) [tensor=orange!20,inner sep=2pt,fit=(P2) (A2L) (A2R) (B2lbl)] {};
+		\node (B3) [tensor=orange!20,inner sep=2pt,fit=(P3) (A3L) (A3R) (B3lbl)] {};
+		\node (B4) [tensor=orange!20,inner sep=2pt,fit=(P4) (A4L) (A4R) (B4lbl)] {};
+	\end{scope}
+	\draw[tleg] (A1R) -- (A2L) (A2R) -- (A3L) (A3R) -- (A4L);
+	\draw[tleg] 
+		(A1L) -- (A1L |- P1.north) (A1R) -- (A1R |- P1.north)
+		(A2L) -- (A2L |- P2.north) (A2R) -- (A2R |- P2.north)
+		(A3L) -- (A3L |- P3.north) (A3R) -- (A3R |- P3.north)
+		(A4L) -- (A4L |- P4.north) (A4R) -- (A4R |- P4.north);
+	\draw[tleg] (P1.south) -- +(0,-0.4) (P2.south) -- +(0,-0.4) (P3.south) -- +(0,-0.4) (P4.south) -- +(0,-0.4);
+	\draw[tleg,dotted,color=blue] (A1L.west) -- +(-0.3,0) (A4R.east) -- +(0.4,0);
+	\draw[tleg,dotted,color=blue] (A1L) -- (A1R) (A2L) -- (A2R) (A3L) -- (A3R) (A4L) -- (A4R);
+\end{tikzpicture}
+\end{document}

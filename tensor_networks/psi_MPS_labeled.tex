@@ -1,0 +1,33 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(B6.base)]
+	% \useasboundingbox (-3.8,-1.8) rectangle (3.8,1.0);
+	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
+		\node (B1)  [tensor] {$B^{[1]}$}; \&
+		\node (B2)  [tensor] {$B^{[2]}$}; \&
+		\node (B3)  [tensor] {$B^{[3]}$}; \&
+		\node (B4)  [tensor] {$B^{[4]}$}; \&
+		\node (B5)  [tensor] {$B^{[5]}$}; \&
+		\node (B6)  [tensor] {$B^{[6]}$}; \\
+	};
+	\foreach \j/\x/\T in {j_1/0.35/B1,j_2/0.35/B2,j_3/0.35/B3,j_4/0.35/B4,j_5/0.35/B5,j_6/0.35/B6}
+	{
+		\node (\j) [tindex,below] at ($ (\T.south west) + (\x,-0.3) $) {$\ket{\j}$};
+		\draw[tleg] ($ (\T.south west) + (\x,0) $) to (\j);
+	}
+	\coordinate (vL) at ($ (B1.west) +(-0.3,0) $);
+	\coordinate (vR) at ($ (B6.east) +(+0.3,0) $);
+	\draw[tleg,dotted,color=blue] (B1.west) to node[tindex,above] {$\alpha_1$} (vL) 
+		         (B6.east) to node[tindex,above] {$\alpha_7$} (vR) ;
+	\draw[tleg] (B1)
+	    to node[tindex,above] {$\alpha_2$} (B2) 
+		to node[tindex,above] {$\alpha_3$} (B3)
+		to node[tindex,above] {$\alpha_4$} (B4) 
+		to node[tindex,above] {$\alpha_5$} (B5) 
+		to node[tindex,above] {$\alpha_6$} (B6);
+\end{tikzpicture}
+\end{document}

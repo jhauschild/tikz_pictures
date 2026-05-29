@@ -1,0 +1,47 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{tensornetwork}
+\usepackage{braket}
+
+\begin{document}
+\begin{tikzpicture}[baseline=(X4.base)]
+	% \useasboundingbox (-3.8,-1.8) rectangle (3.8,1.0);
+	\matrix[tmatrix,matrix anchor=B6.center] at (3,0) {
+		% \node (psi) [tlabel] {$\ket{\psi}$}; \&
+		\node (B1)  [tensor] {$B^{[1]}$}; \&
+		\node (B2)  [tensor] {$B^{[2]}$}; \&
+		\node (B3)  [tensor] {$B^{[3]}$}; \&
+		\node (B4)  [tensor] {$B^{[4]}$}; \&
+		\node (B5)  [tensor] {$B^{[5]}$}; \&
+		\node (B6)  [tensor] {$B^{[6]}$}; \\
+		\& \& \& \node (X4) [tensor=red!60] {$\hat{X}^{[4]}$}; \& \& \\
+		% \node (phi) [tlabel] {$\bra{\phi}$}; \&
+		\node (C1)  [tensor] {$\overline{B^{[1]}}$}; \&
+		\node (C2)  [tensor] {$\overline{B^{[2]}}$}; \&
+		\node (C3)  [tensor] {$\overline{B^{[3]}}$}; \&
+		\node (C4)  [tensor] {$\overline{B^{[4]}}$}; \&
+		\node (C5)  [tensor] {$\overline{B^{[5]}}$}; \&
+		\node (C6)  [tensor] {$\overline{B^{[6]}}$}; \\
+	};
+	\begin{scope}[on background layer]
+	    \node (E2B) [tensor=orange!20,inner sep=6pt,fit=(B1) (C1) (B2) (C2)] {};
+	    \node (E2T) [emptytensor,inner sep=4pt,fit=(B1) (C1) (B2) (C2)] {};
+		\draw[fill=orange!60,rounded corners=4pt] (E2T.south) -- (E2T.center) -- (E2T.east) -- (E2T.north east) -- (E2T.north west) -- (E2T.south west) -- cycle;
+	    \node (E1B) [tensor=orange!80,inner sep=2pt,fit=(B1) (C1)] {};
+
+	    \node (E5B) [tensor=orange!20,inner sep=6pt,fit=(B5) (C5) (B6) (C6)] {};
+	    \node (E5T) [emptytensor,inner sep=4pt,fit=(B5) (C5) (B6) (C6)] {};
+		\draw[fill=orange!60,rounded corners=4pt] (E5T.south) -- (E5T.center) -- (E5T.west) -- (E5T.north west) -- (E5T.north east) -- (E5T.south east) -- cycle;
+	    \node (E6B) [tensor=orange!80,inner sep=2pt,fit=(B6) (C6)] {};
+	\end{scope}
+	\draw[tleg] 
+	   (B1) to (B2) to (B3) to (B4) to (B5) to (B6)
+	   (C1) to (C2) to (C3) to (C4) to (C5) to (C6)
+	   (B1) to (C1) 
+	   (B2) to (C2)
+	   (B3) to (C3)
+	   (B4) to (X4) to (C4)
+	   (B5) to (C5)
+	   (B6) to (C6);
+\end{tikzpicture}
+\end{document}
